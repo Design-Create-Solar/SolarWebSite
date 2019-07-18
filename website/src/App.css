@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-image: linear-gradient(to bottom, orange, yellow);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
