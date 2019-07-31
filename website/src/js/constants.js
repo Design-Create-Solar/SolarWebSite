@@ -1,0 +1,4 @@
+export const HOME_PAGE_DARK_COLOR = "#1d2951";
+export const HOME_PAGE_LIGHT_COLOR = "#e8e8e8";
+export const HOME_PAGE_LIGHT_TEXT_COLOR = "#e8e8e8";
+export const HOME_PAGE_DARK_TEXT_COLOR = "#1d2951";
