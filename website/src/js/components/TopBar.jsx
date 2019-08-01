@@ -26,7 +26,7 @@ const StyledButton = withStyles({
 function TopBar() {
 	return (
 		<div>
-			<AppBar position="static" style={{ backgroundColor: constants.HOME_PAGE_DARK_COLOR }}>
+			<AppBar position="fixed" style={{ backgroundColor: constants.HOME_PAGE_DARK_COLOR }}>
 				<Toolbar style={{ display: "flex", justifyContent: "center" }}>
 					<StyledButton>
 						{/* <a href="LandingPage.jsx" style={{ textDecoration: "none", color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,  }}> */}
