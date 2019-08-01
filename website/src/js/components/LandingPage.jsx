@@ -3,6 +3,7 @@ import LogoHolder from './LogoHolder';
 import {styled, makeStyles} from '@material-ui/styles';
 import * as constants from '../constants';
 import InfoArea from './InfoArea';
+import TopBar from './TopBar';
 
 
 const infoArray = [
@@ -24,6 +25,7 @@ export default class LandingPage extends Component {
     render() {
         return (
             <Container>
+                <TopBar />
                 <LogoHolder/>
                 <InfoContainer order={2}>
                 {
