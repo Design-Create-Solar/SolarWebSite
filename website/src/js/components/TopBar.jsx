@@ -3,7 +3,6 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import * as constants from "../constants";
 import { withStyles, fade } from "@material-ui/core/styles";
-//import { pink } from "@material-ui/core/colors";
 
 const StyledButton = withStyles({
 	root: {
@@ -14,7 +13,8 @@ const StyledButton = withStyles({
 		height: 48,
 		padding: "0 30px",
 		fontSize: "20px",
-		//fontFamily: "Avenir Next"
+        fontFamily: "Avenir Next",
+        fontWeight: 500,
 		//boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 		"&:hover": {
 			backgroundColor: fade(constants.HOME_PAGE_YELLOW, 0.9),

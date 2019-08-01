@@ -8,7 +8,7 @@ import TopBar from './TopBar';
 
 const infoArray = [
     {
-        header:"Header 1",
+        header:"MISSION STATEMENT",
         color: constants.HOME_PAGE_LIGHT_COLOR,
         text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pretium malesuada enim vitae molestie. Fusce tincidunt non nunc et porta. Donec dictum molestie posuere. Duis tempus lectus enim, ut aliquet augue dapibus ut. Ut sodales vel ipsum placerat finibus. Sed rutrum maximus risus non imperdiet. Etiam lacinia semper leo, id feugiat velit consequat sit amet. Fusce at aliquet turpis. Nam eu dui non purus faucibus vehicula. Donec rutrum risus vel risus commodo faucibus. Aenean eu accumsan lectus. Vivamus viverra ipsum erat, at bibendum orci interdum quis. Nullam tincidunt tellus ligula, sed blandit lectus vehicula id. Cras mattis mollis justo.",
         align:"right"
