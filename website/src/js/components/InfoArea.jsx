@@ -2,13 +2,17 @@ import React from "react";
 import { styled, StylesProvider } from "@material-ui/styles";
 import { Typography, Box } from "@material-ui/core";
 import * as constants from "../constants";
+import "../../infoArea.css"
+import { fontFamily } from "@material-ui/system";
+
 var color;
 const InfoArea = (props) => {
 	if (props.color === constants.HOME_PAGE_DARK_COLOR)
 		return (
 			<ContainerDark flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
 				<TextArea>
-					<Typography variant="h5">{props.header}</Typography>
+					{/* <StyledTypography variant="h4">{props.header}</StyledTypography> */}
+					<h4 className="info-header">{props.header}</h4>
 					<Typography variant="body1">{props.text}</Typography>
 				</TextArea>
 			</ContainerDark>
@@ -17,12 +21,14 @@ const InfoArea = (props) => {
 		return (
 			<ContainerLight flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
 				<TextArea>
-					<Typography variant="h5">{props.header}</Typography>
+					{/* <Typography variant="h4">{props.header}</Typography> */}
+					<h4 className="info-header">{props.header}</h4>
 					<Typography variant="body1">{props.text}</Typography>
 				</TextArea>
 			</ContainerLight>
 		);
 };
+
 
 const ContainerDark = styled(Box)({
 	display: "flex",
@@ -43,10 +49,11 @@ const TextArea = styled(Box)({
 	display: "flex",
 	flexDirection: "column",
 	width: "50%",
-	paddingTop: "10%",
-	paddingBottom: "10%",
+	paddingTop: "5%",
+	paddingBottom: "5%",
 	paddingRight: "5%",
-	paddingLeft: "5%"
+	paddingLeft: "5%",
+	//fontFamily: "Avenir Next",
 });
 
 export default InfoArea;

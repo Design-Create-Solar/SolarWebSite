@@ -5,9 +5,9 @@ import ReactTypingEffect from "react-typing-effect";
 import Typing from "react-typing-animation";
 
 const Logo = require("../../images/Logo.png");
-const texts = ["Engineers.", "Scientists.", "Enthusiasts.", "Creators."];
+const texts = ["DESIGN CREATE SOLAR.", "ENGINEERS.", "SCIENTISTS.", "ENTHUSIASTS.", "CREATORS."];
 
-const base = "We are  ";
+const base = "WE ARE  ";
 
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
 		fontStyle: "oblique"
 	}
 }));
+
+//TODO: get that typing cursor to be white
 
 const LogoHolder = () => {
 	const classes = useStyles();
@@ -31,13 +33,13 @@ const LogoHolder = () => {
 			{/* <ReactTypingEffect staticText="We are" eraseDelay={2000} text= {texts} className={classes.text}/> */}
 			<Typing loop={true}>
 				<Text>{base}</Text>
-				<Text>{texts[0]}</Text>
+				<SpecialText>{texts[0]}</SpecialText>
 				<Typing.Backspace count={texts[0].length + 1} delay={500} />
-				<Text>{texts[1]}</Text>
+				<SpecialText>{texts[1]}</SpecialText>
 				<Typing.Backspace count={texts[1].length + 1} delay={500} />
-				<Text>{texts[2]}</Text>
+				<SpecialText>{texts[2]}</SpecialText>
 				<Typing.Backspace count={texts[2].length + 1} delay={500} />
-				<Text>{texts[3]}</Text>
+				<SpecialText>{texts[3]}</SpecialText>
 				<Typing.Backspace count={texts[3].length + base.length + 3} delay={500} />
 			</Typing>
 		</Container>
@@ -60,7 +62,15 @@ const Container = styled("div")({
 });
 
 const Text = styled("span")({
-	fontFamily: "Monospace",
+	fontFamily: "Courier New",
 	fontSize: "2.5em",
-	fontStyle: "oblique"
+	//fontStyle: "oblique"
+	fontWeight: "800"
+});
+
+const SpecialText = styled("span")({
+	fontFamily: "Courier New",
+	fontSize: "2.5em",
+	fontWeight: "800",
+	color: constants.HOME_PAGE_TYPING_TEXT_COLOR,
 });
