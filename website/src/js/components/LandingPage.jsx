@@ -26,7 +26,7 @@ export default class LandingPage extends Component {
         return (
             <Container>
                 <TopBar />
-                <LogoHolder/>
+                <LogoHolder />
                 <InfoContainer order={2}>
                 {
                     infoArray.map(info=>{return(
@@ -50,4 +50,7 @@ const Container = styled('div')({
 const InfoContainer = styled('div')({
     order: 1,
     flex: 1 ,
+    /*boxShadow: "1px 2px black",
+    position: "relative",
+    zIndex: "10"*/
 })
