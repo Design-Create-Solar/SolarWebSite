@@ -17,12 +17,10 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-//TODO: get that typing cursor to be white
-
 const LogoHolder = () => {
 	const classes = useStyles();
 	return (
-		<Container>
+		<Container /*style={{ background: "linear-gradient(to bottom, #1d2951, white)" }}*/>
 			<img src={Logo} />
 			{/* {texts.forEach(text=>{
             return(<div>
@@ -53,19 +51,20 @@ const Container = styled("div")({
 	backgroundColor: constants.HOME_PAGE_DARK_COLOR,
 	color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,
 	width: "100%",
-	height: "100%",
-	minHeight: 700,
+	height: "100",
+	minHeight: "100vh",
 	display: "flex",
 	flexDirection: "column",
 	alignItems: "center",
-	justifyContent: "center"
+	justifyContent: "center",
+	boxShadow: "10px 10px 5px gray",
 });
 
 const Text = styled("span")({
 	fontFamily: "Courier New",
 	fontSize: "2.5em",
-	//fontStyle: "oblique"
-	fontWeight: "800"
+	fontWeight: "800",
+	color: constants.HOME_PAGE_LIGHT_TEXT_COLOR
 });
 
 const SpecialText = styled("span")({
