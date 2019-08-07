@@ -8,6 +8,7 @@ import Slideshow from './Slideshow';
 
 var color;
 const InfoArea = (props) => {
+	console.log(props)
 	if (props.color === constants.HOME_PAGE_DARK_COLOR)
 		return (
 			<ContainerDark flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
@@ -16,7 +17,7 @@ const InfoArea = (props) => {
 					<h4 className="info-header">{props.header}</h4>
 					<Typography variant="body1">{props.text}</Typography>
 				</TextArea>
-				<Slideshow images={props.images}/>
+				{props.images &&<Slideshow images={props.images}/>}
 			</ContainerDark>
 		);
 	if (props.color === constants.HOME_PAGE_LIGHT_COLOR)
@@ -27,7 +28,7 @@ const InfoArea = (props) => {
 					<h4 className="info-header">{props.header}</h4>
 					<Typography variant="body1">{props.text}</Typography>
 				</TextArea>
-				<Slideshow images={props.images}/>
+				{props.images && <Slideshow images={props.images}/>}			
 			</ContainerLight>
 		);
 };

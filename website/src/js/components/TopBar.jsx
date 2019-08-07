@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import * as constants from "../constants";
 import { withStyles, fade } from "@material-ui/core/styles";
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 const StyledButton = withStyles({
 	root: {
@@ -23,24 +24,32 @@ const StyledButton = withStyles({
 	}
 })(Button);
 
-function TopBar() {
+function TopBar(props) {
 	return (
+		<Router>
 		<div>
 			<AppBar position="fixed" style={{ backgroundColor: constants.HOME_PAGE_DARK_COLOR }}>
 				<Toolbar style={{ display: "flex", justifyContent: "center" }}>
-					<StyledButton>
-						{/* <a href="LandingPage.jsx" style={{ textDecoration: "none", color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,  }}> */}
-						Home
-						{/* </a> */}
+					<StyledButton onClick={() =>
+              		props.history.push({ pathname: "/" })}>
+				  	Home
+				  	</StyledButton>
+					<StyledButton onClick={() =>
+              		props.history.push({ pathname: "/projects" })}>
+					Projects
 					</StyledButton>
-					<StyledButton>Projects</StyledButton>
 					<StyledButton>Support Us</StyledButton>
 					<StyledButton>Join the Team</StyledButton>
 					<StyledButton>Contact Us</StyledButton>
 				</Toolbar>
 			</AppBar>
 		</div>
+		</Router>
 	);
 }
+
+const inboxLink = React.forwardRef((props, ref) => (
+	<Link innerRef={ref} to="/projects" {...props} />
+  ));
 
 export default TopBar;

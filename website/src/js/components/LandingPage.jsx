@@ -25,8 +25,8 @@ export default class LandingPage extends Component {
     render() {
         return (
             <Container>
-                <TopBar />
-                <LogoHolder />
+                <TopBar history={this.props.history}/>
+                <LogoHolder/>
                 <InfoContainer order={2}>
                 {
                     infoArray.map(info=>{return(

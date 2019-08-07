@@ -24,15 +24,16 @@ const infoArray = [
 ]
 
 export default class ProjectPage extends Component {
-    render() {
+    render(props) {
         return (
             <Container>
-                <TopBar />
-                {/* <LogoHolder /> */}
+                <TopBar history={this.props.history}/>
                 <InfoContainer order={2}>
+                    <h1>test</h1>
                 {
-                    infoArray.map(info=>{return(
-                        <InfoArea header={info.header} color={info.color} text={info.text} align={info.align} images={info.images}/>
+                    infoArray.map(info=>{ console.log(info)
+                        return(
+                            <InfoArea header={info.header} color={info.color} text={info.text} align={info.align} images={info.images}/>
                     )})
                 }
                 </InfoContainer>

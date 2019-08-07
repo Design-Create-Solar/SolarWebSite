@@ -19,30 +19,30 @@ const Slideshow = (props) => {
   console.log(props);
   return (
     <div className="slide-container">
-      <Fade {...fadeProperties}>
+       <Fade {...fadeProperties}>
 
         <div className="each-fade">
-          <div className="image-container">
-            <img src={props.images[0]} alt={"1"} />
-          </div>
+           <div className="image-container">
+             <img src={props.images[0]} alt={"1"} />
+           </div>
           <h2>First Slide</h2>
-        </div>
+         </div>
 
-        <div className="each-fade">
-          <div className="image-container">
-            <img src={props.images[1]}  alt={"2"}/>
-          </div>
-          <h2>Second Slide</h2>
-        </div>
+         <div className="each-fade">
+           <div className="image-container">
+             <img src={props.images[1]}  alt={"2"}/>
+           </div>
+           <h2>Second Slide</h2>
+         </div>
 
-        <div className="each-fade">
-          <div className="image-container">
-            <img src={props.images[2]} alt={"3"}/>
-          </div>
-          <h2>Third Slide</h2>
-        </div>
+         <div className="each-fade">
+           <div className="image-container">
+             <img src={props.images[2]} alt={"3"}/>
+           </div>
+           <h2>Third Slide</h2>
+         </div>
 
-      </Fade>
+       </Fade>
     </div>
   )
 }
