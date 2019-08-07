@@ -11,7 +11,8 @@ const fadeImages = [
 const fadeProperties = {
   duration: 3000,
   transitionDuration: 500,
-  indicators: true
+  indicators: true,
+  arrows: false
 }
  
 const Slideshow = (props) => {
