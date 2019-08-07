@@ -4,6 +4,7 @@ import { Typography, Box } from "@material-ui/core";
 import * as constants from "../constants";
 import "../../infoArea.css"
 import { fontFamily } from "@material-ui/system";
+import Slideshow from './Slideshow';
 
 var color;
 const InfoArea = (props) => {
@@ -15,6 +16,7 @@ const InfoArea = (props) => {
 					<h4 className="info-header">{props.header}</h4>
 					<Typography variant="body1">{props.text}</Typography>
 				</TextArea>
+				<Slideshow images={props.images}/>
 			</ContainerDark>
 		);
 	if (props.color === constants.HOME_PAGE_LIGHT_COLOR)
@@ -25,6 +27,7 @@ const InfoArea = (props) => {
 					<h4 className="info-header">{props.header}</h4>
 					<Typography variant="body1">{props.text}</Typography>
 				</TextArea>
+				<Slideshow images={props.images}/>
 			</ContainerLight>
 		);
 };
@@ -51,8 +54,8 @@ const TextArea = styled(Box)({
 	width: "50%",
 	paddingTop: "5%",
 	paddingBottom: "5%",
-	paddingRight: "5%",
-	paddingLeft: "5%",
+	paddingRight: "3%",
+	paddingLeft: "3%",
 	//fontFamily: "Avenir Next",
 });
 
