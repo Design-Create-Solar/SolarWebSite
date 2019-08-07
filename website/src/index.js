@@ -4,7 +4,6 @@ import './index.css';
 import LandingPage from './js/components/LandingPage';
 import ProjectPage from './js/components/ProjectPage';
 import * as serviceWorker from './serviceWorker';
-import { createBrowserHistory } from "history";
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,8 +12,8 @@ import {
     withRouter
   } from "react-router-dom";
 import TopBar from './js/components/TopBar'
+import BottomBanner from './js/components/BottomBanner';
   
-const BrowserHistory = createBrowserHistory();
 
 ReactDOM.render(
 
@@ -26,6 +25,7 @@ ReactDOM.render(
             <Route exact path="/home" component={LandingPage} />
             <Route path="/projects" component={ProjectPage} />
         </Switch>
+        <BottomBanner/>
         </div>
     </Router>
 
