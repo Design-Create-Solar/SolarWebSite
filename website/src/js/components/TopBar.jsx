@@ -32,15 +32,17 @@ function TopBar(props) {
 				<Toolbar style={{ display: "flex", justifyContent: "center" }}>
 					<StyledButton onClick={() =>
               		props.history.push({ pathname: "/" })}>
-				  	Home
+				  		Home
 				  	</StyledButton>
 					<StyledButton onClick={() =>
               		props.history.push({ pathname: "/projects" })}>
-					Projects
+						Projects
 					</StyledButton>
 					<StyledButton>Support Us</StyledButton>
 					<StyledButton>Join the Team</StyledButton>
-					<StyledButton>Contact Us</StyledButton>
+					<StyledButton onClick={() =>
+					props.history.push({ pathname: "/members" })}>
+						Members</StyledButton>
 				</Toolbar>
 			</AppBar>
 		</div>

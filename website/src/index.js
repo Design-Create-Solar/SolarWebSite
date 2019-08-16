@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import LandingPage from './js/components/LandingPage';
 import ProjectPage from './js/components/ProjectPage';
+import MembersPage from "./js/components/MembersPage/MembersPage";
 import * as serviceWorker from './serviceWorker';
 import {
     BrowserRouter as Router,
@@ -16,14 +17,13 @@ import BottomBanner from './js/components/BottomBanner';
   
 
 ReactDOM.render(
-
-
     <Router>
         <div>
         <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/home" component={LandingPage} />
             <Route path="/projects" component={ProjectPage} />
+            <Route path="/members" component={MembersPage} />
         </Switch>
         <BottomBanner/>
         </div>
@@ -35,12 +35,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-/* comments: 
-    - should we use MuiThemeProvider? just to get our colors all organized?
-    - it's hot
-    - styling hurts
-        - I'm still plenty confuzzled by all the different ways to 
-            override MaterialUI components so if I do sth ugly, 
-            change it and lemme know here so I can flourish and learn thx
-*/
