@@ -7,8 +7,11 @@ class Card extends Component {
         return (
             <div className="card-container">
                 <div className="card-body">
-                    <FrontCard />
-                    <BackCard />
+                    <FrontCard name={this.props.name} 
+                                position={this.props.position} 
+                                image={this.props.image}/>
+                    <BackCard email={this.props.email}
+                                summary={this.props.summary}/>
                 </div>
             </div>
         )
