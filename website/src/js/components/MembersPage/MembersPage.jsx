@@ -53,7 +53,8 @@ class MembersPage extends Component  {
         <Container>
             <TopBar history={this.props.history}/>
             <Heading>
-                    <PageName>Members</PageName>
+                    {/* <PageName>Members</PageName> */}
+                    <h2 style={{color: "white", paddingTop: "5%", fontFamily: "Avenir Next", margin: "0 0 5px 0"}}>Meeting Info: </h2>
                     <MeetingInfo>Under the full moon, 2 a.m. sharp every second Monday of the month</MeetingInfo>
             </Heading>
             <div className="grid-container">
@@ -92,7 +93,7 @@ const PageName = styled('h3')({
   textAlign: "center",
   fontSize: "100px",
   textShadow: "4px 4px 3px gray",
-  color: constants.CONTACT_US_PAGE_YELLOW,
+  color: constants.MEMBERS_PAGE_YELLOW,
   fontFamily: "Avenir Next",
   padding: "80px 0 0 0",
   margin: "0 0 0 0"
