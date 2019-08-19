@@ -26,13 +26,13 @@ const Name = styled("h2") ({
 
 const Position = styled("h3") ({
     fontFamily: "Avenir Next",
-    color: constants.HOME_PAGE_DARK_TEXT_COLOR, 
+    color: constants.MEMBERS_PAGE_LIGHT_GRAY, 
         // TODO: make this a lighter blue
     // borderStyle: "solid", 
     // borderColor: "black",
     padding: "0 0 0 0",
     margin: "0 0 0 0",
-    opacity: 0.4
+    //TODO: get rid of this opacity thing to get rid of that flipping card bug
 })
 
 export default FrontCard

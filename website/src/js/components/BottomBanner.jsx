@@ -11,9 +11,9 @@ const BottomBanner = () => {
     return (
         <GreyDiv>
                 <Container>
-                        <BannerText>Made with <Heart><FontAwesomeIcon icon= {faHeart}/></Heart>  by the DCS team</BannerText>
+                        <BannerText>Made with <Heart><FontAwesomeIcon icon= {faHeart}/></Heart>  by the SOLAR team</BannerText>
                         <BannerText1>Contact us! <Mailto href= "mailto:ishnoor@g.ucla.edu">Our Email</Mailto></BannerText1>
-                        <BannerText2>Copyright © DCS 2019</BannerText2>
+                        <BannerText2>Copyright © SOLAR 2019</BannerText2>
                 </Container>
         </GreyDiv>
 
@@ -29,6 +29,7 @@ const GreyDiv = styled.div`
     align-items:center;
     padding-top:20px
     min-width:400px;
+    font-family: Avenir Next;
 `
 
 const Container = styled.div`
