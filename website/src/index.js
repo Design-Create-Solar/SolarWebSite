@@ -23,7 +23,7 @@ ReactDOM.render(
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/home" component={LandingPage} />
             <Route path="/programs" component={ProjectPage} />
-            <Route path="/members" component={MembersPage} />
+            <Route path="/team" component={MembersPage} />
         </Switch>
         <BottomBanner/>
         </div>

@@ -39,10 +39,9 @@ function TopBar(props) {
 						Programs
 					</StyledButton>
 					<StyledButton>Support Us</StyledButton>
-					<StyledButton>Join the Team</StyledButton>
 					<StyledButton onClick={() =>
-					props.history.push({ pathname: "/members" })}>
-						Members</StyledButton>
+					props.history.push({ pathname: "/team" })}>
+						The Team</StyledButton>
 				</Toolbar>
 			</AppBar>
 		</div>

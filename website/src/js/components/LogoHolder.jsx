@@ -5,7 +5,7 @@ import ReactTypingEffect from "react-typing-effect";
 import Typing from "react-typing-animation";
 
 const Logo = require("../../images/Logo.png");
-const texts = ["DESIGN CREATE SOLAR.", "ENGINEERS.", "SCIENTISTS.", "ENTHUSIASTS.", "CREATORS."];
+const texts = ["CREATORS", "DESIGNERS", "SOLAR"];
 
 const base = "WE ARE  ";
 
@@ -36,9 +36,9 @@ const LogoHolder = () => {
 				<SpecialText>{texts[1]}</SpecialText>
 				<Typing.Backspace count={texts[1].length + 1} delay={500} />
 				<SpecialText>{texts[2]}</SpecialText>
-				<Typing.Backspace count={texts[2].length + 1} delay={500} />
-				<SpecialText>{texts[3]}</SpecialText>
-				<Typing.Backspace count={texts[3].length + base.length + 3} delay={500} />
+				<Typing.Backspace count={texts[2].length + base.length + 3} delay={500} />
+				{/* <SpecialText>{texts[3]}</SpecialText>
+				<Typing.Backspace count={texts[3].length + base.length + 3} delay={500} /> */}
 			</Typing>
 		</Container>
 	);

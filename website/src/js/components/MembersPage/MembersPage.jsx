@@ -4,6 +4,7 @@ import TopBar from "../TopBar"
 import "./card.css"
 import Card from "./Card"
 import {styled} from '@material-ui/styles'
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 const memberInfo = [
   {
@@ -56,6 +57,9 @@ class MembersPage extends Component  {
                     {/* <PageName>Members</PageName> */}
                     <h2 style={{color: "white", paddingTop: "5%", fontFamily: "Avenir Next", margin: "0 0 5px 0"}}>Meeting Info: </h2>
                     <MeetingInfo>Under the full moon, 2 a.m. sharp every second Monday of the month</MeetingInfo>
+                    <AnchorLink offset="90" href="#join_team_form" style={{color: "white", fontFamily: "Avenir Next", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500"}}>
+                      Join the team
+                    </AnchorLink>
             </Heading>
             <div className="grid-container">
               <Card name={memberInfo[0].name} position={memberInfo[0].position} image={memberInfo[0].image} email={memberInfo[0].email} summary={memberInfo[0].summary} /> 
@@ -64,6 +68,11 @@ class MembersPage extends Component  {
               <Card name={memberInfo[3].name} position={memberInfo[3].position} image={memberInfo[3].image} email={memberInfo[3].email} summary={memberInfo[3].summary} />
               <Card name={memberInfo[4].name} position={memberInfo[4].position} image={memberInfo[4].image} email={memberInfo[4].email} summary={memberInfo[4].summary} />
             </div>
+            <a id="join_team_form" style={{ paddingTop: "1%", color: "white", display: "flex", justifyContent: "center"}}>
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc2fQoHgrmrQSVNNdTDIXKew-SNxTc6g-ALmlwZkCraILVgwA/viewform?embedded=true" width="640" height="856" frameborder="0" marginheight="0" marginwidth="0">
+                Loading…
+              </iframe>
+            </a>
         </Container>
       );
     }
@@ -71,7 +80,7 @@ class MembersPage extends Component  {
 
   
 
-  const Container = styled('div')({
+const Container = styled('div')({
     display: "flex",
     flexDirection:"column",
     width:"100%",
@@ -82,7 +91,7 @@ class MembersPage extends Component  {
 
 const Heading = styled('div') ({
   //background: "pink",/*"linear-gradient(to bottom, #1d2951, white)"*/
-  padding: "30px 0px 70px 0px",
+  padding: "30px 0px 60px 0px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
