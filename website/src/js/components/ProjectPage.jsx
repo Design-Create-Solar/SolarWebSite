@@ -8,17 +8,24 @@ import TopBar from './TopBar';
 
 const infoArray = [
     {
-        header:"MISSION STATEMENT",
+        header:"Impact",
         color: constants.HOME_PAGE_LIGHT_COLOR,
-        text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pretium malesuada enim vitae molestie. Fusce tincidunt non nunc et porta. Donec dictum molestie posuere. Duis tempus lectus enim, ut aliquet augue dapibus ut. Ut sodales vel ipsum placerat finibus. Sed rutrum maximus risus non imperdiet. Etiam lacinia semper leo, id feugiat velit consequat sit amet. Fusce at aliquet turpis. Nam eu dui non purus faucibus vehicula. Donec rutrum risus vel risus commodo faucibus. Aenean eu accumsan lectus. Vivamus viverra ipsum erat, at bibendum orci interdum quis. Nullam tincidunt tellus ligula, sed blandit lectus vehicula id. Cras mattis mollis justo.",
+        text:"This program aims at developing an end product and/or service that addresses energy needs of deprived communities around the world.",
         align:"right",
         images: [require('../../images/Logo.png'), require('../../images/Logo.png'), require('../../images/Logo.png')]
     },
     {
-        header:"Header 2",
+        header:"@ UCLA",
         color: constants.HOME_PAGE_DARK_COLOR,
-        text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pretium malesuada enim vitae molestie. Fusce tincidunt non nunc et porta. Donec dictum molestie posuere. Duis tempus lectus enim, ut aliquet augue dapibus ut. Ut sodales vel ipsum placerat finibus. Sed rutrum maximus risus non imperdiet. Etiam lacinia semper leo, id feugiat velit consequat sit amet. Fusce at aliquet turpis. Nam eu dui non purus faucibus vehicula. Donec rutrum risus vel risus commodo faucibus. Aenean eu accumsan lectus. Vivamus viverra ipsum erat, at bibendum orci interdum quis. Nullam tincidunt tellus ligula, sed blandit lectus vehicula id. Cras mattis mollis justo.",
+        text:"This program aims at developing an end product and/or service that can enhance usage of renewable energy sources at UCLA.",
         align:"left",
+        images: [require('../../images/Logo.png'), require('../../images/Logo.png'), require('../../images/Logo.png')]
+    }, 
+    {
+        header:"Collaborate",
+        color: constants.HOME_PAGE_LIGHT_COLOR,
+        text:"This program aims at working with other clubs at UCLA to develop an end-product that relies on solar energy to function as desired.",
+        align:"right",
         images: [require('../../images/Logo.png'), require('../../images/Logo.png'), require('../../images/Logo.png')]
     }
 ]
@@ -29,7 +36,6 @@ export default class ProjectPage extends Component {
             <Container>
                 <TopBar history={this.props.history}/>
                 <InfoContainer order={2}>
-                    <h1>test</h1>
                 {
                     infoArray.map(info=>{ console.log(info)
                         return(

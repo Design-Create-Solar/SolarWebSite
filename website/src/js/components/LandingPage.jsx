@@ -10,13 +10,13 @@ const infoArray = [
     {
         header:"MISSION STATEMENT",
         color: constants.HOME_PAGE_LIGHT_COLOR,
-        text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pretium malesuada enim vitae molestie. Fusce tincidunt non nunc et porta. Donec dictum molestie posuere. Duis tempus lectus enim, ut aliquet augue dapibus ut. Ut sodales vel ipsum placerat finibus. Sed rutrum maximus risus non imperdiet. Etiam lacinia semper leo, id feugiat velit consequat sit amet. Fusce at aliquet turpis. Nam eu dui non purus faucibus vehicula. Donec rutrum risus vel risus commodo faucibus. Aenean eu accumsan lectus. Vivamus viverra ipsum erat, at bibendum orci interdum quis. Nullam tincidunt tellus ligula, sed blandit lectus vehicula id. Cras mattis mollis justo.",
+        text:"Design Create Solar strives to bring UCLA students from different educational backgrounds together to brainstorm, design and ultimately produce a solar energy solution to energy-related issues within the UCLA community and deprived communities around the world.",
         align:"right"
     },
     {
-        header:"Header 2",
+        header:"About the Club",
         color: constants.HOME_PAGE_DARK_COLOR,
-        text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pretium malesuada enim vitae molestie. Fusce tincidunt non nunc et porta. Donec dictum molestie posuere. Duis tempus lectus enim, ut aliquet augue dapibus ut. Ut sodales vel ipsum placerat finibus. Sed rutrum maximus risus non imperdiet. Etiam lacinia semper leo, id feugiat velit consequat sit amet. Fusce at aliquet turpis. Nam eu dui non purus faucibus vehicula. Donec rutrum risus vel risus commodo faucibus. Aenean eu accumsan lectus. Vivamus viverra ipsum erat, at bibendum orci interdum quis. Nullam tincidunt tellus ligula, sed blandit lectus vehicula id. Cras mattis mollis justo.",
+        text:"Founded in Spring 2019, Design Create Solar is a technology oriented student organization",
         align:"left"
     }
 ]
@@ -50,7 +50,4 @@ const Container = styled('div')({
 const InfoContainer = styled('div')({
     order: 1,
     flex: 1 ,
-    /*boxShadow: "1px 2px black",
-    position: "relative",
-    zIndex: "10"*/
 })
