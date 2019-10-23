@@ -29,7 +29,7 @@ const GreyDiv = styled.div`
     align-items:center;
     padding-top:20px
     min-width:400px;
-    font-family: Avenir Next;
+    font-family: Futura;
 `
 
 const Container = styled.div`
