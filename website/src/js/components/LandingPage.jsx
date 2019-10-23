@@ -16,7 +16,7 @@ const infoArray = [
     {
         header:"About the Club",
         color: constants.HOME_PAGE_DARK_COLOR,
-        text:"Founded in Spring 2019, Design Create Solar is a technology oriented student organization",
+        text:"Founded in Spring 2019, Design Create Solar is a non-profit technology oriented student organization that strives to bring UCLA students from different educational backgrounds together to brainstorm, design and ultimately produce solar energy solutions to energy-related issues within the UCLA community and underprivileged communities around the world.",
         align:"left"
     }
 ]
@@ -44,7 +44,7 @@ const Container = styled('div')({
     flexDirection:"column",
     width:"100%",
     height:"100%",
-    overflow:"scroll"
+    overflow:"none"
 })
 
 const InfoContainer = styled('div')({

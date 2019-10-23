@@ -52,11 +52,16 @@ class MembersPage extends Component  {
     render() {
       return (
         <Container>
+            <MsgBox>
+              <Msg>We're working on it</Msg>
+            </MsgBox>
             <TopBar history={this.props.history}/>
-            <Heading>
-                    {/* <PageName>Members</PageName> */}
+            
+            {/* <Heading>
                     <h2 style={{color: "white", paddingTop: "5%", fontFamily: "Avenir Next", margin: "0 0 5px 0"}}>Meeting Info: </h2>
-                    <MeetingInfo>Under the full moon, 2 a.m. sharp every second Monday of the month</MeetingInfo>
+                    <MeetingInfo>Where: Boelter SCC Space</MeetingInfo>
+                    <MeetingInfo>General Meetings: Tuesdays 5-7PM</MeetingInfo>
+                    <MeetingInfo>Technical Meetings: Thursdays 5-7PM</MeetingInfo>
                     <AnchorLink offset="90" href="#join_team_form" style={{color: "white", fontFamily: "Avenir Next", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500"}}>
                       Join the team
                     </AnchorLink>
@@ -72,20 +77,34 @@ class MembersPage extends Component  {
               <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc2fQoHgrmrQSVNNdTDIXKew-SNxTc6g-ALmlwZkCraILVgwA/viewform?embedded=true" width="640" height="856" frameborder="0" marginheight="0" marginwidth="0">
                 Loading…
               </iframe>
-            </a>
+            </a> */}
         </Container>
       );
     }
   };
 
+const MsgBox = styled("div")({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  textAlign: "center"
+})
   
+const Msg = styled("h1") ({
+  fontFamily: "Futura",
+  color: "white",
+  borderStyle: "dashed",
+  padding: "3em 3em", 
+  borderColor: constants.HOME_PAGE_YELLOW
+})
 
 const Container = styled('div')({
     display: "flex",
     flexDirection:"column",
     width:"100%",
     height:"100%",
-    overflow:"scroll",
+    overflow:"none",
     backgroundColor: constants.HOME_PAGE_DARK_COLOR
 })
 
@@ -112,7 +131,7 @@ const MeetingInfo = styled('p') ({
   textAlign: "center",
   padding: "0 0 0 0",
   margin: "0 0 0 0",
-  width: "400px",
+  // width: "400px",
   fontFamily: "Avenir Next",
   color: constants.HOME_PAGE_LIGHT_COLOR
 })

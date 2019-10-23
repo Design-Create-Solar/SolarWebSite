@@ -4,39 +4,76 @@ import { Typography, Box } from "@material-ui/core";
 import * as constants from "../constants";
 import "../../infoArea.css"
 import Slideshow from './Slideshow';
-import {Desktop, Mobile, Tablet, Default} from '../constants';
-
-
+import {Desktop, Default, Mobile} from '../constants';
+import SlideshowMobile from "./SlideShowMobile"
 
 var color;
 const InfoArea = (props) => {
-	console.log(props)
 	if (props.color === constants.HOME_PAGE_DARK_COLOR)
 		return (
-			<Desktop>
-				<ContainerDark flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
-					<TextArea>
-						<h4 className="info-header">{props.header}</h4>
-						<ActualText>{props.text}</ActualText>
-					</TextArea>
-					{props.images &&<Slideshow images={props.images}/>}
-				</ContainerDark>
-			</Desktop>
+			<div>
+				<Desktop>
+					<ContainerDark flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
+						<TextArea>
+							<h4 className="info-header">{props.header}</h4>
+							<ActualText>{props.text}</ActualText>
+						</TextArea>
+						{props.images &&<Slideshow images={props.images}/>}
+					</ContainerDark>
+				</Desktop>
+				<Default>
+					<ContainerDark flexDirection="column" backgroundColor="red">
+						<TextArea>
+							<h4 className="info-header mobile-header">{props.header}</h4>
+							<ActualText style={{padding: "0 0 0 0", margin: "0 0 0 0"}}>{props.text}</ActualText>
+						</TextArea>
+							{props.images &&<SlideshowMobile images={props.images}/>}
+					</ContainerDark>
+				</Default>
+				<Mobile>
+					<ContainerDark flexDirection="column" backgroundColor="red">
+						<TextArea>
+							<h4 className="info-header mobile-header">{props.header}</h4>
+							<ActualText style={{padding: "0 0 0 0", margin: "0 0 0 0"}}>{props.text}</ActualText>
+						</TextArea>
+							{props.images &&<SlideshowMobile images={props.images}/>}
+					</ContainerDark>
+				</Mobile>
+			</div>
 		);
 	if (props.color === constants.HOME_PAGE_LIGHT_COLOR)
 		return (
-			<Desktop>
-				<ContainerLight flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
-					<TextArea>
-						<h4 className="info-header">{props.header}</h4>
-						<ActualText>{props.text}</ActualText>
-					</TextArea>
-					{props.images && <Slideshow images={props.images}/>}			
-				</ContainerLight>
-			</Desktop>
+			<div>
+				<Desktop>
+					<ContainerLight flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
+						<TextArea>
+							<h4 className="info-header">{props.header}</h4>
+							<ActualText>{props.text}</ActualText>
+						</TextArea>
+						{props.images &&<Slideshow images={props.images}/>}
+					</ContainerLight>
+				</Desktop>
+				<Default>
+					<ContainerLight flexDirection="column" backgroundColor="red">
+						<TextArea>
+							<h4 className="info-header mobile-header">{props.header}</h4>
+							<ActualText style={{padding: "0 0 0 0", margin: "0 0 0 0"}}>{props.text}</ActualText>
+						</TextArea>
+							{props.images &&<SlideshowMobile images={props.images}/>}
+					</ContainerLight>
+				</Default>
+				<Mobile>
+					<ContainerLight flexDirection="column" backgroundColor="red">
+						<TextArea>
+							<h4 className="info-header mobile-header">{props.header}</h4>
+							<ActualText style={{padding: "0 0 0 0", margin: "0 0 0 0"}}>{props.text}</ActualText>
+						</TextArea>
+							{props.images &&<SlideshowMobile images={props.images}/>}
+					</ContainerLight>
+				</Mobile>
+			</div>
 		);
 };
-
 
 const ContainerDark = styled(Box)({
 	display: "flex",
@@ -68,6 +105,7 @@ const ActualText = styled('p') ({
 	fontSize: "25px"
 });
 
+<<<<<<< HEAD
 {/* <Responsive displayIn={["Laptop"]}>
 <ContainerDark flexDirection={props.align === "left" ? "row" : "row-reverse"} backgroundColor="red">
 	<TextArea>
@@ -77,5 +115,7 @@ const ActualText = styled('p') ({
 	{props.images &&<Slideshow images={props.images}/>}
 </ContainerDark>
 </Responsive> */}
+=======
+>>>>>>> responsive info area, apt pics, right meeting times
 
 export default InfoArea;

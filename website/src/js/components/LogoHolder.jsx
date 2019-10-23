@@ -3,6 +3,7 @@ import React from "react";
 import * as constants from "../constants";
 import ReactTypingEffect from "react-typing-effect";
 import Typing from "react-typing-animation";
+import Box from "@material-ui/core/Box"
 
 const Logo = require("../../images/Logo.png");
 const texts = ["CREATORS", "DESIGNERS", "SOLAR"];
@@ -20,26 +21,25 @@ const useStyles = makeStyles((theme) => ({
 const LogoHolder = () => {
 	const classes = useStyles();
 	return (
-		<Container /*style={{ background: "linear-gradient(to bottom, #1d2951, white)" }}*/>
+		<Container>
 			<img src={Logo} style={{height: "35em", paddingBottom: "2em"}}/>
-			{/* {texts.forEach(text=>{
-            return(<div>
-            <Text>{text}</Text>
-            <Typing.Backspace count={text.length}/>
-            </div>)
-        })} */}
-			{/* <ReactTypingEffect staticText="We are" eraseDelay={2000} text= {texts} className={classes.text}/> */}
-			<Typing loop={true} hideCursor={true}>
-				<Text>{base}</Text>
-				<SpecialText>{texts[0]}</SpecialText>
-				<Typing.Backspace count={texts[0].length + 1} delay={500} />
-				<SpecialText>{texts[1]}</SpecialText>
-				<Typing.Backspace count={texts[1].length + 1} delay={500} />
-				<SpecialText>{texts[2]}</SpecialText>
-				<Typing.Backspace count={texts[2].length + base.length + 3} delay={500} />
-				{/* <SpecialText>{texts[3]}</SpecialText>
-				<Typing.Backspace count={texts[3].length + base.length + 3} delay={500} /> */}
-			</Typing>
+			<Box 
+				style={{
+					minHeight: "4em"
+				}}
+			>
+				<Typing loop={true} hideCursor={true}>
+					<Text>{base}</Text>
+					<SpecialText>{texts[0]}</SpecialText>
+					<Typing.Backspace count={texts[0].length + 1} delay={500} />
+					<SpecialText>{texts[1]}</SpecialText>
+					<Typing.Backspace count={texts[1].length + 1} delay={500} />
+					<SpecialText>{texts[2]}</SpecialText>
+					<Typing.Backspace count={texts[2].length + base.length + 3} delay={500} />
+					{/* <SpecialText>{texts[3]}</SpecialText>
+					<Typing.Backspace count={texts[3].length + base.length + 3} delay={500} /> */}
+				</Typing>
+			</Box>
 		</Container>
 	);
 };

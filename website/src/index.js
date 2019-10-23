@@ -9,23 +9,25 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    withRouter
   } from "react-router-dom";
-import TopBar from './js/components/TopBar'
 import BottomBanner from './js/components/BottomBanner';
+import ScrollToTop from "./js/components/ScrollToTop"
+import SponsorsPage from './js/components/SponsorsPage/SponsorsPage';
   
 
 ReactDOM.render(
     <Router>
         <div>
-        <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/home" component={LandingPage} />
-            <Route path="/programs" component={ProjectPage} />
-            <Route path="/team" component={MembersPage} />
-        </Switch>
-        <BottomBanner/>
+            <ScrollToTop>
+                <Switch>
+                    <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/home" component={LandingPage} />
+                    <Route path="/programs" component={ProjectPage} />
+                    <Route path="/team" component={MembersPage} />
+                    <Route path="/sponsors" component={SponsorsPage} />
+                </Switch>
+            </ScrollToTop>
+            <BottomBanner/>
         </div>
     </Router>
 

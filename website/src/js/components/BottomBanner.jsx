@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as constants from '../constants';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -11,7 +10,6 @@ const BottomBanner = () => {
     return (
         <GreyDiv>
                 <Container>
-                        <BannerText>Made with <Heart><FontAwesomeIcon icon= {faHeart}/></Heart>  by the SOLAR team</BannerText>
                         <BannerText1>Contact us! <Mailto href= "mailto:ishnoor@g.ucla.edu">Our Email</Mailto></BannerText1>
                         <BannerText2>Copyright © SOLAR 2019</BannerText2>
                 </Container>
@@ -38,10 +36,6 @@ const Container = styled.div`
     flex-direction:column;
     align-items:center;
     justify-content:center;
-`
-const BannerText = styled.p`
-    color:white;
-    order:0;
 `
 
 const BannerText1 = styled.p`
