@@ -32,6 +32,7 @@ const infoArray = [
 
 export default class ProjectPage extends Component {
     render(props) {
+        console.log(props);
         return (
             <Container>
                 <TopBar history={this.props.history}/>
@@ -59,7 +60,4 @@ const Container = styled('div')({
 const InfoContainer = styled('div')({
     order: 1,
     flex: 1 ,
-    /*boxShadow: "1px 2px black",
-    position: "relative",
-    zIndex: "10"*/
 })

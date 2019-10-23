@@ -21,7 +21,7 @@ const LogoHolder = () => {
 	const classes = useStyles();
 	return (
 		<Container /*style={{ background: "linear-gradient(to bottom, #1d2951, white)" }}*/>
-			<img src={Logo} />
+			<img src={Logo} style={{height: "35em", paddingBottom: "2em"}}/>
 			{/* {texts.forEach(text=>{
             return(<div>
             <Text>{text}</Text>
@@ -29,7 +29,7 @@ const LogoHolder = () => {
             </div>)
         })} */}
 			{/* <ReactTypingEffect staticText="We are" eraseDelay={2000} text= {texts} className={classes.text}/> */}
-			<Typing loop={true}>
+			<Typing loop={true} hideCursor={true}>
 				<Text>{base}</Text>
 				<SpecialText>{texts[0]}</SpecialText>
 				<Typing.Backspace count={texts[0].length + 1} delay={500} />
@@ -61,14 +61,14 @@ const Container = styled("div")({
 });
 
 const Text = styled("span")({
-	fontFamily: "Courier New",
+	fontFamily: "Avenir",
 	fontSize: "2.5em",
 	fontWeight: "800",
 	color: constants.HOME_PAGE_LIGHT_TEXT_COLOR
 });
 
 const SpecialText = styled("span")({
-	fontFamily: "Courier New",
+	fontFamily: "Futura",
 	fontSize: "2.5em",
 	fontWeight: "800",
 	color: constants.HOME_PAGE_TYPING_TEXT_COLOR,
