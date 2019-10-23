@@ -2,7 +2,12 @@
     width: 40%;
     padding-top: 10%;
     padding-bottom: 5%;
-    align-items: center;
+
+}
+
+.slide-container.mobile {
+    padding: 0 0 5% 0;
+    margin: 0 0 0 0;
 }
 
 .each-fade {
@@ -12,12 +17,11 @@
 }
       
 .each-fade .image-container {
-    width: 75%;
-    overflow: hidden;
-    }
-      
-.each-fade .image-container img {
     width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     }
       
 .each-fade h2 {

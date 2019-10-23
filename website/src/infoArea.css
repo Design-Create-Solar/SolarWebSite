@@ -6,3 +6,7 @@ h4.info-header{
     font-family: "Futura";
     text-shadow: 2px 3px 2px gray;
 }
+
+h4.info-header.mobile-header{
+    margin: 0 0 0 0;
+}
