@@ -9,10 +9,10 @@ library.add(faHeart);
 const BottomBanner = () => {
     return (
         <GreyDiv>
-                <Container>
-                        <BannerText1>Contact us! <Mailto href= "mailto:ishnoor@g.ucla.edu">Our Email</Mailto></BannerText1>
-                        <BannerText2>Copyright © SOLAR 2019</BannerText2>
-                </Container>
+            <Container>
+                <BannerText1>Contact us! <Mailto href="mailto:designcreatesolar@gmail.com">Our Email</Mailto></BannerText1>
+                <BannerText2>Copyright © SOLAR 2019</BannerText2>
+            </Container>
         </GreyDiv>
 
     )
