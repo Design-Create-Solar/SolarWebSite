@@ -25,7 +25,7 @@ const Email=styled("p") ({
 
 const Summary=styled("p") ({
     fontFamily: "Avenir Next",
-    padding: "15% 10% 0 10%", 
+    padding: "10% 10% 0 10%", 
     margin: "0 0 0 0"
     // borderStyle: "solid",
     // borderColor: "black"

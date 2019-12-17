@@ -1,11 +1,10 @@
 import { styled, makeStyles } from "@material-ui/styles";
 import React from "react";
-import * as constants from "../constants";
-import ReactTypingEffect from "react-typing-effect";
+import * as constants from "../../constants";
 import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box"
 
-const Logo = require("../../images/Logo.png");
+const Logo = require("../../../images/Logo.png");
 const texts = ["CREATORS", "DESIGNERS", "SOLAR"];
 
 const base = "WE ARE  ";
