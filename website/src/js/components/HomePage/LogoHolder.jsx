@@ -1,11 +1,10 @@
 import { styled, makeStyles } from "@material-ui/styles";
 import React from "react";
-import * as constants from "../constants";
-import ReactTypingEffect from "react-typing-effect";
+import * as constants from "../../constants";
 import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box"
 
-const Logo = require("../../images/Logo.png");
+const Logo = require("../../../images/Logo.png");
 const texts = ["CREATORS", "DESIGNERS", "SOLAR"];
 
 const base = "WE ARE  ";
@@ -22,13 +21,14 @@ const LogoHolder = () => {
 	const classes = useStyles();
 	return (
 		<Container>
-			<img src={Logo} style={{height: "35em", paddingBottom: "2em"}}/>
-			<Box 
+			<img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+			<Box
 				style={{
 					minHeight: "4em"
 				}}
 			>
 				<Typing loop={true} hideCursor={true}>
+					<Typing.Backspace count={texts[0].length + 1 + base.length} delay={500} />
 					<Text>{base}</Text>
 					<SpecialText>{texts[0]}</SpecialText>
 					<Typing.Backspace count={texts[0].length + 1} delay={500} />

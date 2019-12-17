@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import LandingPage from './js/components/LandingPage';
-import ProjectPage from './js/components/ProjectPage';
+import LandingPage from './js/components/HomePage/LandingPage';
+import ProjectPage from './js/components/ProgramsPage/ProjectPage';
 import MembersPage from './js/components/MembersPage/MembersPage';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
