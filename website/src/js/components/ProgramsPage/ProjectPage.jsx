@@ -35,7 +35,7 @@ export default class ProjectPage extends Component {
         return (
             <Container>
                 <TopBar history={this.props.history}/>
-                <InfoContainer order={2} style={{paddingTop: "5rem"}}>
+                <InfoContainer order={2}>
                 {
                     infoArray.map(info=>{ console.log(info)
                         return(

@@ -3,6 +3,7 @@ import React from "react";
 import * as constants from "../../constants";
 import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box"
+import { Default, Mobile, Desktop } from '../../constants';
 
 const Logo = require("../../../images/Logo.png");
 const texts = ["CREATORS", "DESIGNERS", "SOLAR"];
@@ -28,7 +29,6 @@ const LogoHolder = () => {
 				}}
 			>
 				<Typing loop={true} hideCursor={true}>
-					<Typing.Backspace count={texts[0].length + 1 + base.length} delay={500} />
 					<Text>{base}</Text>
 					<SpecialText>{texts[0]}</SpecialText>
 					<Typing.Backspace count={texts[0].length + 1} delay={500} />
@@ -36,8 +36,6 @@ const LogoHolder = () => {
 					<Typing.Backspace count={texts[1].length + 1} delay={500} />
 					<SpecialText>{texts[2]}</SpecialText>
 					<Typing.Backspace count={texts[2].length + base.length + 3} delay={500} />
-					{/* <SpecialText>{texts[3]}</SpecialText>
-					<Typing.Backspace count={texts[3].length + base.length + 3} delay={500} /> */}
 				</Typing>
 			</Box>
 		</Container>
@@ -47,7 +45,6 @@ const LogoHolder = () => {
 export default LogoHolder;
 
 const Container = styled("div")({
-	// position:"fixed",
 	backgroundColor: constants.HOME_PAGE_DARK_COLOR,
 	color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,
 	width: "100%",
