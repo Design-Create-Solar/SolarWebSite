@@ -2,12 +2,15 @@ import React from 'react';
 import { Fade } from 'react-slideshow-image';
 import './SliderStyle.css'
  
+<<<<<<< HEAD:website/src/js/components/ProgramsPage/Slideshow.jsx
 const fadeImages = [
   require('../../../images/Logo.png'),
   require('../../../images/Logo.png'),
   require('../../../images/Logo.png')
 ];
  
+=======
+>>>>>>> 1a10cf6590e0530ebaf3c6796649542a91822fec:website/src/js/components/ProgramsPage/Slideshow.jsx
 const fadeProperties = {
   duration: 3000,
   transitionDuration: 500,
