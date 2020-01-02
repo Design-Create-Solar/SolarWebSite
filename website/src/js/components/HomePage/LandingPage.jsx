@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LogoHolder from './LogoHolder';
-import {styled, makeStyles} from '@material-ui/styles';
+import {styled} from '@material-ui/styles';
 import * as constants from '../../constants';
 import InfoArea from '../InfoArea';
 import TopBar from '../TopBar';

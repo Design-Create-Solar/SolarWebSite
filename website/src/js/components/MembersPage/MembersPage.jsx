@@ -131,14 +131,14 @@ const TextPart = styled("div") ({
 })
 
 const Container = styled('div')({
-    display: "flex",
-    flexDirection:"column",
-    width:"100%",
-    height:"100%",
-    overflow:"none",
-    backgroundColor: constants.HOME_PAGE_DARK_COLOR
+   display: "flex",
+   flexDirection:"column",
+   width:"100%",
+   height:"100%",
+   overflow:"none",
+   backgroundColor: constants.HOME_PAGE_DARK_COLOR
 })
-
+ 
 const Heading = styled('div') ({
   padding: "30px 0px 60px 0px",
   display: "flex",
@@ -154,5 +154,5 @@ const MeetingInfo = styled('p') ({
   fontFamily: "Avenir Next",
   color: constants.HOME_PAGE_LIGHT_COLOR
 })
-
+ 
 export default MembersPage
