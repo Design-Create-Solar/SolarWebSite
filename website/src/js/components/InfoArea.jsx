@@ -1,11 +1,11 @@
 import React from 'react';
 import { styled } from '@material-ui/styles';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import * as constants from '../constants';
 import '../../infoArea.css';
-import Slideshow from './Slideshow';
+import Slideshow from './ProgramsPage/Slideshow';
 import { Desktop, Default, Mobile } from '../constants';
-import SlideshowMobile from './SlideShowMobile';
+import SlideshowMobile from './ProgramsPage/SlideShowMobile';
 
 var color;
 const InfoArea = props => {
