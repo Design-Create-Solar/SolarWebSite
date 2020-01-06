@@ -13,7 +13,7 @@ const base = "WE ARE  ";
 const useStyles = makeStyles((theme) => ({
 	title: {
 		fontFamily: "Monospace",
-		fontSize: 10000, //TODO: Doesnt seem to be working also better loop over texts
+		fontSize: 10000, //TODO: Doesn't seem to be working also better loop over texts
 		fontStyle: "oblique"
 	}
 }));
@@ -22,7 +22,15 @@ const LogoHolder = () => {
 	const classes = useStyles();
 	return (
 		<Container>
-			<img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+			<Default>
+				<img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+			</Default>
+			<Desktop>
+				<img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+			</Desktop>
+			<Mobile>
+				<img src={Logo} style={{ width: "100%", paddingBottom: "2em" }} />
+			</Mobile>
 			<Box
 				style={{
 					minHeight: "4em"
@@ -58,15 +66,15 @@ const Container = styled("div")({
 });
 
 const Text = styled("span")({
-	fontFamily: "Avenir",
+	fontFamily: "Futura",
 	fontSize: "2.5em",
-	fontWeight: "800",
+	fontWeight: "bold",
 	color: constants.HOME_PAGE_LIGHT_TEXT_COLOR
 });
 
 const SpecialText = styled("span")({
 	fontFamily: "Futura",
 	fontSize: "2.5em",
-	fontWeight: "800",
+	fontWeight: "400",
 	color: constants.HOME_PAGE_TYPING_TEXT_COLOR,
 });

@@ -102,126 +102,131 @@ function TopBar(props) {
 									Members
 								</StyledButton>
 							</Box>
+
 						</Mobile>
 						<Desktop>
-								<Box
+							<Box
+								style={{
+									display: 'flex',
+									//	alignSelf: 'center',
+									justifyContent: 'center',
+									alignItems: 'center',
+									//overflowX: 'scroll'
+									//padding: '10px'
+									flexGrow: 1,
+									width: '100%'
+								}}
+							>
+								<StyledButton
 									style={{
-										display: 'flex',
-										//	alignSelf: 'center',
-										justifyContent: 'center',
-										alignItems: 'center',
-										//overflowX: 'scroll'
-										//padding: '10px'
-										flexGrow: 1,
-										width: '100%'
+										order: 1
 									}}
+									onClick={() =>
+										props.history.push({ pathname: '/' })
+									}
 								>
-									<StyledButton
-										style={{
-											order: 1
-										}}
-										onClick={() =>
-											props.history.push({ pathname: '/' })
-										}
-									>
-										Home
+									Home
 									</StyledButton>
-									<StyledButton
-										style={{
-											order: 2
-										}}
-										onClick={() =>
-											props.history.push({
-												pathname: '/programs'
-											})
-										}
-									>
-										Programs
+								<StyledButton
+									style={{
+										order: 2
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/programs'
+										})
+									}
+								>
+									Programs
 									</StyledButton>
-									<StyledButton
-										style={{
-											order: 3
-										}}
-										onClick={() =>
-											props.history.push({
-												pathname: '/sponsors'
-											})
-										}
-									>
-										Sponsors
+								<StyledButton
+									style={{
+										order: 3
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/sponsors'
+										})
+									}
+								>
+									Sponsors
 									</StyledButton>
-									<StyledButton
-										style={{
-											order: 4
-										}}
-										onClick={() =>
-											props.history.push({
-												pathname: '/team'
-											})
-										}
-									>
-										Members
+								<StyledButton
+									style={{
+										order: 4
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/team'
+										})
+									}
+								>
+									Meet the Team
 									</StyledButton>
-								</Box>
+							</Box>
 						</Desktop>
 						<Default>
-						<Box
+							<Box
+								style={{
+									display: 'flex',
+									//	alignSelf: 'center',
+									justifyContent: 'center',
+									alignItems: 'center',
+									//overflowX: 'scroll'
+									//padding: '10px'
+									flexGrow: 1,
+									width: '100%'
+								}}
+							>
+								<StyledButton
 									style={{
-										display: 'flex',
-										//	alignSelf: 'center',
-										justifyContent: 'center',
-										alignItems: 'center',
-										//overflowX: 'scroll'
-										//padding: '10px'
-										flexGrow: 1,
-										width: '100%'
+										order: 1
+									}}
+									onClick={() =>
+										props.history.push({ pathname: '/' })
+									}
+								>
+									Home
+									</StyledButton>
+								<StyledButton
+									style={{
+										order: 2
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/programs'
+										})
+									}
+								>
+									Programs
+									</StyledButton>
+								<StyledButton
+									style={{
+										order: 3
 									}}
 								>
-									<StyledButton
-										style={{
-											order: 1
-										}}
-										onClick={() =>
-											props.history.push({ pathname: '/' })
-										}
-									>
-										Home
+									Sponsor
 									</StyledButton>
-									<StyledButton
-										style={{
-											order: 2
-										}}
-										onClick={() =>
-											props.history.push({
-												pathname: '/programs'
-											})
-										}
-									>
-										Programs
+								<StyledButton
+									style={{
+										order: 4
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/team'
+										})
+									}
+								>
+									Members
 									</StyledButton>
-									<StyledButton
-										style={{
-											order: 3
-										}}
-									>
-										Sponsor
-									</StyledButton>
-									<StyledButton
-										style={{
-											order: 4
-										}}
-										onClick={() =>
-											props.history.push({
-												pathname: '/team'
-											})
-										}
-									>
-										Members
-									</StyledButton>
-								</Box>
+							</Box>
 						</Default>
 					</Toolbar>
 				</AppBar>
+				<Mobile>
+					<div style={{ height: "50px" }}></div>
+
+				</Mobile>
 			</div>
 		</Router>
 	);

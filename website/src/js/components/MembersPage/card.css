@@ -14,8 +14,10 @@
   .ReactFlipCard__Front,
   .ReactFlipCard__Back {
     box-sizing: border-box;
-    width: 500px;
-    height: 400px;
+    max-width: 500px;
+    min-height: 430px;
+    height: 10%;
+    width: 100%;
   }
   .ReactFlipCard__Front,
   .ReactFlipCard__Back {
