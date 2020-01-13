@@ -29,7 +29,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"build:prod" : "docker build -t ishnoor/solar-web-prod",
+		"build:prod" : "docker build -t ishnoor/solar-web-prod .",
 		"deploy:aws" : "chmod +x ./bin/deploy.sh; ./bin/deploy.sh deploy"
 	},
 	"eslintConfig": {

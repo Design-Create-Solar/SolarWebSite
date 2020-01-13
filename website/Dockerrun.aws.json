@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-        "Name": "ishnoor/prod-ver1",
+        "Name": "ishnoor/solar-web-prod",
         "Update": "true"
     },
     "Ports": [

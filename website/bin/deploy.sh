@@ -1,6 +1,6 @@
 #!/bin/bash
-if git diff-index --quiet HEAD --; then 
-    set -o errexit; # Exit on error
+#if git diff-index --quiet HEAD --; then 
+ #   set -o errexit; # Exit on error
 echo Step 1/4: Creating production build;
     npm run build;
 echo Step 2/4: Archiving previous production image;
@@ -14,6 +14,6 @@ echo Step 3/4: Creating new production image;
     docker push ishnoor/solar-web-prod;
 echo Step 4/4: Creating elastic beanstalk environment;
 eb $1 SolarWebsite-dev6;
-else
-    echo Please commit your changes first.;
-fi
+#else
+ #   echo Please commit your changes first.;
+#fi
