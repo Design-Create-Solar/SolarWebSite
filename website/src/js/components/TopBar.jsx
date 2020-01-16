@@ -99,10 +99,9 @@ function TopBar(props) {
 										})
 									}
 								>
-									Members
+									Meet The Team
 								</StyledButton>
 							</Box>
-
 						</Mobile>
 						<Desktop>
 							<Box
@@ -126,7 +125,7 @@ function TopBar(props) {
 									}
 								>
 									Home
-									</StyledButton>
+								</StyledButton>
 								<StyledButton
 									style={{
 										order: 2
@@ -138,7 +137,7 @@ function TopBar(props) {
 									}
 								>
 									Programs
-									</StyledButton>
+								</StyledButton>
 								<StyledButton
 									style={{
 										order: 3
@@ -150,7 +149,7 @@ function TopBar(props) {
 									}
 								>
 									Sponsors
-									</StyledButton>
+								</StyledButton>
 								<StyledButton
 									style={{
 										order: 4
@@ -162,7 +161,7 @@ function TopBar(props) {
 									}
 								>
 									Meet the Team
-									</StyledButton>
+								</StyledButton>
 							</Box>
 						</Desktop>
 						<Default>
@@ -187,7 +186,7 @@ function TopBar(props) {
 									}
 								>
 									Home
-									</StyledButton>
+								</StyledButton>
 								<StyledButton
 									style={{
 										order: 2
@@ -199,14 +198,14 @@ function TopBar(props) {
 									}
 								>
 									Programs
-									</StyledButton>
+								</StyledButton>
 								<StyledButton
 									style={{
 										order: 3
 									}}
 								>
 									Sponsor
-									</StyledButton>
+								</StyledButton>
 								<StyledButton
 									style={{
 										order: 4
@@ -217,16 +216,21 @@ function TopBar(props) {
 										})
 									}
 								>
-									Members
-									</StyledButton>
+									Meet The Team
+								</StyledButton>
 							</Box>
 						</Default>
 					</Toolbar>
 				</AppBar>
 				<Mobile>
-					<div style={{ height: "50px" }}></div>
-
+					<div style={{ height: '63px' }}></div>
 				</Mobile>
+				<Default>
+					<div style={{ height: '63px' }}></div>
+				</Default>
+				<Desktop>
+					<div style={{ height: '63px' }}></div>
+				</Desktop>
 			</div>
 		</Router>
 	);

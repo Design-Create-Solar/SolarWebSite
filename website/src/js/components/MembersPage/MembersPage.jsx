@@ -115,7 +115,7 @@ class MembersPage extends Component {
               <AnchorLink offset="90" href="#join_team_form" style={{ color: "white", fontFamily: "Futura", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500" }}>
                 Join the team
               </AnchorLink>
-              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Members: </h1>
+              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Officers: </h1>
             </Heading>
             <div className="grid-container">
               {
@@ -161,7 +161,7 @@ class MembersPage extends Component {
               <AnchorLink offset="90" href="#join_team_form" style={{ color: "white", fontFamily: "Futura", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500" }}>
                 Join the team
               </AnchorLink>
-              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Members: </h1>
+              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Officers: </h1>
 
             </Heading>
             <div className="grid-container">
