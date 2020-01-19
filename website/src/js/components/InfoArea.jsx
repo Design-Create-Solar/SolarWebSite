@@ -1,11 +1,11 @@
 import React from 'react';
 import { styled } from '@material-ui/styles';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import * as constants from '../constants';
 import '../../infoArea.css';
-import Slideshow from './Slideshow';
+import Slideshow from './ProgramsPage/Slideshow';
 import { Desktop, Default, Mobile } from '../constants';
-import SlideshowMobile from './SlideShowMobile';
+import SlideshowMobile from './ProgramsPage/SlideShowMobile';
 
 var color;
 const InfoArea = props => {
@@ -28,7 +28,7 @@ const InfoArea = props => {
 				</Desktop>
 				<Default>
 					<ContainerDark flexDirection='column' backgroundColor='red'>
-						<TextArea>
+						<TextAreaMobile>
 							<h4 className='info-header mobile-header'>
 								{props.header}
 							</h4>
@@ -40,7 +40,7 @@ const InfoArea = props => {
 							>
 								{props.text}
 							</ActualText>
-						</TextArea>
+						</TextAreaMobile>
 						{props.images && (
 							<SlideshowMobile images={props.images} />
 						)}
@@ -48,7 +48,7 @@ const InfoArea = props => {
 				</Default>
 				<Mobile>
 					<ContainerDark flexDirection='column' backgroundColor='red'>
-						<TextArea>
+						<TextAreaMobile>
 							<h4 className='info-header mobile-header'>
 								{props.header}
 							</h4>
@@ -60,7 +60,7 @@ const InfoArea = props => {
 							>
 								{props.text}
 							</ActualText>
-						</TextArea>
+						</TextAreaMobile>
 						{props.images && (
 							<SlideshowMobile images={props.images} />
 						)}
@@ -90,7 +90,7 @@ const InfoArea = props => {
 						flexDirection='column'
 						backgroundColor='red'
 					>
-						<TextArea>
+						<TextAreaMobile>
 							<h4 className='info-header mobile-header'>
 								{props.header}
 							</h4>
@@ -102,7 +102,7 @@ const InfoArea = props => {
 							>
 								{props.text}
 							</ActualText>
-						</TextArea>
+						</TextAreaMobile>
 						{props.images && (
 							<SlideshowMobile images={props.images} />
 						)}
@@ -113,7 +113,7 @@ const InfoArea = props => {
 						flexDirection='column'
 						backgroundColor='red'
 					>
-						<TextArea>
+						<TextAreaMobile>
 							<h4 className='info-header mobile-header'>
 								{props.header}
 							</h4>
@@ -125,7 +125,7 @@ const InfoArea = props => {
 							>
 								{props.text}
 							</ActualText>
-						</TextArea>
+						</TextAreaMobile>
 						{props.images && (
 							<SlideshowMobile images={props.images} />
 						)}
@@ -154,6 +154,18 @@ const TextArea = styled(Box)({
 	display: 'flex',
 	flexDirection: 'column',
 	width: '50%',
+	paddingTop: '5%',
+	paddingBottom: '5%',
+	paddingRight: '3%',
+	paddingLeft: '3%'
+});
+
+const TextAreaMobile = styled(Box)({
+	order: 0,
+	display: 'flex',
+	flexDirection: 'column',
+	width: '90%',
+	textAlign: 'center',
 	paddingTop: '5%',
 	paddingBottom: '5%',
 	paddingRight: '3%',

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FROM ishnoor/solar-prod
+=======
+FROM ishnoor/dcs-ver1
+>>>>>>> 2f9e4bb0e81d4d001be57074d5b0982ef352e3c2
 # Remove the default nginx index.html
 RUN rm -rf /var/www/
 # Copy the contents of the d
@@ -7,4 +11,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 # Start server
+<<<<<<< HEAD
 CMD ["nginx", "-g", "daemon off;"]
+=======
+CMD ["nginx", "-g", "daemon off;"]
+>>>>>>> 2f9e4bb0e81d4d001be57074d5b0982ef352e3c2

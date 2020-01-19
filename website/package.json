@@ -9,24 +9,28 @@
 		"@material-ui/core": "^4.3.0",
 		"@material-ui/icons": "^4.2.1",
 		"@material-ui/styles": "^4.3.0",
+		"pdf-to-base64": "^1.0.2",
+		"pdf-viewer-reactjs": "^2.0.1",
 		"react": "^16.8.6",
 		"react-anchor-link-smooth-scroll": "^1.0.12",
 		"react-dom": "^16.8.6",
+		"react-flipcard-2": "^0.3.2",
 		"react-responsive": "^8.0.1",
 		"react-router-dom": "^5.0.1",
 		"react-scripts": "^3.2.0",
 		"react-slideshow-image": "^1.2.1",
 		"react-typing-animation": "^1.6.2",
 		"react-typing-effect": "^2.0.2",
-		"styled-components": "^4.3.2"
+		"styled-components": "^4.3.2",
+		"tabletop": "^1.6.2"
 	},
 	"scripts": {
-		"start": "npx react-scripts start",
-		"build": "npx react-scripts build",
-		"test": "npx react-scripts test",
-		"eject": "npx react-scripts eject",
-		"create:aws": "./bin/deploy.sh create",
-		"deploy:aws": "./bin/deploy.sh deploy"
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"build:prod" : "docker build -t ishnoor/solar-web-prod .",
+		"deploy:aws" : "chmod +x ./bin/deploy.sh; ./bin/deploy.sh deploy"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

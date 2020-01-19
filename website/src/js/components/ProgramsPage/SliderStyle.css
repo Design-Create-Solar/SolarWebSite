@@ -1,0 +1,37 @@
+.slide-container {
+	width: 40%;
+	padding-top: 10%;
+	padding-bottom: 5%;
+	align-items: center;
+}
+
+.slide-container-mobile {
+	width: 90%;
+	padding-top: 10%;
+	padding-bottom: 5%;
+	align-items: center;
+}
+
+.each-fade {
+	display: flex;
+	height: 95%;
+	width: 100%;
+}
+
+.each-fade .image-container {
+	width: 75%;
+	overflow: hidden;
+}
+
+.each-fade .image-container img {
+	width: 100%;
+}
+
+.each-fade h2 {
+	width: 25%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	background: #adceed;
+}
