@@ -65,4 +65,46 @@ router.post("/addAcc", (req, res) => {
   });
 });
 
+router.get("/query/all/:type", (req, res) => {
+  let type = req.params.type;
+  let reader = client.query(type);
+  reader
+    .then(data => {
+      res.send(JSON.stringify(data));
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
+router.get("/query/entries/:type/:number", (req, res) => {
+  let type = req.params.type;
+  let number = req.params.number;
+  let reader = client.query(type);
+  reader.limit = number;
+  reader
+    .then(data => {
+      res.send(JSON.stringify(data));
+      console.log("GET success!");
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
+router.get("/query/time/:type/:time", (req, res) => {
+  let type = req.params.type;
+  let reader = client.query(type);
+  let time = req.params.time;
+  reader.start = "-" + time + "h";
+  reader
+    .then(data => {
+      res.send(JSON.stringify(data));
+      console.log("router.get /query/type/time success!");
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
 module.exports = router;
