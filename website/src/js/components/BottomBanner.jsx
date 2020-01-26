@@ -23,7 +23,8 @@ const BottomBanner = () => {
 };
 
 const GreyDiv = styled.div`
-    background-color: ${constants.HOME_PAGE_DARK_COLOR};
+    /* background-color: ${constants.HOME_PAGE_DARK_COLOR}; */
+	background-color:black;
     width:100%;
     display:flex;
     justify-content:center;

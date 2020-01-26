@@ -22,15 +22,16 @@
 		"react-typing-animation": "^1.6.2",
 		"react-typing-effect": "^2.0.2",
 		"styled-components": "^4.3.2",
-		"tabletop": "^1.6.2"
+		"tabletop": "^1.6.2",
+		"video-react": "^0.14.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"build:prod" : "docker build -t ishnoor/solar-web-prod .",
-		"deploy:aws" : "chmod +x ./bin/deploy.sh; ./bin/deploy.sh deploy"
+		"build:prod": "docker build -t ishnoor/solar-web-prod .",
+		"deploy:aws": "chmod +x ./bin/deploy.sh; ./bin/deploy.sh deploy"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
