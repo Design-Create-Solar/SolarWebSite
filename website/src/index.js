@@ -10,6 +10,7 @@ import BottomBanner from './js/components/BottomBanner';
 import ScrollToTop from './js/components/ScrollToTop';
 import SponsorsPage from './js/components/SponsorsPage/SponsorsPage';
 import './futura/futur.ttf';
+import test from '/mnt/c/dcs/SolarWebSite/website/src/js/components/sockettest.jsx'
 
 ReactDOM.render(
 	<Router>
@@ -21,6 +22,7 @@ ReactDOM.render(
 					<Route path='/programs' component={ProjectPage} />
 					<Route path='/team' component={MembersPage} />
 					<Route path='/sponsors' component={SponsorsPage} />
+					<Route path='/test' component={test} />
 				</Switch>
 			</ScrollToTop>
 			<BottomBanner />
