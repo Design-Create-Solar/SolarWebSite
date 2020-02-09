@@ -101,6 +101,18 @@ function TopBar(props) {
 								>
 									Meet The Team
 								</StyledButton>
+								<StyledButton
+									style={{
+										order: 5
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/data'
+										})
+									}
+								>
+									Data
+								</StyledButton>
 							</Box>
 						</Mobile>
 						<Desktop>
@@ -162,6 +174,18 @@ function TopBar(props) {
 								>
 									Meet the Team
 								</StyledButton>
+								<StyledButton
+									style={{
+										order: 5
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/data'
+										})
+									}
+								>
+									Data
+								</StyledButton>
 							</Box>
 						</Desktop>
 						<Default>
@@ -217,6 +241,18 @@ function TopBar(props) {
 									}
 								>
 									Meet The Team
+								</StyledButton>
+								<StyledButton
+									style={{
+										order: 5
+									}}
+									onClick={() =>
+										props.history.push({
+											pathname: '/data'
+										})
+									}
+								>
+									Data
 								</StyledButton>
 							</Box>
 						</Default>
