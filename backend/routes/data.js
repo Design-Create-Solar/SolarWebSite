@@ -1,11 +1,14 @@
 const router = require("express").Router();
 const client = require("../config/influx.js");
 const socketIO = require("socket.io");
-const sockettest = async (socket, data) => {
+const sockettest = async (data) => {
   try {
-    socket.emit("FromAPI", data)
+    const io = require("../server.js");
+    console.log(io)
+    io.emit("FromAPI", data)
   } catch (error) {
-    console.error('Error ${error.code}')
+    console.error(`Error ${error.code}`)
+    console.log(io)
   }
 }
 
@@ -23,8 +26,8 @@ router.post("/add", (req, res) => {
       temperature: tempValue,
       measureDevice: deviceString
     })
-    .then(() => {
-      sockettest("teststring")
+    .then((data) => {
+      sockettest(JSON.stringify(data))
       console.info("write point success")
     })
     .catch(console.error);
@@ -113,6 +116,7 @@ router.get("/query/:type/start/:stime/end/:etime", (req, res) => {
   reader
     .then(data => {
       res.send(JSON.stringify(data));
+      sockettest(JSON.stringify(data))
       console.log("router.get /query/type/time success!");
     })
     .catch(err => {

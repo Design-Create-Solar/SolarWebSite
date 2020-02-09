@@ -10,18 +10,23 @@ const PORT = 5000
 app.use(bodyParser.json())
 app.use("/data", dataRoutes)
 app.use(bodyParser.urlencoded({ extended: true }))
-const server = socketIo[app]
-app.listen(PORT, () => {
+const server = require('http').Server(app)
+const io = socketIo(server)
+// app.listen(4000, () => {
+//     console.log("App listening on " + 4000)
+// })
+server.listen(PORT, () => {
     console.log("Listening on " + PORT)
 })
 
 let interval;
 io.on("connection", socket => {
     console.log("New client connected");
+    module.exports = socket
     if (interval) {
         clearInterval(interval);
     }
-    interval = setInterval(() => console.log("still connected"), 10000);
+    interval = setInterval(() => /* insert get request here? */console.log("still connected"), 10000);
     socket.on("disconnect", () => {
         console.log("Client disconnected");
     });
