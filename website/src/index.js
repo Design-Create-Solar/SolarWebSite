@@ -11,9 +11,9 @@ import ScrollToTop from './js/components/ScrollToTop';
 import SponsorsPage from './js/components/SponsorsPage/SponsorsPage';
 import DataPage from './js/components/DataPage/DataPage'
 import './futura/futur.ttf';
+import test from './js/components/sockettest.jsx'
 
 import './assets/base.css';
-import Main from './js/components/DataPage/DemoPages/Main';
 import configureStore from './config/configureStore';
 import { Provider } from 'react-redux';
 
@@ -31,6 +31,7 @@ ReactDOM.render(
 						<Route path='/team' component={MembersPage} />
 						<Route path='/sponsors' component={SponsorsPage} />
 						<Route path='/data' component={DataPage} />
+						<Route path='/test' component={test} />
 					</Switch>
 				</ScrollToTop>
 				<BottomBanner />

@@ -38,6 +38,7 @@
 		"reactstrap": "^8.4.1",
 		"recharts": "^2.0.0-beta.1",
 		"redux": "^4.0.5",
+		"socket.io-client": "^2.3.0",
 		"styled-components": "^4.3.2",
 		"tabletop": "^1.6.2"
 	},

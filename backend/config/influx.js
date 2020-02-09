@@ -1,5 +1,5 @@
 const Influx = require('influxdb-nodejs')
-const client = new Influx('http://127.0.0.1:8086/testdb') //no auth
+const client = new Influx('http://localhost:8086/testdb') //no auth
 
 // i --> integer
 // s --> string
@@ -40,6 +40,7 @@ const accTagSchema = {
 client.schema('accelerometer', accFieldSchema, accTagSchema, {
     stripUnknown: true,
 });
+
 
 
 
