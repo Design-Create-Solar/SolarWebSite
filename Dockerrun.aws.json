@@ -3,12 +3,24 @@
 	"containerDefinitions": [
 		{
 			"name": "nginx",
-			"image": "docker.io/ishnoor/iamish-prod",
+			"image": "docker.io/ishnoor/solar-web-prod",
 			"essential": true,
 			"portMappings": [
 				{
 					"hostPort": 80,
 					"containerPort": 80
+				}
+			],
+			"memory": 128
+        },
+        {
+			"name": "node",
+			"image": "docker.io/ishnoor/dcs-server",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 5000,
+					"containerPort": 5000
 				}
 			],
 			"memory": 128
