@@ -1,0 +1,17 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "nginx",
+			"image": "docker.io/ishnoor/iamish-prod",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 80,
+					"containerPort": 80
+				}
+			],
+			"memory": 128
+		}
+	]
+}
