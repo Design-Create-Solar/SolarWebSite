@@ -42,11 +42,11 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						{/* <video src='https://dms.licdn.com/playlist/C5605AQE68fPSE2hINg/feedshare-video-captions-thumbnails-ambry-mp4_h264_aac_3300k/0?e=1580166000&v=beta&t=ifqE3fCeeWXLKMOXPVLWoOYMDci3g1-KDzgUxtj9GXM' /> */}
+						{/* <video src='http://localhost:5000/static/poo.mp4' /> */}
 						<Player
 							playsInline
 							// poster="/assets/poster.png"
-							src='https://dms.licdn.com/playlist/C5605AQE68fPSE2hINg/feedshare-video-captions-thumbnails-ambry-mp4_h264_aac_3300k/0?e=1580166000&v=beta&t=ifqE3fCeeWXLKMOXPVLWoOYMDci3g1-KDzgUxtj9GXM'
+							src='http://localhost:5000/static/poo.mp4'
 						/>
 					</BetterInfoContainer>
 				</Desktop>
@@ -57,7 +57,7 @@ export default class LandingPage extends Component {
 						<Player
 							playsInline
 							// poster="/assets/poster.png"
-							src='https://dms.licdn.com/playlist/C5605AQE68fPSE2hINg/feedshare-video-captions-thumbnails-ambry-mp4_h264_aac_3300k/0?e=1580166000&v=beta&t=ifqE3fCeeWXLKMOXPVLWoOYMDci3g1-KDzgUxtj9GXM'
+							src='http://localhost:5000/static/poo.mp4'
 						/>
 					</BetterInfoContainer>
 				</Default>
@@ -68,7 +68,7 @@ export default class LandingPage extends Component {
 						<Player
 							playsInline
 							// poster="/assets/poster.png"
-							src='https://dms.licdn.com/playlist/C5605AQE68fPSE2hINg/feedshare-video-captions-thumbnails-ambry-mp4_h264_aac_3300k/0?e=1580166000&v=beta&t=ifqE3fCeeWXLKMOXPVLWoOYMDci3g1-KDzgUxtj9GXM'
+							src='http://localhost:5000/static/poo.mp4'
 						/>
 					</BetterInfoContainerMObile>
 				</Mobile>
