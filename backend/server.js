@@ -5,7 +5,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const dataRoutes = require("./routes/data")
 const app = express()
-const PORT = 5001
+const PORT = 5000
 app.use(bodyParser.json())
 app.use("/data", dataRoutes)
 
