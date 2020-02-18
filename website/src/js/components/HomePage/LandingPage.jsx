@@ -4,9 +4,9 @@ import { styled } from '@material-ui/styles';
 import * as constants from '../../constants';
 import InfoArea from '../InfoArea';
 import '../../../../node_modules/video-react/dist/video-react.css'; // import css
-import { Player } from 'video-react';
 import TopBar from '../TopBar';
 import { Default, Mobile, Desktop } from '../../constants';
+import ReactPlayer from 'react-player'
 
 const infoArray = [
 	{
@@ -42,37 +42,21 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						{/* <video // src='http://localhost:5000/static/poo.mp4' /> */}
-						<Player
-							playsInline
-							// poster="/assets/poster.png"
-							// src='http://localhost:5000/static/poo.mp4'
-							src='https://www.youtube.com/watch?v=0o46wh2UCqc'
-						/>
+						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="80vw" height="80vh"/>
 					</BetterInfoContainer>
 				</Desktop>
 				<Default>
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						<Player
-							playsInline
-							// poster="/assets/poster.png"
-							// src='http://localhost:5000/static/poo.mp4'
-							src='https://www.youtube.com/watch?v=0o46wh2UCqc'
-						/>
+						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="80vw" height="80vh"/>
 					</BetterInfoContainer>
 				</Default>
 				<Mobile>
 					<BetterInfoContainerMObile>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText mobile>{infoArray[1].text}</ActualText>
-						<Player
-							playsInline
-							// poster="/assets/poster.png"
-							// src='http://localhost:5000/static/poo.mp4'
-							src='https://www.youtube.com/watch?v=0o46wh2UCqc'
-						/>
+						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="80vw" height="80vh"/>
 					</BetterInfoContainerMObile>
 				</Mobile>
 			</Container>
