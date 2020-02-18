@@ -42,21 +42,21 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="80vw" height="80vh"/>
+						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="100%" height="60vh"/>
 					</BetterInfoContainer>
 				</Desktop>
 				<Default>
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="80vw" height="80vh"/>
+						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="100%" height="60vh"/>
 					</BetterInfoContainer>
 				</Default>
 				<Mobile>
 					<BetterInfoContainerMObile>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText mobile>{infoArray[1].text}</ActualText>
-						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="80vw" height="80vh"/>
+						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="100%" height="60vh"/>
 					</BetterInfoContainerMObile>
 				</Mobile>
 			</Container>
@@ -80,7 +80,9 @@ const BetterInfoContainer = styled('div')({
 	textAlign: 'center',
 	fontFamily: 'Futura',
 	fontSize: '2em',
-	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR
+	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
+	display: "flex",
+	flexDirection: "column"
 	// backgroundImage: "url(https://www.transparenttextures.com/patterns/leather.png)",
 });
 
