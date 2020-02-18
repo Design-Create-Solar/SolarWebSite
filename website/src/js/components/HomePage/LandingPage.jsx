@@ -42,11 +42,12 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						{/* <video src='http://localhost:5000/static/poo.mp4' /> */}
+						{/* <video // src='http://localhost:5000/static/poo.mp4' /> */}
 						<Player
 							playsInline
 							// poster="/assets/poster.png"
-							src='http://localhost:5000/static/poo.mp4'
+							// src='http://localhost:5000/static/poo.mp4'
+							src='https://www.youtube.com/watch?v=0o46wh2UCqc'
 						/>
 					</BetterInfoContainer>
 				</Desktop>
@@ -57,7 +58,8 @@ export default class LandingPage extends Component {
 						<Player
 							playsInline
 							// poster="/assets/poster.png"
-							src='http://localhost:5000/static/poo.mp4'
+							// src='http://localhost:5000/static/poo.mp4'
+							src='https://www.youtube.com/watch?v=0o46wh2UCqc'
 						/>
 					</BetterInfoContainer>
 				</Default>
@@ -68,7 +70,8 @@ export default class LandingPage extends Component {
 						<Player
 							playsInline
 							// poster="/assets/poster.png"
-							src='http://localhost:5000/static/poo.mp4'
+							// src='http://localhost:5000/static/poo.mp4'
+							src='https://www.youtube.com/watch?v=0o46wh2UCqc'
 						/>
 					</BetterInfoContainerMObile>
 				</Mobile>
