@@ -10,7 +10,7 @@ import BottomBanner from './js/components/BottomBanner';
 import ScrollToTop from './js/components/ScrollToTop';
 import SponsorsPage from './js/components/SponsorsPage/SponsorsPage';
 import './futura/futur.ttf';
-import test from '/mnt/c/dcs/SolarWebSite/website/src/js/components/sockettest.jsx'
+import test from '/js/components/sockettest.jsx'
 
 ReactDOM.render(
 	<Router>

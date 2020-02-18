@@ -1,6 +1,12 @@
 {
   "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "fetch": "^1.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.1",
+    "nodemon": "^2.0.2",
     "screw-filereader": "^1.4.3"
   }
 }
