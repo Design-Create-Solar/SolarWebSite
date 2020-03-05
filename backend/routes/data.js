@@ -1,12 +1,15 @@
 const router = require("express").Router();
 const client = require("../config/influx.js");
 const socketIO = require("socket.io");
+
+const io = require("../server");
 const sockettest = async (data) => {
   try {
-    const io = require("../server.js");
+    // const io = require("../server.js");
     console.log(io)
     io.emit("FromAPI", data)
   } catch (error) {
+    console.log("came in here")
     console.error(`Error ${error.code}`)
     console.log(io)
   }

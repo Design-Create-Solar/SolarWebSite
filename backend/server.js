@@ -4,9 +4,11 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const dataRoutes = require("./routes/data")
 const socketIo = require('socket.io')
+const cors = require('cors')
 
 const app = express()
 const PORT = 5000
+app.use(cors())
 app.use(bodyParser.json())
 app.use("/data", dataRoutes)
 app.use(bodyParser.urlencoded({ extended: true }))
