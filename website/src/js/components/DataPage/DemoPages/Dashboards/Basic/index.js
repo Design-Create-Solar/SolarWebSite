@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
+import socketIOClient from "socket.io-client";
 
 import {
     Row, Col,
@@ -71,7 +72,9 @@ export default class AnalyticsDashboard1 extends Component {
         };
         this.toggle = this.toggle.bind(this);
         this.toggle1 = this.toggle1.bind(this);
-
+        this.dataFiller = this.dataFiller.bind(this); 
+        // need to bind funcs b/c going to set state in there
+        // without this, doing this in function won't pass component but func
     }
 
     toggle() {
@@ -93,25 +96,37 @@ export default class AnalyticsDashboard1 extends Component {
         const socket = socketIOClient(endpoint);
         socket.on("FromAPI", data => this.setState({ response: data }));
 
-        fetch("/data/query/BMS/all")
-        .then(results => {
-            console.log("hellohello");
-            console.log(results.json);
-            return results.json();
-        }).then(data => {
-            var points = [];
-            // data.results.map((point) => {
-            //     points.push({
-            //         name: 
-            //     })
-            // })
-            // this.setState({})
+        fetch("http://localhost:5000/data/query/BMS/all")
+        .then(async results => {
+            
+            const resultJson = await results.json();
+            await this.dataFiller(resultJson);
         })
-        .catch(console.log("something went wrong"))
+        .catch(err => {console.log(err?err:"ERROROROROROROR")})
     }
 
-    render() {
+    dataFiller(resultThingy) {
+        let arr = []
+        resultThingy.results[0].series[0].values.forEach((el, i)=>{
+            let element = {};
+            element.name=el[0];
+            element.temp = el[3];//temp for testing 
+            arr.push(element)
+        })
+        this.setState({data3: arr, response: false});
 
+    }
+
+    poodiddy(response) {
+        this.dataFiller(JSON.parse(response))
+    }
+
+    render() { // whenever state changes, this renders() again
+        const {data3, response} = this.state;
+        
+        if (response) {
+            this.poodiddy(response);
+        }
         return (
             <Fragment>
                 <ReactCSSTransitionGroup
@@ -122,9 +137,6 @@ export default class AnalyticsDashboard1 extends Component {
                     transitionEnter={false}
                     transitionLeave={false}>
                     <div>
-                        {
-                            console.log("this works")
-                        }
                         <PageTitle
                             heading="Basic Dashboard"
                             subheading="This is an example dashboard created using build-in elements and components."
@@ -265,7 +277,7 @@ export default class AnalyticsDashboard1 extends Component {
                                                     </div>
                                                 </div>
                                                 <ResponsiveContainer height={187}>
-                                                    <AreaChart data={data} margin={{top: -45, right: 0, left: 0, bottom: 0}}>
+                                                    <AreaChart data={data3} margin={{top: -45, right: 0, left: 0, bottom: 0}}>
                                                         <defs>
                                                             <linearGradient id="colorPv2" x1="0" y1="0" x2="0" y2="1">
                                                                 <stop offset="10%" stopColor="var(--warning)" stopOpacity={0.7}/>
@@ -273,7 +285,7 @@ export default class AnalyticsDashboard1 extends Component {
                                                             </linearGradient>
                                                         </defs>
                                                         <Tooltip/>
-                                                        <Area type='monotoneX' dataKey='uv' stroke='var(--warning)' strokeWidth={2} fillOpacity={1}
+                                                        <Area type='monotoneX' dataKey='temp' stroke='var(--warning)' strokeWidth={2} fillOpacity={1}
                                                               fill="url(#colorPv2)"/>
                                                     </AreaChart>
                                                 </ResponsiveContainer>

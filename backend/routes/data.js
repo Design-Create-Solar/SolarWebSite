@@ -2,11 +2,11 @@ const router = require("express").Router();
 const client = require("../config/influx.js");
 const socketIO = require("socket.io");
 
-const io = require("../server");
+// const io = require("../server");
 const sockettest = async (data) => {
   try {
-    // const io = require("../server.js");
-    console.log(io)
+    const io = require("../server.js");
+    // console.log(io)
     io.emit("FromAPI", data)
   } catch (error) {
     console.log("came in here")
@@ -63,10 +63,10 @@ router.post("/addBMS", (req, res) => {
       //////
       let type = "BMS";
       let reader = client.query(type);
-      let stime = 100;
-      let etime = 0;
-      reader.end = "-" + etime + "h";
-      reader.start = "-" + stime + "h";
+      // let stime = 100;
+      // let etime = 0;
+      // reader.end = "-" + etime + "h";
+      // reader.start = "-" + stime + "h";
       reader
         .then(data => {
           // res.send(JSON.stringify(data));
