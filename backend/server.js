@@ -11,6 +11,9 @@ const PORT = 5000
 app.use(cors())
 app.use(bodyParser.json())
 app.use("/data", dataRoutes)
+
+app.use('/static', express.static('media'))
+
 app.use(bodyParser.urlencoded({ extended: true }))
 const server = require('http').Server(app)
 const io = socketIo(server)

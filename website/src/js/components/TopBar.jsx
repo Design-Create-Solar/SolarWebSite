@@ -30,10 +30,7 @@ function TopBar(props) {
 	return (
 		<Router>
 			<div>
-				<AppBar
-					position='fixed'
-					style={{ backgroundColor: constants.HOME_PAGE_DARK_COLOR }}
-				>
+				<AppBar position='fixed' style={{ backgroundColor: 'black' }}>
 					<Toolbar
 						style={{
 							//overflow: 'scroll',
