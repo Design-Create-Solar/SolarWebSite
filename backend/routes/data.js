@@ -4,13 +4,13 @@ const socketIO = require("socket.io");
 const sockettest = async (data) => {
   try {
     const io = require("../server.js");
-    console.log(io)
-    io.emit("FromAPI", data)
+    console.log(io);
+    io.emit("FromAPI", data);
   } catch (error) {
-    console.error(`Error ${error.code}`)
-    console.log(io)
+    console.error(`Error ${error.code}`);
+    console.log(io);
   }
-}
+};
 
 router.post("/add", (req, res) => {
   let sID = req.body.sID;
@@ -20,20 +20,20 @@ router.post("/add", (req, res) => {
   client
     .write("temperatureSensor")
     .tag({
-      sensorID: sID
+      sensorID: sID,
     })
     .field({
       temperature: tempValue,
-      measureDevice: deviceString
+      measureDevice: deviceString,
     })
     .then((data) => {
-      sockettest(JSON.stringify(data))
-      console.info("write point success")
+      sockettest(JSON.stringify(data));
+      console.info("write point success");
     })
     .catch(console.error);
 
   res.json({
-    test: "arbitrary response"
+    test: "arbitrary response",
   });
 });
 
@@ -44,17 +44,17 @@ router.post("/addBMS", (req, res) => {
   client
     .write("BMS")
     .tag({
-      sensorID: sID
+      sensorID: sID,
     })
     .field({
       temperature: tempValue,
-      voltage: voltage
+      voltage: voltage,
     })
     .then(() => console.info("write BMS point success"))
     .catch(console.error);
 
   res.json({
-    test: "arbitrary response"
+    test: "arbitrary response",
   });
 });
 
@@ -65,17 +65,17 @@ router.post("/addAcc", (req, res) => {
   client
     .write("accelerometer")
     .tag({
-      sensorID: sID
+      sensorID: sID,
     })
     .field({
       Zenith: Zenith,
-      Azimuth: Azimuth
+      Azimuth: Azimuth,
     })
     .then(() => console.info("write point success"))
     .catch(console.error);
 
   res.json({
-    test: "arbitrary response"
+    test: "arbitrary response",
   });
 });
 
@@ -83,10 +83,10 @@ router.get("/query/:type/all", (req, res) => {
   let type = req.params.type;
   let reader = client.query(type);
   reader
-    .then(data => {
+    .then((data) => {
       res.send(JSON.stringify(data));
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 });
@@ -97,11 +97,11 @@ router.get("/query/:type/:number", (req, res) => {
   let reader = client.query(type);
   reader.limit = number;
   reader
-    .then(data => {
+    .then((data) => {
       res.send(JSON.stringify(data));
       console.log("GET success!");
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 });
@@ -114,12 +114,12 @@ router.get("/query/:type/start/:stime/end/:etime", (req, res) => {
   reader.end = "-" + etime + "h";
   reader.start = "-" + stime + "h";
   reader
-    .then(data => {
+    .then((data) => {
       res.send(JSON.stringify(data));
-      sockettest(JSON.stringify(data))
+      sockettest(JSON.stringify(data));
       console.log("router.get /query/type/time success!");
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 });
