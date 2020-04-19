@@ -27,8 +27,10 @@ app.use("/block", block);
 mongoose.connect(
   process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-  () => console.log("connected to mongodb")
+  () => console.log("Connection to MongoDB established.")
 );
+
+app.listen(PORT, () => console.log("Server listening on port " + PORT + "."));
 
 //socket.io realtime updates:
 
