@@ -5,14 +5,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     min: 1,
-    max: 20
+    max: 20,
   },
   password: {
     type: String,
     required: true,
     min: 1,
-    max: 2000
-  }
+    max: 2000,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
