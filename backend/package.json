@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "concurrently \"serve -s ~/media -l 5001\" \"npm run start\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:prod": "docker build -t ishnoor/dcs-server ."
   },
   "author": "",
   "license": "ISC",
