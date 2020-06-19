@@ -2,19 +2,16 @@ const dotenv = require("dotenv").config();
 
 const base64Upload = async function (base64, title) {
   const AWS = require("aws-sdk");
-  //hardcoded access key and secret key for throwaway account, change in production
   AWS.config.update({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
   });
-  const S3_BUCKET = "dcs-media"; //change this to name of s3 bucket
-  //hardcoded access key and secret key for throwaway account, change in production
+  const S3_BUCKET = process.env.S3_BUCKET;
 
   AWS.config.setPromisesDependency(require("bluebird"));
   const s3 = new AWS.S3();
 
-  // Ensure that you POST a base64 data to your server.
-  // Let's assume the variable "base64" is one.
+  // Ensure POST a base64 data to server
   const base64Data = new Buffer.from(
     base64.replace(/^data:image\/\w+;base64,/, ""),
     "base64"
@@ -44,8 +41,6 @@ const base64Upload = async function (base64, title) {
     console.log(error);
   }
 
-  // Save the Location (url) to your database and Key if needs be.
-  // As good developers, we should return the url and let other function do the saving to database etc
   console.log("Stored in s3 with url, key:");
   console.log(location, key);
 
