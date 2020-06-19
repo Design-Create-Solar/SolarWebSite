@@ -23,7 +23,7 @@ var BlockSchema = new Schema({
     max: 3000,
   },
   images: {
-    type: [String], //test with array of strings
+    type: [String],
   },
   direction: {
     type: Number,

@@ -1,4 +1,5 @@
 const Block = require("../models/blockModel");
+const uploadBase64 = require("../aws/uploadBase64");
 
 //GET BY DB ID
 exports.block_details_bydbid = (req, res) => {
@@ -19,7 +20,7 @@ exports.block_details_byid = (req, res) => {
 
 //GET BY PAGE NAME
 exports.block_details_bypage = (req, res) => {
-  Block.findOne({ page: req.params.page }, (err, block) => {
+  Block.find({ page: req.params.page }, (err, block) => {
     if (err) return err;
     res.send(block);
   });
@@ -35,14 +36,25 @@ exports.block_details_bytype = (req, res) => {
 
 //CREATE BLOCK
 exports.block_create = async (req, res) => {
+  //each images[i] corresponds to a titles[i]
+
+  //for each base64 string in req.body.images
+  //run upload base64 and add the result to images array
+  base64Array = req.body.images;
+  titlesArray = req.body.titles;
+  var images = [];
+  for (var i = 0; i < base64Array.length; i++) {
+    var url = await uploadBase64(base64Array[i], titlesArray[i]);
+    images.push(url);
+  }
+
   let block = new Block({
-    //determine id to assign, placeholder is 1 for now
     id: req.body.id,
     page: req.body.page,
     type: req.body.type,
     text: req.body.text,
     media: req.body.media,
-    images: req.body.images,
+    images: images,
     direction: req.body.direction,
     header: req.body.header,
   });
@@ -50,20 +62,59 @@ exports.block_create = async (req, res) => {
   //if id exists return 400 status (mainly for testing, this shouldn't happen because id will be generated)
   const idExists = await Block.findOne({ id: req.body.id }); //change to id: req.body.id
   if (idExists) {
-    return res.status(400).send("block id already exists!");
+    return res
+      .status(400)
+      .send("Block id already exists! Use update routes or use a new id.");
   }
 
   block.save((err) => {
     if (err) return err;
+    console.log("Block created!");
     res.send("Block created!");
   });
 };
 
 //UPDATE BLOCK BY DB ID
-exports.block_update = (req, res) => {
+exports.block_update_db_id = async (req, res) => {
+  base64Array = req.body.images;
+  titlesArray = req.body.titles;
+  var images = [];
+  for (var i = 0; i < base64Array.length; i++) {
+    var url = await uploadBase64(base64Array[i], titlesArray[i]);
+    images.push(url);
+  }
+
+  req.body.images = images;
+
   Block.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
     if (err) return err;
-    res.send("Block udpated!");
+    res.send("Block updated!");
+  });
+};
+
+//UPDATE BLOCK BY CUSTOM ID
+exports.block_update_id = async (req, res) => {
+  //check if block exists
+  const blockExists = await Block.findOne({ id: req.params.id });
+  if (!blockExists) {
+    res.send("Block does not exist.");
+    console.log("Update was attempted on block id that does not exist.");
+    return;
+  }
+
+  base64Array = req.body.images;
+  titlesArray = req.body.titles;
+  var images = [];
+  for (var i = 0; i < base64Array.length; i++) {
+    var url = await uploadBase64(base64Array[i], titlesArray[i]);
+    images.push(url);
+  }
+
+  req.body.images = images;
+
+  await Block.findOneAndUpdate({ id: req.params.id }, req.body, (err) => {
+    if (err) return err;
+    res.send("Block updated!");
   });
 };
 
@@ -79,9 +130,4 @@ exports.block_delete = async (req, res) => {
   } else {
     res.send("Block does not exist!");
   }
-};
-
-//Simple version, without validation or sanitation
-exports.test = function (req, res) {
-  res.send("Greetings from the Test controller!");
 };

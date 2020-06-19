@@ -19,8 +19,11 @@ router.get("/getByType/:type", block_controller.block_details_bytype);
 //CREATE BLOCK
 router.post("/create", block_controller.block_create);
 
-//UPDATE BLOCK
-router.put("/update/:id", block_controller.block_update);
+//UPDATE BLOCK BY DB ID
+router.put("/updateByDBid/:id", block_controller.block_update_db_id);
+
+//UPDATE BLOCK BY CUSTOM ID
+router.put("/update/:id", block_controller.block_update_id);
 
 //DELETE BLOCK
 router.put("/delete/:id", block_controller.block_delete);

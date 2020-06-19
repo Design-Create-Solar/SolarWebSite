@@ -1,3 +1,6 @@
+// ENV VARIABLES
+const dotenv = require("dotenv").config();
+
 //Databases
 const Influx = require("influxdb-nodejs");
 const mongoose = require("mongoose");
@@ -8,10 +11,9 @@ const express = require("express"),
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
-const dotenv = require("dotenv").config();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 
 //ROUTES
 const dataRoutes = require("./routes/dataRoute"); //for time series db
