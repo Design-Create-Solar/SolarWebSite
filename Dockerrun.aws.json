@@ -12,7 +12,7 @@
 				}
 			],
             "memory": 128,
-            "links": ["api"]
+            "links": ["api", "dcsfrontend"]
         },
         {
 			"name": "api",

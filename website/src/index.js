@@ -28,7 +28,7 @@ ReactDOM.render(
 						<Route exact path='/' component={LandingPage} />
 						<Route exact path='/home' component={LandingPage} />
 						<Route path='/programs' component={ProjectPage} />
-						<Route path='/team' component={MembersPage} />
+						<Route exact path='/team' component={MembersPage} />
 						<Route path='/sponsors' component={SponsorsPage} />
 						{/* <Route path='/data' component={DataPage} /> */}
 						<Route path='/test' component={test} />

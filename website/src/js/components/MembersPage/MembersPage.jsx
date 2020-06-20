@@ -7,13 +7,16 @@ import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Tabletop from "tabletop"
 import FlipCard from "react-flipcard-2"
 import bruh from 'styled-components';
+import StyledButton from "../StyledButton"
 
 class MembersPage extends Component {
 
   constructor() {
     super()
     this.state = {
-      data: [],
+      // data: [],
+      membersData: [],
+      teamsData: [],
       isFlipped: false,
     }
   }
@@ -44,10 +47,20 @@ class MembersPage extends Component {
 
   componentDidMount() {
     Tabletop.init({
-      key: "1FuVIG3TqJK7jfQs853T-clF_QsQpi5t4_iIuIRoyxJI",
+      // key: "1FuVIG3TqJK7jfQs853T-clF_QsQpi5t4_iIuIRoyxJI",
+      key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k",
       callback: googleData => {
         this.setState({
-          data: googleData
+          membersData: googleData
+        })
+      },
+      simpleSheet: true
+    })
+    Tabletop.init({
+      key: "1bOLQA-3072h9-_BmdceXsM4QT3aREskoQSeOQ42kg5k",
+      callback: googleData => {
+        this.setState({
+          teamsData: googleData
         })
       },
       simpleSheet: true
@@ -55,8 +68,8 @@ class MembersPage extends Component {
   }
 
   render() {
-    const { data } = this.state
-    console.log("update state --->", this.state)
+    console.log(this.state)
+    const { membersData, teamsData } = this.state
     return (
       <div>
         <constants.Desktop>
@@ -64,9 +77,22 @@ class MembersPage extends Component {
             <TopBar history={this.props.history} />
             <Heading>
               <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Meeting Info: </h1>
-              <MeetingInfo>Where: Boelter SCC Space</MeetingInfo>
-              <MeetingInfo>General Meetings: Tuesdays 5-7PM</MeetingInfo>
-              <MeetingInfo>Technical Meetings: Thursdays 5-7PM</MeetingInfo>
+              {/* <MeetingInfo>Where: Boelter SCC Space</MeetingInfo> */}
+              <h3 style={{ color: "white", fontFamily: "Futura", margin: "0 0 5px 0" }}>Zoom link to be posted</h3>
+              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>The Rest of the Team</h1>
+              <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                {
+                  teamsData.map(obj => {
+                    let pathStr = "/team/" + obj.Name
+                    return (
+                      <StyledButton onClick={() => this.props.history.push({ pathname: pathStr })}>
+                        {obj.Name}
+                      </StyledButton>
+                    )
+                  })
+                }
+              </div>
+
               <AnchorLink offset="90" href="#join_team_form" style={{ color: "white", fontFamily: "Futura", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500" }}>
                 Join the team
               </AnchorLink>
@@ -74,8 +100,7 @@ class MembersPage extends Component {
             </Heading>
             <div className="grid-container">
               {
-                data.map(obj => {
-
+                membersData.filter(obj => obj["IsLead"]=="TRUE").map(obj => {
                   return (
                     <FlipCard>
                       {/* FRONT */}
@@ -94,7 +119,8 @@ class MembersPage extends Component {
                       </Back>
                     </FlipCard>
                   )
-                })}
+                })
+              }
             </div>
 
             <a id="join_team_form" style={{ paddingTop: "1%", color: "white", display: "flex", justifyContent: "center" }}>
@@ -109,9 +135,8 @@ class MembersPage extends Component {
             <TopBar history={this.props.history} />
             <Heading>
               <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Meeting Info: </h1>
-              <MeetingInfo>Where: Boelter SCC Space</MeetingInfo>
-              <MeetingInfo>General Meetings: Tuesdays 5-7PM</MeetingInfo>
-              <MeetingInfo>Technical Meetings: Thursdays 5-7PM</MeetingInfo>
+              
+              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>The Rest of the Team</h1>
               <AnchorLink offset="90" href="#join_team_form" style={{ color: "white", fontFamily: "Futura", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500" }}>
                 Join the team
               </AnchorLink>
@@ -119,7 +144,7 @@ class MembersPage extends Component {
             </Heading>
             <div className="grid-container">
               {
-                data.map(obj => {
+                membersData.map(obj => {
 
                   return (
                     <FlipCard>
@@ -149,15 +174,12 @@ class MembersPage extends Component {
             </a>
           </Container>
         </constants.Default>
-
         <constants.Mobile>
           <Container>
             <TopBar history={this.props.history} />
             <Heading>
               <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>Meeting Info: </h1>
-              <MeetingInfo>Where: Boelter SCC Space</MeetingInfo>
-              <MeetingInfo>General Meetings: Tuesdays 5-7PM</MeetingInfo>
-              <MeetingInfo>Technical Meetings: Thursdays 5-7PM</MeetingInfo>
+              <h1 style={{ color: "white", paddingTop: "5%", fontFamily: "Futura", margin: "0 0 5px 0" }}>The Rest of the Team</h1>
               <AnchorLink offset="90" href="#join_team_form" style={{ color: "white", fontFamily: "Futura", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500" }}>
                 Join the team
               </AnchorLink>
@@ -166,7 +188,7 @@ class MembersPage extends Component {
             </Heading>
             <div className="grid-container">
               {
-                data.map(obj => {
+                membersData.map(obj => {
 
                   return (
                     // <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", minHeight: "300px", display: "flex", flexDirection: "column", justifyContent: "center", }}>
