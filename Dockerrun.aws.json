@@ -11,10 +11,10 @@
 					"containerPort": 80
 				}
 			],
-            "memory": 128,
-            "links": ["api"]
-        },
-        {
+			"memory": 128,
+			"links": ["api", "dcsfrontend"]
+		},
+		{
 			"name": "api",
 			"image": "docker.io/ishnoor/dcs-server",
 			"essential": true,
@@ -24,11 +24,21 @@
 					"containerPort": 5000
 				}
 			],
-            "memory": 128
+			"environment": [
+				{
+					"name": "LOCATIONS_DB_URL",
+					"value": "mongodb+srv://tedusername:tedpassword@testingblocksdb-grscr.mongodb.net/test?retryWrites=true&w=majority"
+				},
+				{
+					"name": "BESTTIME_API_PRIVATE_KEY",
+					"value": "pri_833ae17eb7c745f4803be0ebe93bd467"
+				}
+			],
+			"memory": 128
 		},
 		{
 			"name": "dcsfrontend",
-			"image": "docker.io/ishnoor/dcs-frontend", 
+			"image": "docker.io/ishnoor/dcs-frontend",
 			"essential": true,
 			"portMappings": [
 				{
@@ -36,7 +46,7 @@
 					"containerPort": 3000
 				}
 			],
-            "memory": 128
+			"memory": 128
 		}
 	]
 }
