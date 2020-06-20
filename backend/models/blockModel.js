@@ -26,7 +26,7 @@ var BlockSchema = new Schema({
     type: [String],
   },
   direction: {
-    type: Number,
+    type: String,
   },
   header: {
     type: String,

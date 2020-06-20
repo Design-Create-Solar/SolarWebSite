@@ -40,12 +40,14 @@ exports.block_create = async (req, res) => {
 
   //for each base64 string in req.body.images
   //run upload base64 and add the result to images array
-  base64Array = req.body.images;
-  titlesArray = req.body.titles;
-  var images = [];
-  for (var i = 0; i < base64Array.length; i++) {
-    var url = await uploadBase64(base64Array[i], titlesArray[i]);
-    images.push(url);
+  if (req.body.images) {
+    base64Array = req.body.images;
+    titlesArray = req.body.titles;
+    var images = [];
+    for (var i = 0; i < base64Array.length; i++) {
+      var url = await uploadBase64(base64Array[i], titlesArray[i]);
+      images.push(url);
+    }
   }
 
   let block = new Block({
@@ -60,7 +62,7 @@ exports.block_create = async (req, res) => {
   });
 
   //if id exists return 400 status (mainly for testing, this shouldn't happen because id will be generated)
-  const idExists = await Block.findOne({ id: req.body.id }); //change to id: req.body.id
+  const idExists = await Block.findOne({ id: req.body.id });
   if (idExists) {
     return res
       .status(400)

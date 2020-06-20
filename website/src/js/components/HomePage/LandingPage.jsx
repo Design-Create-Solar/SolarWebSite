@@ -6,7 +6,8 @@ import InfoArea from "../InfoArea";
 import TopBar from "../TopBar";
 import Axios from "axios";
 
-const infoArray = [
+//changed from const to var
+var infoArray = [
   {
     header: "MISSION STATEMENT",
     color: constants.HOME_PAGE_LIGHT_COLOR,
@@ -28,11 +29,28 @@ export default class LandingPage extends Component {
     super();
     this.state = { data: {} };
   }
-  componentWillMount() {
-    Axios.get("localhost:5000/block/getByPage/meet the team")
+  componentDidMount() {
+    Axios.get("http://localhost:5000/block/getByPage/landing")
       .then(function (response) {
         console.log(response);
-        this.setState({ data: response });
+        //this.setState({ data: response });
+        //loop through response and add to infoArray
+        var data = response.data;
+        for (var i = 0; i < data.length; i++) {
+          var colorSelect;
+          if (i % 2 === 0) {
+            colorSelect = constants.HOME_PAGE_DARK_COLOR;
+          } else {
+            colorSelect = constants.HOME_PAGE_LIGHT_COLOR;
+          }
+          infoArray.push({
+            header: data[i].header,
+            color: colorSelect,
+            text: data[i].text,
+            align: data[i].direction,
+          });
+        }
+        console.log(infoArray);
       })
       .catch((err) => {
         console.log(err);
