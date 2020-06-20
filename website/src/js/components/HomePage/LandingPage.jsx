@@ -4,7 +4,7 @@ import { styled } from "@material-ui/styles";
 import * as constants from "../../constants";
 import InfoArea from "../InfoArea";
 import TopBar from "../TopBar";
-import Axios from "axios";
+import axios from "axios";
 
 //changed from const to var
 var infoArray = [
@@ -27,36 +27,35 @@ var infoArray = [
 export default class LandingPage extends Component {
   constructor() {
     super();
-    this.state = { data: {} };
+    this.state = { data: [] };
   }
   componentDidMount() {
-    Axios.get("http://localhost:5000/block/getByPage/landing")
-      .then(function (response) {
-        console.log(response);
-        //this.setState({ data: response });
-        //loop through response and add to infoArray
-        var data = response.data;
-        for (var i = 0; i < data.length; i++) {
-          var colorSelect;
-          if (i % 2 === 0) {
-            colorSelect = constants.HOME_PAGE_DARK_COLOR;
-          } else {
-            colorSelect = constants.HOME_PAGE_LIGHT_COLOR;
-          }
-          infoArray.push({
-            header: data[i].header,
-            color: colorSelect,
-            text: data[i].text,
-            align: data[i].direction,
-          });
+    Axios.get("http://localhost:5000/block/getByPage/landing").then(function (
+      response
+    ) {
+      console.log(response);
+      //this.setState({ data: response });
+      //loop through response and add to infoArray
+      var data = response.data;
+      for (var i = 0; i < data.length; i++) {
+        var colorSelect;
+        if (i % 2 === 0) {
+          colorSelect = constants.HOME_PAGE_DARK_COLOR;
+        } else {
+          colorSelect = constants.HOME_PAGE_LIGHT_COLOR;
         }
-        console.log(infoArray);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        infoArray.push({
+          header: data[i].header,
+          color: colorSelect,
+          text: data[i].text,
+          align: data[i].direction,
+        });
+      }
+      console.log(infoArray);
+    });
   }
   render() {
+    console.log(this.state);
     return (
       <Container>
         <TopBar history={this.props.history} />
