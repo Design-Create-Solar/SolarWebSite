@@ -45,8 +45,9 @@ export default class LandingPage extends Component {
 						{/* <video src='http://localhost:5000/static/poo.mp4' /> */}
 						<Player
 							playsInline
+							autoplay={false}
 							// poster="/assets/poster.png"
-							src='http://localhost:5000/static/poo.mp4'
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/static/poo.mp4'
 						/>
 					</BetterInfoContainer>
 				</Desktop>
@@ -56,8 +57,9 @@ export default class LandingPage extends Component {
 						<ActualText>{infoArray[1].text}</ActualText>
 						<Player
 							playsInline
+							autoplay={false}
 							// poster="/assets/poster.png"
-							src='http://localhost:5000/static/poo.mp4'
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/static/poo.mp4'
 						/>
 					</BetterInfoContainer>
 				</Default>
@@ -67,8 +69,9 @@ export default class LandingPage extends Component {
 						<ActualText mobile>{infoArray[1].text}</ActualText>
 						<Player
 							playsInline
+							autoplay={false}
 							// poster="/assets/poster.png"
-							src='http://localhost:5000/static/poo.mp4'
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/static/poo.mp4'
 						/>
 					</BetterInfoContainerMObile>
 				</Mobile>

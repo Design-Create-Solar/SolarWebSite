@@ -30,7 +30,7 @@ ReactDOM.render(
 						<Route path='/programs' component={ProjectPage} />
 						<Route path='/team' component={MembersPage} />
 						<Route path='/sponsors' component={SponsorsPage} />
-						<Route path='/data' component={DataPage} />
+						{/* <Route path='/data' component={DataPage} /> */}
 						<Route path='/test' component={test} />
 					</Switch>
 				</ScrollToTop>

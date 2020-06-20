@@ -98,7 +98,7 @@ function TopBar(props) {
 								>
 									Meet The Team
 								</StyledButton>
-								<StyledButton
+								{/* <StyledButton
 									style={{
 										order: 5
 									}}
@@ -109,7 +109,7 @@ function TopBar(props) {
 									}
 								>
 									Data
-								</StyledButton>
+								</StyledButton> */}
 							</Box>
 						</Mobile>
 						<Desktop>
@@ -171,7 +171,7 @@ function TopBar(props) {
 								>
 									Meet the Team
 								</StyledButton>
-								<StyledButton
+								{/* <StyledButton
 									style={{
 										order: 5
 									}}
@@ -182,7 +182,7 @@ function TopBar(props) {
 									}
 								>
 									Data
-								</StyledButton>
+								</StyledButton> */}
 							</Box>
 						</Desktop>
 						<Default>
@@ -239,7 +239,7 @@ function TopBar(props) {
 								>
 									Meet The Team
 								</StyledButton>
-								<StyledButton
+								{/* <StyledButton
 									style={{
 										order: 5
 									}}
@@ -250,7 +250,7 @@ function TopBar(props) {
 									}
 								>
 									Data
-								</StyledButton>
+								</StyledButton> */}
 							</Box>
 						</Default>
 					</Toolbar>
