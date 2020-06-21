@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { styled } from '@material-ui/styles';
-import * as constants from '../../constants';
-import InfoArea from '../InfoArea';
-import TopBar from '../TopBar';
+import * as constants from '../MultiplePages/constants';
+import InfoArea from '../MultiplePages/InfoArea';
+import TopBar from '../MultiplePages/TopBar';
 
 const infoArray = [
 	{

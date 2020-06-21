@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import { Default, Mobile, Desktop } from '../constants';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Default, Mobile, Desktop } from './constants';
 import StyledButton from "./StyledButton"
 function TopBar(props) {
 	return (
@@ -246,9 +246,5 @@ function TopBar(props) {
 		</Router>
 	);
 }
-
-const inboxLink = React.forwardRef((props, ref) => (
-	<Link innerRef={ref} to='/projects' {...props} />
-));
 
 export default TopBar;

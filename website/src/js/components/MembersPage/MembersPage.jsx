@@ -1,13 +1,13 @@
 import React, { Component } from "react"
-import * as constants from "../../constants"
-import TopBar from "../TopBar"
+import * as constants from "../MultiplePages/constants"
+import TopBar from "../MultiplePages/TopBar"
 import "./card.css"
 import { styled } from '@material-ui/styles'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Tabletop from "tabletop"
 import FlipCard from "react-flipcard-2"
 import bruh from 'styled-components';
-import StyledButton from "../StyledButton"
+import StyledButton from "../MultiplePages/StyledButton"
 
 class MembersPage extends Component {
 
@@ -68,7 +68,6 @@ class MembersPage extends Component {
   }
 
   render() {
-    console.log(this.state)
     const { membersData, teamsData } = this.state
     return (
       <div>
@@ -100,7 +99,7 @@ class MembersPage extends Component {
             </Heading>
             <div className="grid-container">
               {
-                membersData.filter(obj => obj["IsLead"]=="TRUE").map(obj => {
+                membersData.filter(obj => obj["IsLead"]==="TRUE").map(obj => {
                   return (
                     <FlipCard>
                       {/* FRONT */}
@@ -277,14 +276,6 @@ const Heading = styled('div')({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-})
-
-const MeetingInfo = styled('p')({
-  textAlign: "center",
-  padding: "0 0 0 0",
-  margin: "0 0 0 0",
-  fontFamily: "Futura",
-  color: constants.HOME_PAGE_LIGHT_COLOR
 })
 
 export default MembersPage;

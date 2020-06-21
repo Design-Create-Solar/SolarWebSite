@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button';
-import * as constants from '../constants';
+import * as constants from './constants';
 import { withStyles, fade } from '@material-ui/core/styles';
 
 const StyledButton = withStyles({

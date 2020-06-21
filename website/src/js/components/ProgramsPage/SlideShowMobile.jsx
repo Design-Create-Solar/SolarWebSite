@@ -1,6 +1,5 @@
 import React from 'react';
 import { Fade } from 'react-slideshow-image';
-import slideshow from './Slideshow';
 import './SliderStyle.css';
 
 const fadeProperties = {

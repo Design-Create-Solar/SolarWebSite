@@ -6,10 +6,10 @@ import ProjectPage from './js/components/ProgramsPage/ProjectPage';
 import MembersPage from './js/components/MembersPage/MembersPage';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import BottomBanner from './js/components/BottomBanner';
-import ScrollToTop from './js/components/ScrollToTop';
+import BottomBanner from './js/components/MultiplePages/BottomBanner';
+import ScrollToTop from './js/components/MultiplePages/ScrollToTop';
 import SponsorsPage from './js/components/SponsorsPage/SponsorsPage';
-import DataPage from './js/components/DataPage/DataPage'
+import SubsystemPage from './js/components/MembersPage/SubsystemPage'
 import './futura/futur.ttf';
 import test from './js/components/sockettest.jsx'
 
@@ -32,6 +32,7 @@ ReactDOM.render(
 						<Route path='/sponsors' component={SponsorsPage} />
 						{/* <Route path='/data' component={DataPage} /> */}
 						<Route path='/test' component={test} />
+						<Route path="/team/" component={SubsystemPage}/>
 					</Switch>
 				</ScrollToTop>
 				<BottomBanner />

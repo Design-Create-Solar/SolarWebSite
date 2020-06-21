@@ -116,8 +116,8 @@
 
 // export default SponsorsPage
 import React, { Component } from "react"
-import * as constants from "../../constants"
-import TopBar from "../TopBar"
+import * as constants from "../MultiplePages/constants"
+import TopBar from "../MultiplePages/TopBar"
 import { styled } from '@material-ui/styles'
 import PDFViewer from 'pdf-viewer-reactjs'
 // import PDFViewer from "./PDFViewer"
@@ -160,22 +160,6 @@ class SponsorsPage extends Component {
     );
   }
 };
-
-const MsgBox = styled("div")({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  textAlign: "center"
-})
-
-const Msg = styled("h1")({
-  fontFamily: "Futura",
-  color: "white",
-  borderStyle: "dashed",
-  padding: "3em 3em",
-  borderColor: constants.HOME_PAGE_YELLOW
-})
 
 const Container = styled('div')({
   display: "flex",

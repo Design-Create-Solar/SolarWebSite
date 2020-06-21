@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as constants from '../constants';
+import * as constants from './constants';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -53,9 +53,6 @@ const BannerText2 = styled.p`
 	order: 2;
 `;
 
-const Heart = styled.span`
-	color: red;
-`;
 const Mailto = styled.a`
 	color: white;
 `;

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import LogoHolder from './LogoHolder';
 import { styled } from '@material-ui/styles';
-import * as constants from '../../constants';
-import InfoArea from '../InfoArea';
+import * as constants from '../MultiplePages/constants';
 import '../../../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
-import TopBar from '../TopBar';
-import { Default, Mobile, Desktop } from '../../constants';
+import TopBar from '../MultiplePages/TopBar';
+import { Default, Mobile, Desktop } from '../MultiplePages/constants';
 
 const infoArray = [
 	{
@@ -47,7 +46,7 @@ export default class LandingPage extends Component {
 							playsInline
 							autoplay={false}
 							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/static/poo.mp4'
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
 						/>
 					</BetterInfoContainer>
 				</Desktop>
@@ -59,7 +58,7 @@ export default class LandingPage extends Component {
 							playsInline
 							autoplay={false}
 							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/static/poo.mp4'
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
 						/>
 					</BetterInfoContainer>
 				</Default>
@@ -71,7 +70,7 @@ export default class LandingPage extends Component {
 							playsInline
 							autoplay={false}
 							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/static/poo.mp4'
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
 						/>
 					</BetterInfoContainerMObile>
 				</Mobile>
@@ -108,10 +107,6 @@ const Container = styled('div')({
 	overflow: 'none'
 });
 
-const InfoContainer = styled('div')({
-	order: 1,
-	flex: 1
-});
 const InfoHeader = styled('h4')({
 	fontWeight: 500,
 	fontSize: '1.5em',

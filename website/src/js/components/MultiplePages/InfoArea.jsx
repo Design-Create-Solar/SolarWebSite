@@ -1,13 +1,12 @@
 import React from 'react';
 import { styled } from '@material-ui/styles';
 import { Box } from '@material-ui/core';
-import * as constants from '../constants';
-import '../../infoArea.css';
-import Slideshow from './ProgramsPage/Slideshow';
-import { Desktop, Default, Mobile } from '../constants';
-import SlideshowMobile from './ProgramsPage/SlideShowMobile';
+import * as constants from './constants';
+import './infoArea.css';
+import Slideshow from '../ProgramsPage/Slideshow';
+import { Desktop, Default, Mobile } from './constants';
+import SlideshowMobile from '../ProgramsPage/SlideShowMobile';
 
-var color;
 const InfoArea = props => {
 	if (props.color === constants.HOME_PAGE_DARK_COLOR)
 		return (

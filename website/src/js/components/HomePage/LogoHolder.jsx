@@ -1,9 +1,9 @@
 import { styled, makeStyles } from '@material-ui/styles';
 import React from 'react';
-import * as constants from '../../constants';
+import * as constants from '../MultiplePages/constants';
 import Typing from 'react-typing-animation';
 import Box from '@material-ui/core/Box';
-import { Default, Mobile, Desktop } from '../../constants';
+import { Default, Mobile, Desktop } from '../MultiplePages/constants';
 
 const Logo = require('../../../images/Logo.png');
 const texts = ['DESIGNERS', 'CREATORS', 'SOLAR'];
@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LogoHolder = () => {
-	const classes = useStyles();
 	return (
 		<Container>
 			<Default>
