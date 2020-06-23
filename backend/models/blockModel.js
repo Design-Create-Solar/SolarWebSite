@@ -31,6 +31,9 @@ var BlockSchema = new Schema({
   header: {
     type: String,
   },
+  color: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Block", BlockSchema);

@@ -5,18 +5,18 @@ import { Form, Field } from "react-final-form";
 
 import axios from "axios";
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const onSubmit = async values => {
+const onSubmit = async (values) => {
   await axios
     .post("http://localhost:5000/auth/register", {
       name: values.name,
-      password: values.password
+      password: values.password,
     })
-    .then(res => {
-      console.log(res);
+    .then((res) => {
+      alert(res.data);
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       alert(
         "Registration Failed! The registration server may be down or you are submitting duplicate credentials."

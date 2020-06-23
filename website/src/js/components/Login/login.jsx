@@ -5,18 +5,19 @@ import { Form, Field } from "react-final-form";
 
 import axios from "axios";
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+//const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const onSubmit = async values => {
+const onSubmit = async (values) => {
   await axios
     .post("http://localhost:5000/auth/login", {
       name: values.name,
-      password: values.password
+      password: values.password,
     })
-    .then(res => {
+    .then((res) => {
       console.log(res);
+      alert("Login success!");
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       alert("Login Failed!");
     });

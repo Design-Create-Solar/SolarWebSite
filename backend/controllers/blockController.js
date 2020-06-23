@@ -78,15 +78,16 @@ exports.block_create = async (req, res) => {
 
 //UPDATE BLOCK BY DB ID
 exports.block_update_db_id = async (req, res) => {
-  base64Array = req.body.images;
-  titlesArray = req.body.titles;
-  var images = [];
-  for (var i = 0; i < base64Array.length; i++) {
-    var url = await uploadBase64(base64Array[i], titlesArray[i]);
-    images.push(url);
+  if (req.body.images) {
+    base64Array = req.body.images;
+    titlesArray = req.body.titles;
+    var images = [];
+    for (var i = 0; i < base64Array.length; i++) {
+      var url = await uploadBase64(base64Array[i], titlesArray[i]);
+      images.push(url);
+    }
+    req.body.images = images;
   }
-
-  req.body.images = images;
 
   Block.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
     if (err) return err;
@@ -104,15 +105,17 @@ exports.block_update_id = async (req, res) => {
     return;
   }
 
-  base64Array = req.body.images;
-  titlesArray = req.body.titles;
-  var images = [];
-  for (var i = 0; i < base64Array.length; i++) {
-    var url = await uploadBase64(base64Array[i], titlesArray[i]);
-    images.push(url);
-  }
+  if (req.body.images) {
+    base64Array = req.body.images;
+    titlesArray = req.body.titles;
+    var images = [];
+    for (var i = 0; i < base64Array.length; i++) {
+      var url = await uploadBase64(base64Array[i], titlesArray[i]);
+      images.push(url);
+    }
 
-  req.body.images = images;
+    req.body.images = images;
+  }
 
   await Block.findOneAndUpdate({ id: req.params.id }, req.body, (err) => {
     if (err) return err;

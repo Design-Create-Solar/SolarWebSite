@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BottomBanner from "./js/components/BottomBanner";
 import ScrollToTop from "./js/components/ScrollToTop";
 import SponsorsPage from "./js/components/SponsorsPage/SponsorsPage";
+import login from "./js/components/Login/login";
+import register from "./js/components/Login/register";
 import "./futura/futur.ttf";
 //import test from './js/components/sockettest.jsx'
 import test from "./js/components/Login/login.jsx";
@@ -24,6 +26,8 @@ ReactDOM.render(
           <Route path="/team" component={MembersPage} />
           <Route path="/sponsors" component={SponsorsPage} />
           <Route path="/test" component={test} />
+          <Route path="/login" component={login} />
+          <Route path="/register" component={register} />
         </Switch>
       </ScrollToTop>
       <BottomBanner />
