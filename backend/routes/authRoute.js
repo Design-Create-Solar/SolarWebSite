@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
 //login
 router.post("/login", async (req, res) => {
   console.log("received request!");
-
+  console.log(req.body);
   //check if user in db
   const user = await User.findOne({ name: req.body.name });
   if (!user) {

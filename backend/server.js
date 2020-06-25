@@ -21,7 +21,7 @@ app.use("/data", dataRoutes);
 const authRoute = require("./routes/authRoute"); //contains register and login endpoints eg: /auth/register, /auth/login
 app.use("/auth", authRoute);
 const usersRoute = require("./routes/usersRoute");
-app.use("/view/users", usersRoute);
+app.use("/users", usersRoute);
 const block = require("./routes/blockRoute"); //for website builder blocks
 app.use("/block", block);
 

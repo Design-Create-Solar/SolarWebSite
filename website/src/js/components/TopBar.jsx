@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -6,6 +6,9 @@ import * as constants from "../constants";
 import { withStyles, fade } from "@material-ui/core/styles";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { Default, Mobile, Desktop } from "../constants";
+//know about logged in user
+import UserContext from "../../context/UserContext";
+
 const StyledButton = withStyles({
   root: {
     //background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -27,6 +30,15 @@ const StyledButton = withStyles({
 })(Button);
 
 function TopBar(props) {
+  const { userData, setUserData } = useContext(UserContext);
+  const logout = () => {
+    setUserData({
+      token: undefined,
+      user: undefined,
+    });
+    localStorage.setItem("auth-token", "");
+  };
+
   return (
     <Router>
       <div>
@@ -169,6 +181,14 @@ function TopBar(props) {
                   }
                 >
                   Login
+                </StyledButton>
+                <StyledButton
+                  style={{
+                    order: 5,
+                  }}
+                  onClick={logout}
+                >
+                  Log Out
                 </StyledButton>
               </Box>
             </Desktop>
