@@ -1,25 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import * as constants from './constants';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import React from "react";
+import styled from "styled-components";
+import * as constants from "./constants";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faHeart);
 
 const BottomBanner = () => {
-	return (
-		<GreyDiv>
-			<Container>
-				<BannerText1>
-					Contact us!{' '}
-					<Mailto href='mailto:designcreatesolar@gmail.com'>
-						Our Email
-					</Mailto>
-				</BannerText1>
-				<BannerText2>Copyright © SOLAR 2019</BannerText2>
-			</Container>
-		</GreyDiv>
-	);
+  return (
+    <GreyDiv>
+      <Container>
+        <BannerText1>
+          Contact us!{" "}
+          <Mailto href="mailto:designcreatesolar@gmail.com">Our Email</Mailto>
+        </BannerText1>
+        <BannerText2>Copyright © SOLAR 2019-2020</BannerText2>
+      </Container>
+    </GreyDiv>
+  );
 };
 
 const GreyDiv = styled.div`
@@ -36,24 +34,24 @@ const GreyDiv = styled.div`
 `;
 
 const Container = styled.div`
-	order: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const BannerText1 = styled.p`
-	color: white;
-	order: 1;
+  color: white;
+  order: 1;
 `;
 
 const BannerText2 = styled.p`
-	color: white;
-	order: 2;
+  color: white;
+  order: 2;
 `;
 
 const Mailto = styled.a`
-	color: white;
+  color: white;
 `;
 export default BottomBanner;
