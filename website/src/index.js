@@ -15,40 +15,10 @@ import "./futura/futur.ttf";
 //import test from './js/components/sockettest.jsx'
 import test from "./js/components/Login/login.jsx";
 
-//auth context
 import UserContext from "./context/UserContext";
-import Axios from "axios";
+import {UserDataHook} from "./api"
 
-const userDataHook = () => {
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
-};
-
-//runs once at startup
-useEffect(() => {
-  const checkLoggedIn = async () => {
-    let token = localStorage.getItem("auth-token");
-    if (token === null) {
-      localStorage.setItem("auth-token", "");
-      token = "";
-    }
-    const tokenResponse = await Axios.post(
-      "http://localhost:5000/users/tokenIsValid",
-      null,
-      { headers: { "auth-token": token } }
-    );
-    if (tokenResponse.data) {
-      const userResponse = await Axios.get("http://localhost:5000/users/", {
-        headers: { "auth-token": token },
-      });
-      setUserData({ token, user: userResponse.data });
-    }
-  };
-  checkLoggedIn();
-}, []);
-
+const [userData, setUserData] = useState(UserDataHook())
 ReactDOM.render(
   <UserContext.Provider value={{ userData, setUserData }}>
     <Router>
