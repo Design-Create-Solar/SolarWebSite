@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import LandingPage from "./js/components/HomePage/LandingPage";
@@ -15,33 +15,31 @@ import "./futura/futur.ttf";
 //import test from './js/components/sockettest.jsx'
 import test from "./js/components/Login/login.jsx";
 
-import UserContext from "./context/UserContext";
-import {UserDataHook} from "./api"
+import checkUser from "./context/api"
+import {UserProvider} from "./context/UserContext"
 
-const [userData, setUserData] = useState(UserDataHook())
-ReactDOM.render(
-  <UserContext.Provider value={{ userData, setUserData }}>
-    <Router>
-      <div>
-        <ScrollToTop>
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/home" component={LandingPage} />
-            <Route path="/programs" component={ProjectPage} />
-            <Route path="/team" component={MembersPage} />
-            <Route path="/sponsors" component={SponsorsPage} />
-            <Route path="/test" component={test} />
-            <Route path="/login" component={login} />
-            <Route path="/register" component={register} />
-          </Switch>
-        </ScrollToTop>
-        <BottomBanner />
-      </div>
-    </Router>
-  </UserContext.Provider>,
-
-  document.getElementById("root")
-);
+  ReactDOM.render(
+    <UserProvider>
+      <Router>
+        <div>
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <Route exact path="/home" component={LandingPage} />
+              <Route path="/programs" component={ProjectPage} />
+              <Route path="/team" component={MembersPage} />
+              <Route path="/sponsors" component={SponsorsPage} />
+              <Route path="/test" component={test} />
+              <Route path="/login" component={login} />
+              <Route path="/register" component={register} />
+            </Switch>
+          </ScrollToTop>
+          <BottomBanner />
+        </div>
+      </Router>
+    </UserProvider>,
+    document.getElementById("root")
+  );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

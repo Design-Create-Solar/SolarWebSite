@@ -7,7 +7,7 @@ import { withStyles, fade } from "@material-ui/core/styles";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { Default, Mobile, Desktop } from "../constants";
 //know about logged in user
-import UserContext from "../../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 const StyledButton = withStyles({
   root: {
