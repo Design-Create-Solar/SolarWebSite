@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 
 const CheckUser = () => {
+  console.log("in checkUser")
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
@@ -10,6 +11,7 @@ const CheckUser = () => {
 
   //runs once at startup
   useEffect(() => {
+    console.log("ran checkuser's useeffect")
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
       if (token === null) {
@@ -25,13 +27,15 @@ const CheckUser = () => {
         await Axios.get("http://localhost:5000/users/", {
           headers: { "auth-token": token },
         }).then((res) => {
-          setUserData({ token, user: res.data });
+          setUserData({ token: token, user: res.data });
         });
         // setUserData({ token, user: userResponse.data });
       }
     };
     checkLoggedIn();
   }, []);
+
+  return [userData, setUserData]
 };
 
 export default CheckUser;

@@ -39,17 +39,18 @@ function TopBar(props) {
     });
     localStorage.setItem("auth-token", "");
   };
-  // const uploadButton = () => {
-  //   if (userData.user) {
-  //     return (
-  //       <StyledButton
-  //         onClick={() => props.history.push({ pathname: "/upload" })}
-  //       >
-  //         Upload
-  //       </StyledButton>
-  //     );
-  //   }
-  // };
+  const uploadButton = () => {
+    if (userData.user) {
+      return (
+        <StyledButton
+          style={{order: 6}}
+          onClick={() => props.history.push({ pathname: "/upload" })}
+        >
+          Upload
+        </StyledButton>
+      );
+    }
+  };
 
   return (
     <Router>
@@ -70,13 +71,7 @@ function TopBar(props) {
               <Box
                 style={{
                   display: "flex",
-                  //	alignSelf: 'center',
-                  // justifyContent: 'center',
-                  // alignItems: 'center',
-                  overflowX: "scroll",
-                  //padding: '10px'
-                  //	flexGrow: 1,
-                  //	width: '100%'
+                  overflowX: "scroll"
                 }}
               >
                 <StyledButton
@@ -123,17 +118,15 @@ function TopBar(props) {
                 >
                   Meet The Team
                 </StyledButton>
+                {uploadButton()}
               </Box>
             </Mobile>
             <Desktop>
               <Box
                 style={{
                   display: "flex",
-                  //	alignSelf: 'center',
                   justifyContent: "center",
                   alignItems: "center",
-                  //overflowX: 'scroll'
-                  //padding: '10px'
                   flexGrow: 1,
                   width: "100%",
                 }}
@@ -202,18 +195,15 @@ function TopBar(props) {
                 >
                   Log Out
                 </StyledButton>
-                {userData.user ? <></> : <></>}
+                {uploadButton()}
               </Box>
             </Desktop>
             <Default>
               <Box
                 style={{
                   display: "flex",
-                  //	alignSelf: 'center',
                   justifyContent: "center",
                   alignItems: "center",
-                  //overflowX: 'scroll'
-                  //padding: '10px'
                   flexGrow: 1,
                   width: "100%",
                 }}
@@ -257,6 +247,7 @@ function TopBar(props) {
                 >
                   Meet The Team
                 </StyledButton>
+                {uploadButton()}
               </Box>
             </Default>
           </Toolbar>

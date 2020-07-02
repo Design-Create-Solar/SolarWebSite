@@ -57,7 +57,6 @@ export default class LandingPage extends Component {
     // }
   }
   render() {
-    console.log(this.state.data);
     const { data } = this.state;
     return (
       <Container>

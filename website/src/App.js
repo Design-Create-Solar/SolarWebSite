@@ -17,40 +17,9 @@ import "./futura/futur.ttf";
 import test from "./js/components/Login/login.jsx";
 import Axios from "axios";
 
-import checkUser from "./context/api";
 import { UserProvider } from "./context/UserContext";
 
 function App() {
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
-
-  //runs once at startup
-  useEffect(() => {
-    const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-        setUserData({ token: undefined, user: undefined });
-      }
-      const tokenResponse = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
-        null,
-        { headers: { "auth-token": token } }
-      );
-      if (tokenResponse.data) {
-        await Axios.get("http://localhost:5000/users/", {
-          headers: { "auth-token": token },
-        }).then((res) => {
-          setUserData({ token: token, user: res.data });
-        });
-        // setUserData({ token, user: userResponse.data });
-      }
-    };
-    checkLoggedIn();
-  }, []);
   return (
     <UserProvider>
       <Router>
