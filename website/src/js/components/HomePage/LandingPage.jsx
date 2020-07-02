@@ -6,6 +6,8 @@ import InfoArea from "../InfoArea";
 import TopBar from "../TopBar";
 import axios from "axios";
 
+import checkUser from "../../../context/api";
+
 //changed from const to var
 var infoArray = [
   {

@@ -1,21 +1,22 @@
 // const { createContext } = require("react");
 
 //import { createContext } from "react";
-import React, {Component, useState} from "react"
-import CheckUser from "./api"
-const UserContext = React.createContext()
+import React, { Component, useState } from "react";
+import CheckUser from "./api";
+const UserContext = React.createContext({
+  user: undefined,
+  token: undefined,
+});
 
 function UserProvider(props) {
-    let [userData, setUserData] = useState(CheckUser())
-    let value = {userData, setUserData}
+  let [userData, setUserData] = useState(CheckUser());
+  let value = { userData, setUserData };
 
-    return (
-        <UserContext.Provider value={value}>
-            {props.children}
-        </UserContext.Provider>
-    )
+  return (
+    <UserContext.Provider value={value}>{props.children}</UserContext.Provider>
+  );
 }
 
-let UserContextConsumer = UserContext.Consumer
+let UserContextConsumer = UserContext.Consumer;
 
-export {UserContext, UserProvider, UserContextConsumer};
+export { UserContext, UserProvider, UserContextConsumer };

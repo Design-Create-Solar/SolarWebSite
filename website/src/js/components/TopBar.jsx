@@ -7,7 +7,8 @@ import { withStyles, fade } from "@material-ui/core/styles";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { Default, Mobile, Desktop } from "../constants";
 //know about logged in user
-import {UserContext} from "../../context/UserContext";
+import { UserContext, UserProvider } from "../../context/UserContext";
+import checkUser from "../../context/api";
 
 const StyledButton = withStyles({
   root: {
@@ -38,6 +39,17 @@ function TopBar(props) {
     });
     localStorage.setItem("auth-token", "");
   };
+  // const uploadButton = () => {
+  //   if (userData.user) {
+  //     return (
+  //       <StyledButton
+  //         onClick={() => props.history.push({ pathname: "/upload" })}
+  //       >
+  //         Upload
+  //       </StyledButton>
+  //     );
+  //   }
+  // };
 
   return (
     <Router>
@@ -184,12 +196,13 @@ function TopBar(props) {
                 </StyledButton>
                 <StyledButton
                   style={{
-                    order: 5,
+                    order: 6,
                   }}
                   onClick={logout}
                 >
                   Log Out
                 </StyledButton>
+                {userData.user ? <></> : <></>}
               </Box>
             </Desktop>
             <Default>
