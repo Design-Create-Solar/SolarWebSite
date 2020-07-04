@@ -8,7 +8,6 @@ import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { Default, Mobile, Desktop } from "../constants";
 //know about logged in user
 import { UserContext, UserProvider } from "../../context/UserContext";
-import checkUser from "../../context/api";
 
 const StyledButton = withStyles({
   root: {
@@ -40,10 +39,10 @@ function TopBar(props) {
     localStorage.setItem("auth-token", "");
   };
   const uploadButton = () => {
-    if (userData.user) {
+    if (userData && userData.user) {
       return (
         <StyledButton
-          style={{order: 6}}
+          style={{ order: 6 }}
           onClick={() => props.history.push({ pathname: "/upload" })}
         >
           Upload
@@ -71,7 +70,7 @@ function TopBar(props) {
               <Box
                 style={{
                   display: "flex",
-                  overflowX: "scroll"
+                  overflowX: "scroll",
                 }}
               >
                 <StyledButton

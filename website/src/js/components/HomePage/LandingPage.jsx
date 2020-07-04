@@ -6,8 +6,6 @@ import InfoArea from "../InfoArea";
 import TopBar from "../TopBar";
 import axios from "axios";
 
-import checkUser from "../../../context/api";
-
 //changed from const to var
 var infoArray = [
   {
@@ -35,7 +33,6 @@ export default class LandingPage extends Component {
     axios
       .get("http://localhost:5000/block/getByPage/landing")
       .then((response) => {
-        console.log(response);
         this.setState({ data: response.data });
       });
     //loop through response and add to infoArray
