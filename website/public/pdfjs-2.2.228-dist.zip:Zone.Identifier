@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://mozilla.github.io/pdf.js/getting_started/
+HostUrl=https://github-production-release-asset-2e65be.s3.amazonaws.com/1663468/829c1b00-a35f-11e9-90df-6f027a899e2a?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200110%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200110T023213Z&X-Amz-Expires=300&X-Amz-Signature=28d1714386f8145082db574b209c9684c1bc272d9fc39694e892c899716f913c&X-Amz-SignedHeaders=host&actor_id=42233636&response-content-disposition=attachment%3B%20filename%3Dpdfjs-2.2.228-dist.zip&response-content-type=application%2Foctet-stream

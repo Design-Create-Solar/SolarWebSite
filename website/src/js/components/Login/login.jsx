@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { render } from "react-dom";
 import { useHistory } from "react-router-dom";
-import Styles from "./Styles";
+import Styles from "../Styles";
 import { Form, Field } from "react-final-form";
 import axios from "axios";
 
