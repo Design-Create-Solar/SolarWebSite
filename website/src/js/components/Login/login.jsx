@@ -56,7 +56,7 @@ export default function App() {
               <Field
                 name="password"
                 component="input"
-                type="text"
+                type="password"
                 placeholder="Password"
               />
             </div>

@@ -41,6 +41,11 @@ export default styled.div`
     color: #222;
   }
 
+  h3 {
+    text-align: center;
+    color: #222;
+  }
+
   & > div {
     text-align: center;
   }

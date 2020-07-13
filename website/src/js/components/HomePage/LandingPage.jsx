@@ -32,7 +32,8 @@ var infoArray = [
 export default function LandingPage(props) {
   const { userData, setUserData } = useContext(UserContext);
   let [blockData, setBlockData] = useState([]);
-  let [showForm, setShowForm] = useState(false);
+  let [showAddForm, setShowAddForm] = useState(false);
+  let [showDeleteForm, setShowDeleteForm] = useState(false);
   useEffect(() => {
     console.log("in useeffect");
     axios
@@ -45,13 +46,11 @@ export default function LandingPage(props) {
   }, []);
 
   const addButton = () => {
-    //function that handles the info submitted to form
-
     if (userData && userData.user) {
       return (
         <Button
           onClick={() => {
-            setShowForm(true);
+            setShowAddForm(true);
           }}
         >
           Add
@@ -60,15 +59,22 @@ export default function LandingPage(props) {
     }
   };
 
+  const deleteButton = () => {
+    if (userData && userData.user) {
+      return (
+        <Button
+          onClick={() => {
+            setShowDeleteForm(true);
+          }}
+        >
+          Delete
+        </Button>
+      );
+    }
+  };
+
   //function to show a form to input info for block
-  const displayForm = () => {
-    // onSubmit({
-    //   id: 1.4,
-    //   type: "text",
-    //   text: "This was added by button",
-    //   direction: "right",
-    //   header: "Cool header bro",
-    // });
+  const displayAddForm = () => {
     const onSubmit = async (values) => {
       await axios
         .post("http://localhost:5000/block/create", {
@@ -93,9 +99,24 @@ export default function LandingPage(props) {
           setBlockData(response.data);
         });
     };
+    const onPreview = () => {
+      setBlockData([
+        ...blockData,
+        {
+          id: 1.999,
+          page: "landing",
+          type: document.getElementById("Type").value,
+          text: document.getElementById("Text").value,
+          direction: document.getElementById("Direction").value,
+          header: document.getElementById("Header").value,
+          color: document.getElementById("Color").value,
+        },
+      ]);
+    };
     return (
       <Styles>
-        <h1>Block Content</h1>
+        <h1>Add Block</h1>
+        <h3>Fill as many fields as possible to ensure block creation.</h3>
 
         <Form
           onSubmit={onSubmit}
@@ -105,6 +126,7 @@ export default function LandingPage(props) {
               <div>
                 <label>ID</label>
                 <Field
+                  id="ID"
                   name="ID"
                   component="input"
                   type="text"
@@ -114,6 +136,7 @@ export default function LandingPage(props) {
               <div>
                 <label>Type</label>
                 <Field
+                  id="Type"
                   name="Type"
                   component="input"
                   type="text"
@@ -123,6 +146,7 @@ export default function LandingPage(props) {
               <div>
                 <label>Text</label>
                 <Field
+                  id="Text"
                   name="Text"
                   component="input"
                   type="text"
@@ -132,6 +156,7 @@ export default function LandingPage(props) {
               <div>
                 <label>Direction</label>
                 <Field
+                  id="Direction"
                   name="Direction"
                   component="input"
                   type="text"
@@ -141,6 +166,7 @@ export default function LandingPage(props) {
               <div>
                 <label>Header</label>
                 <Field
+                  id="Header"
                   name="Header"
                   component="input"
                   type="text"
@@ -150,6 +176,7 @@ export default function LandingPage(props) {
               <div>
                 <label>Color</label>
                 <Field
+                  id="Color"
                   name="Color"
                   component="input"
                   type="text"
@@ -158,14 +185,139 @@ export default function LandingPage(props) {
               </div>
               <div className="buttons">
                 <button type="submit" disabled={submitting || pristine}>
-                  Submit
+                  Save
+                </button>
+                <button
+                  type="button"
+                  onClick={onPreview}
+                  disabled={submitting || pristine}
+                >
+                  Preview
                 </button>
                 <button
                   type="button"
                   onClick={form.reset}
                   disabled={submitting || pristine}
                 >
-                  Reset
+                  Reset Form Inputs
+                </button>
+              </div>
+            </form>
+          )}
+        />
+      </Styles>
+    );
+  };
+
+  const displayDeleteForm = () => {
+    const onSubmit = async (values) => {
+      await axios
+        .put("http://localhost:5000/block/delete", {
+          id: values.ID,
+          page: "landing",
+          type: values.Type,
+          text: values.Text,
+          direction: values.Direction,
+          header: values.Header,
+          color: values.Color,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Error with axios request!");
+        });
+      await axios
+        .get("http://localhost:5000/block/getByPage/landing")
+        .then((response) => {
+          setBlockData(response.data);
+        });
+    };
+
+    return (
+      <Styles>
+        <h1>Delete Block</h1>
+        <h3>
+          Fill as many fields as possible to ensure deletion of the target
+          block.
+        </h3>
+
+        <Form
+          onSubmit={onSubmit}
+          initialValues={{}}
+          render={({ handleSubmit, form, submitting, pristine }) => (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>ID</label>
+                <Field
+                  id="ID"
+                  name="ID"
+                  component="input"
+                  type="text"
+                  placeholder="ID"
+                />
+              </div>
+              <div>
+                <label>Type</label>
+                <Field
+                  id="Type"
+                  name="Type"
+                  component="input"
+                  type="text"
+                  placeholder="Type"
+                />
+              </div>
+              <div>
+                <label>Text</label>
+                <Field
+                  id="Text"
+                  name="Text"
+                  component="input"
+                  type="text"
+                  placeholder="Text"
+                />
+              </div>
+              <div>
+                <label>Direction</label>
+                <Field
+                  id="Direction"
+                  name="Direction"
+                  component="input"
+                  type="text"
+                  placeholder="Direction"
+                />
+              </div>
+              <div>
+                <label>Header</label>
+                <Field
+                  id="Header"
+                  name="Header"
+                  component="input"
+                  type="text"
+                  placeholder="Header"
+                />
+              </div>
+              <div>
+                <label>Color</label>
+                <Field
+                  id="Color"
+                  name="Color"
+                  component="input"
+                  type="text"
+                  placeholder="Color"
+                />
+              </div>
+              <div className="buttons">
+                <button type="submit" disabled={submitting || pristine}>
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  onClick={form.reset}
+                  disabled={submitting || pristine}
+                >
+                  Reset Form Inputs
                 </button>
               </div>
             </form>
@@ -201,7 +353,9 @@ export default function LandingPage(props) {
           );
         })}
         {addButton()}
-        {showForm ? displayForm() : null}
+        {deleteButton()}
+        {showAddForm ? displayAddForm() : null}
+        {showDeleteForm ? displayDeleteForm() : null}
       </InfoContainer>
     </Container>
   );

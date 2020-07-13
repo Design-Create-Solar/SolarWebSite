@@ -25,7 +25,10 @@ router.put("/updateByDBid/:id", block_controller.block_update_db_id);
 //UPDATE BLOCK BY CUSTOM ID
 router.put("/update/:id", block_controller.block_update_id);
 
-//DELETE BLOCK
+//DELETE BLOCK BY DB ID
 router.put("/delete/:id", block_controller.block_delete);
+
+//DELETE BLOCK BY PARAMS
+router.put("/delete/", block_controller.block_delete_params);
 
 module.exports = router;

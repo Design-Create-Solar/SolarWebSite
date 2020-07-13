@@ -59,6 +59,7 @@ exports.block_create = async (req, res) => {
     images: images,
     direction: req.body.direction,
     header: req.body.header,
+    color: req.body.color,
   });
 
   //if id exists return 400 status (mainly for testing, this shouldn't happen because id will be generated)
@@ -123,7 +124,7 @@ exports.block_update_id = async (req, res) => {
   });
 };
 
-//DELETE BLOCK
+//DELETE BLOCK BY DB ID
 exports.block_delete = async (req, res) => {
   const blockExists = await Block.findById(req.params.id);
   //if block exists, remove it
@@ -131,6 +132,28 @@ exports.block_delete = async (req, res) => {
     Block.findByIdAndRemove(req.params.id, (err) => {
       if (err) return err;
       res.send("Block was deleted successfully!");
+    });
+  } else {
+    res.send("Block does not exist!");
+  }
+};
+
+//DELETE BLOCK BY PARAMS
+exports.block_delete_params = async (req, res) => {
+  /*req.body example:
+
+  {
+    text: This is the text of the block,
+    header: Header text,
+    direction: right
+  }
+
+  */
+  const blockExists = await Block.findOne(req.body);
+  if (blockExists) {
+    Block.findOneAndDelete(req.body, (err) => {
+      if (err) return err;
+      res.send("Block deleted by params!");
     });
   } else {
     res.send("Block does not exist!");
