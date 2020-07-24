@@ -31,7 +31,6 @@ ReactDOM.render(
             <Route path="/programs" component={ProjectPage} />
             <Route exact path="/team/officers" component={MembersPage} />
             <Route path="/sponsors" component={SponsorsPage} />
-            {/* <Route path='/data' component={DataPage} /> */}
             <Route path="/test" component={test} />
             <Route path="/team" component={SubsystemPage} />
             <Route path="/join" component={RecruitmentPage} />

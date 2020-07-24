@@ -7,6 +7,8 @@ import Tabletop from "tabletop";
 import FlipCard from "react-flipcard-2";
 import bruh from "styled-components";
 import StyledButton from "../MultiplePages/StyledButton";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Heading from "./Heading";
 
 class MembersPage extends Component {
   constructor() {
@@ -137,35 +139,39 @@ class MembersPage extends Component {
               </h1>
             </Heading>
             <div className="grid-container">
-              {membersData
-                .filter((obj) => obj["IsLead"] === "TRUE")
-                .map((obj) => {
-                  return (
-                    <FlipCard>
-                      {/* FRONT */}
-                      <div
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <ImageThing image={obj.Image} />
-                        <TextPart>
-                          <div>{obj.Name}</div>
-                          <div>{obj.Position}</div>
-                        </TextPart>
-                      </div>
+              <TransitionGroup component={null}>
+                {membersData
+                  .filter((obj) => obj["IsLead"] === "TRUE")
+                  .map((obj) => {
+                    return (
+                      <CSSTransition classNames="cardboi" timeout={300}>
+                        <FlipCard>
+                          {/* FRONT */}
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <ImageThing image={obj.Image} />
+                            <TextPart>
+                              <div>{obj.Name}</div>
+                              <div>{obj.Position}</div>
+                            </TextPart>
+                          </div>
 
-                      {/* BACK */}
-                      <Back>
-                        <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
-                        <div style={{}}>{obj.Email}</div>
-                      </Back>
-                    </FlipCard>
-                  );
-                })}
+                          {/* BACK */}
+                          <Back>
+                            <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
+                            <div style={{}}>{obj.Email}</div>
+                          </Back>
+                        </FlipCard>
+                      </CSSTransition>
+                    );
+                  })}
+              </TransitionGroup>
             </div>
           </Container>
         </constants.Desktop>
@@ -199,6 +205,33 @@ class MembersPage extends Component {
                 The Rest of the Team
               </h1>
 
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <StyledButton
+                  onClick={() =>
+                    this.props.history.push({ pathname: "/team/officers" })
+                  }
+                >
+                  Officers
+                </StyledButton>
+                {teamsData.map((obj) => {
+                  let pathStr = "/team/" + obj.Name;
+                  return (
+                    <StyledButton
+                      onClick={() =>
+                        this.props.history.push({ pathname: pathStr })
+                      }
+                    >
+                      {obj.Name}
+                    </StyledButton>
+                  );
+                })}
+              </div>
               <h1
                 style={{
                   color: "white",
@@ -211,33 +244,39 @@ class MembersPage extends Component {
               </h1>
             </Heading>
             <div className="grid-container">
-              {membersData.map((obj) => {
-                return (
-                  <FlipCard>
-                    {/* FRONT */}
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <ImageThing image={obj.Image} />
-                      <TextPart>
-                        <div>{obj.Name}</div>
-                        <div>{obj.Position}</div>
-                      </TextPart>
-                    </div>
+              <TransitionGroup component={null}>
+                {membersData
+                  .filter((obj) => obj["IsLead"] === "TRUE")
+                  .map((obj) => {
+                    return (
+                      <CSSTransition classNames="cardboi" timeout={300}>
+                        <FlipCard>
+                          {/* FRONT */}
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <ImageThing image={obj.Image} />
+                            <TextPart>
+                              <div>{obj.Name}</div>
+                              <div>{obj.Position}</div>
+                            </TextPart>
+                          </div>
 
-                    {/* BACK */}
-                    <Back>
-                      <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
-                      <div style={{}}>{obj.Email}</div>
-                    </Back>
-                  </FlipCard>
-                );
-              })}
+                          {/* BACK */}
+                          <Back>
+                            <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
+                            <div style={{}}>{obj.Email}</div>
+                          </Back>
+                        </FlipCard>
+                      </CSSTransition>
+                    );
+                  })}
+              </TransitionGroup>
             </div>
           </Container>
         </constants.Default>
@@ -245,7 +284,7 @@ class MembersPage extends Component {
           <Container>
             <TopBar history={this.props.history} />
             <Heading>
-              <h1
+              <h2
                 style={{
                   paddingTop: "5%",
                   fontFamily: "Futura",
@@ -258,8 +297,8 @@ class MembersPage extends Component {
                 >
                   Meeting Link
                 </a>
-              </h1>
-              <h1
+              </h2>
+              <h2
                 style={{
                   color: "white",
                   paddingTop: "5%",
@@ -268,9 +307,38 @@ class MembersPage extends Component {
                 }}
               >
                 The Rest of the Team
-              </h1>
+              </h2>
 
-              <h1
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <StyledButton
+                  onClick={() =>
+                    this.props.history.push({ pathname: "/team/officers" })
+                  }
+                >
+                  Officers
+                </StyledButton>
+                {teamsData.map((obj) => {
+                  let pathStr = "/team/" + obj.Name;
+                  return (
+                    <StyledButton
+                      onClick={() =>
+                        this.props.history.push({ pathname: pathStr })
+                      }
+                    >
+                      {obj.Name}
+                    </StyledButton>
+                  );
+                })}
+              </div>
+
+              <h2
                 style={{
                   color: "white",
                   paddingTop: "5%",
@@ -279,47 +347,45 @@ class MembersPage extends Component {
                 }}
               >
                 Officers:{" "}
-              </h1>
+              </h2>
             </Heading>
             <div className="grid-container">
-              {membersData.map((obj) => {
-                return (
-                  // <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", minHeight: "300px", display: "flex", flexDirection: "column", justifyContent: "center", }}>
-                  //   <ImageThing image={obj.Image} />
-                  //   <TextPart>
-                  //     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>{obj.Name}</div>
-                  //     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>{obj.Position}</div>
-                  //   </TextPart>
-                  // </div>
+              <TransitionGroup component={null}>
+                {membersData
+                  .filter((obj) => obj["IsLead"] === "TRUE")
+                  .map((obj) => {
+                    return (
+                      <CSSTransition classNames="cardboi" timeout={300}>
+                        <FlipCard>
+                          {/* FRONT */}
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <ImageThing image={obj.Image} />
+                            <TextPart>
+                              <div>{obj.Name}</div>
+                              <div>{obj.Position}</div>
+                            </TextPart>
+                          </div>
 
-                  <FlipCard>
-                    {/* FRONT */}
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <ImageThing image={obj.Image} />
-                      <TextPart>
-                        <div>{obj.Name}</div>
-                        <div>{obj.Position}</div>
-                      </TextPart>
-                    </div>
-
-                    {/* BACK */}
-                    <Back>
-                      <div style={{ flexGrow: 1 }}>
-                        {obj.Bio.substr(0, 350)}
-                        {obj.Bio.length > 350 && "..."}
-                      </div>
-                      <div style={{}}>{obj.Email}</div>
-                    </Back>
-                  </FlipCard>
-                );
-              })}
+                          {/* BACK */}
+                          <Back>
+                            <div style={{ flexGrow: 1 }}>
+                              {obj.Bio.substr(0, 350)}
+                              {obj.Bio.length > 350 && "..."}
+                            </div>
+                            <div style={{}}>{obj.Email}</div>
+                          </Back>
+                        </FlipCard>
+                      </CSSTransition>
+                    );
+                  })}
+              </TransitionGroup>
             </div>
           </Container>
         </constants.Mobile>
@@ -366,14 +432,6 @@ const Container = styled("div")({
   height: "100%",
   overflow: "none",
   backgroundColor: constants.HOME_PAGE_DARK_COLOR,
-});
-
-const Heading = styled("div")({
-  padding: "30px 0px 60px 0px",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
 });
 
 export default MembersPage;
