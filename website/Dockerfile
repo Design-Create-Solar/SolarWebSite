@@ -5,13 +5,11 @@ WORKDIR /app/server
 COPY package.json /app/server
 # COPY package-lock.json
 
-RUN npm install --silent
+RUN npm install
 
 COPY src /app/server/src
 COPY public /app/server/public
 COPY server.js /app/server
-RUN ls /app/server
-RUN ls /app/server/public
 
 # RUN rm -rf /app/server/build
 
