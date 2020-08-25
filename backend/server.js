@@ -14,19 +14,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 dotenv.config();
 
-// let dev_db_url = process.env.LOCATIONS_DB_URL;
+let dev_db_url = process.env.LOCATIONS_DB_URL;
 
-// mongoose.connect(
-//   dev_db_url,
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//   },
-//   () => console.log("connection to mongoDB successful")
-// );
-// let db = mongoose.connection;
-// db.on("error", console.error.bind(console, "MongoDB connection error:"));
+mongoose.connect(
+  dev_db_url,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  },
+  () => console.log("connection to mongoDB successful")
+);
+let db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 //end mongoose setup
 
 //routes

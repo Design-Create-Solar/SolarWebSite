@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var elastic = require("../elasticsearch");
+var elastic = require("../elasticSearch");
 
 //request body should have index field and query field
 /**
@@ -18,6 +18,7 @@ var elastic = require("../elasticsearch");
  * }
  */
 router.post("/search", function (req, res) {
+  console.log("req.body.searchString is: ", req.body.searchString);
   let arrayOfShouldJsons = [];
   for (var json of req.body.busySlots) {
     let day = json.day;
@@ -380,7 +381,7 @@ router.post("/search", function (req, res) {
             must: [
               {
                 match: {
-                  subjectName: req.body.searchString,
+                  subjectCode: req.body.searchString,
                 },
               },
             ],
