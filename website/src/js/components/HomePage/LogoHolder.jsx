@@ -5,7 +5,7 @@ import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box";
 import { Default, Mobile, Desktop } from "../MultiplePages/constants";
 
-const Logo = require("../../../images/Logo.png");
+const Logo = require("../../../images/logo2.png");
 const texts = ["DESIGNERS", "CREATORS", "SOLAR"];
 
 const base = "WE ARE  ";

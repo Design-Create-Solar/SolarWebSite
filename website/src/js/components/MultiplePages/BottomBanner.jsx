@@ -22,7 +22,7 @@ const BottomBanner = () => {
 
 const GreyDiv = styled.div`
     /* background-color: ${constants.HOME_PAGE_DARK_COLOR}; */
-	background-color:black;
+    background: linear-gradient(to right, red, orange , yellow, green, cyan, blue, violet);linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
     width:100%;
     display:flex;
     justify-content:center;

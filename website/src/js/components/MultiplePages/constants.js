@@ -1,7 +1,7 @@
 import React from 'react';
 import MediaQuery from 'react-responsive'
 
-export const HOME_PAGE_DARK_COLOR = "#3a3a3c";
+export const HOME_PAGE_DARK_COLOR = "black";
 //export const HOME_PAGE_DARK_COLOR = "#1d2951"; the dark blue
 //export const HOME_PAGE_LIGHT_COLOR = "#e8e8e8";
 export const HOME_PAGE_LIGHT_COLOR = "white";
