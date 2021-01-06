@@ -1,54 +1,48 @@
+// ENV VARIABLES
+const dotenv = require("dotenv").config();
+
+//Databases
 const Influx = require("influxdb-nodejs");
-const express = require("express");
-const bodyParser = require("body-parser");
-const dataRoutes = require("./routes/data");
-const socketIo = require("socket.io");
-const cors = require("cors");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 
-const app = express();
-const PORT = 5000;
+const express = require("express"),
+  app = express(),
+  PORT = 5000;
+const bodyParser = require("body-parser");
+const cors = require("cors");
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-dotenv.config();
 
-let dev_db_url = process.env.LOCATIONS_DB_URL;
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 
-mongoose.connect(
-  dev_db_url,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  },
-  () => console.log("connection to mongoDB successful")
-);
-let db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-//end mongoose setup
-
-//routes
-const documents = require("./routes/documents");
-app.use("/documents", documents);
-
-const locations = require("./routes/locations");
-app.use("/locations", locations);
-
+//ROUTES
+const dataRoutes = require("./routes/dataRoute"); //for time series db
 app.use("/data", dataRoutes);
+const authRoute = require("./routes/authRoute"); //contains register and login endpoints eg: /auth/register, /auth/login
+app.use("/auth", authRoute);
+const usersRoute = require("./routes/usersRoute");
+app.use("/users", usersRoute);
+const block = require("./routes/blockRoute"); //for website builder blocks
+app.use("/block", block);
 
-app.use("/static", express.static("media"));
+//connect to mongodb
+mongoose.connect(
+  process.env.DB_CONNECT,
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+  () => console.log("Connection to MongoDB established.")
+);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-const server = require("http").Server(app);
-const io = socketIo(server);
-// app.listen(4000, () => {
-//     console.log("App listening on " + 4000)
-// })
-server.listen(PORT, () => {
-  console.log("Listening on " + PORT);
-});
+app.listen(PORT, () => console.log("Server listening on port " + PORT + "."));
+
+//socket.io realtime updates:
+
+//const socketIo = require("socket.io");
+
+// const server = require("http").Server(app);
+// const io = socketIo(server);
+// server.listen(PORT, () => {
+//   console.log("Listening on " + PORT);
+// });
 
 // let interval;
 // io.on("connection", (socket) => {
