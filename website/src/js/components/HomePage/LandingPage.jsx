@@ -95,7 +95,9 @@ const BetterInfoContainer = styled('div')({
 	textAlign: 'center',
 	fontFamily: 'Futura',
 	fontSize: '2em',
-	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR
+	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
+	display: "flex",
+	flexDirection: "column"
 	// backgroundImage: "url(https://www.transparenttextures.com/patterns/leather.png)",
 });
 
