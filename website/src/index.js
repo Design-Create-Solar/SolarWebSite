@@ -1,15 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-<<<<<<< HEAD
-import * as serviceWorker from "./serviceWorker";
-
-// import "./futura/futur.ttf";
-
-import App from "./App.js";
-
-ReactDOM.render(<App />, document.getElementById("root"));
-=======
 import LandingPage from "./js/components/HomePage/LandingPage";
 import ProjectPage from "./js/components/ProgramsPage/ProjectPage";
 import MembersPage from "./js/components/MembersPage/MembersPage";
@@ -52,7 +43,6 @@ ReactDOM.render(
 
   document.getElementById("root")
 );
->>>>>>> data_display
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

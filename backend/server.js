@@ -25,9 +25,10 @@ app.use("/users", usersRoute);
 const block = require("./routes/blockRoute"); //for website builder blocks
 app.use("/block", block);
 
+console.log(process.env)
 //connect to mongodb
 mongoose.connect(
-  process.env.DB_CONNECT,
+  process.env.LOCATIONS_DB_URL,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   () => console.log("Connection to MongoDB established.")
 );
