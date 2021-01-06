@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import LogoHolder from './LogoHolder';
 import { styled } from '@material-ui/styles';
-import * as constants from '../../constants';
-import InfoArea from '../InfoArea';
+import * as constants from '../MultiplePages/constants';
 import '../../../../node_modules/video-react/dist/video-react.css'; // import css
-import TopBar from '../TopBar';
-import { Default, Mobile, Desktop } from '../../constants';
-import ReactPlayer from 'react-player'
+import { Player } from 'video-react';
+import TopBar from '../MultiplePages/TopBar';
+import { Default, Mobile, Desktop } from '../MultiplePages/constants';
 
 const infoArray = [
 	{
@@ -42,21 +41,37 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="100%" height="60vh"/>
+						{/* <video src='http://localhost:5000/static/poo.mp4' /> */}
+						<Player
+							playsInline
+							autoplay={false}
+							// poster="/assets/poster.png"
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
+						/>
 					</BetterInfoContainer>
 				</Desktop>
 				<Default>
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="100%" height="60vh"/>
+						<Player
+							playsInline
+							autoplay={false}
+							// poster="/assets/poster.png"
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
+						/>
 					</BetterInfoContainer>
 				</Default>
 				<Mobile>
 					<BetterInfoContainerMObile>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText mobile>{infoArray[1].text}</ActualText>
-						<ReactPlayer url='https://www.youtube.com/watch?v=0o46wh2UCqc' playing width="100%" height="60vh"/>
+						<Player
+							playsInline
+							autoplay={false}
+							// poster="/assets/poster.png"
+							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
+						/>
 					</BetterInfoContainerMObile>
 				</Mobile>
 			</Container>
@@ -94,10 +109,6 @@ const Container = styled('div')({
 	overflow: 'none'
 });
 
-const InfoContainer = styled('div')({
-	order: 1,
-	flex: 1
-});
 const InfoHeader = styled('h4')({
 	fontWeight: 500,
 	fontSize: '1.5em',

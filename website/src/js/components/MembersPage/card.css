@@ -1,33 +1,51 @@
 .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .ReactFlipCard {
-    margin: 25px;
-    text-align: center;
-  }
-  .ReactFlipCard,
-  .ReactFlipCard__Front,
-  .ReactFlipCard__Back {
-    box-sizing: border-box;
-    max-width: 500px;
-    min-height: 430px;
-    height: 10%;
-    width: 100%;
-  }
-  .ReactFlipCard__Front,
-  .ReactFlipCard__Back {
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    padding: 25px;
-  }
-  .ReactFlipCard__Front {
-    background-color: #eee;
-  }
-  .ReactFlipCard__Back {
-    background-color: #cef;
-  }
+  margin: 25px;
+  text-align: center;
+}
+.ReactFlipCard,
+.ReactFlipCard__Front,
+.ReactFlipCard__Back {
+  box-sizing: border-box;
+  max-width: 500px;
+  min-height: 430px;
+  height: 10%;
+  width: 100%;
+}
+.ReactFlipCard__Front,
+.ReactFlipCard__Back {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 25px;
+}
+.ReactFlipCard__Front {
+  background-color: #eee;
+}
+.ReactFlipCard__Back {
+  background-color: #cef;
+}
+
+.cardboi-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.cardboi-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.cardboi-exit {
+  opacity: 1;
+}
+.cardboi-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

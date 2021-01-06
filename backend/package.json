@@ -5,19 +5,21 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:prod": "concurrently \"serve -s ~/media -l 5001\" \"npm run start\"",
-    "start": "node server.js",
-    "build:prod": "docker build -t ishnoor/dcs-server ."
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.701.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "http-server": "^0.12.1",
+    "http": "0.0.0",
     "influxdb-nodejs": "^3.1.0",
-    "node-static": "^0.7.11",
-    "nodemon": "^2.0.2"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.10",
+    "nodemon": "^2.0.2",
+    "socket.io": "^2.3.0"
   }
 }

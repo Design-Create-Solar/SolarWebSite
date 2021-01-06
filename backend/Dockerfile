@@ -1,22 +1,12 @@
-FROM node:10
+FROM node:8.7.0-alpine
+RUN mkdir -p /app/server
+WORKDIR /app/server
 
-# Create app directory
-WORKDIR /usr/src/app
+COPY package.json /app/server
+# COPY package-lock.json
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY ./media /root/media
-RUN ls -alR
+RUN npm install --silent
 
-COPY package*.json ./
+COPY . /app/server
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
-
-EXPOSE 5000
-CMD [ "npm", "run", "start" ]
+CMD ["npm", "start"]

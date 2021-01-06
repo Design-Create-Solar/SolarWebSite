@@ -1,10 +1,18 @@
-FROM ishnoor/dcs-ver1
-# Remove the default nginx index.html
-RUN rm -rf /var/www/
-# Copy the contents of the d
-COPY ./build /var/www
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM node:8.7.0-alpine
+RUN mkdir -p /app/server
+WORKDIR /app/server
 
-EXPOSE 80
-# Start server
-CMD ["nginx", "-g", "daemon off;"]
+COPY package.json /app/server
+# COPY package-lock.json
+
+RUN npm install
+
+COPY src /app/server/src
+COPY public /app/server/public
+COPY server.js /app/server
+
+# RUN rm -rf /app/server/build
+
+RUN npm run build
+
+CMD ["node", "server"]

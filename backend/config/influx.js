@@ -1,5 +1,5 @@
-const Influx = require('influxdb-nodejs');
-const client = new Influx('http://169.232.119.6:8086/testdb'); //no auth
+const Influx = require('influxdb-nodejs')
+const client = new Influx('http://localhost:8086/testdb') //no auth
 
 // i --> integer
 // s --> string
