@@ -1,21 +1,34 @@
-const router = require("express").Router();
-const client = require("../config/influx.js");
-const socketIO = require("socket.io");
+const router = require('express').Router();
+const client = require('../config/influx.js');
+const socketIO = require('socket.io');
+
+// const io = require("../server");
 const sockettest = async (data) => {
-  try {
-    const io = require("../server.js");
-    console.log(io);
-    io.emit("FromAPI", data);
-  } catch (error) {
-    console.error(`Error ${error.code}`);
-    console.log(io);
-  }
+	try {
+		const io = require('../server.js');
+		// console.log(io)
+		io.emit('FromAPI', data);
+	} catch (error) {
+		console.log('came in here');
+		console.error(`Error ${error.code}`);
+		console.log(io);
+	}
 };
 
-router.post("/add", (req, res) => {
-  let sID = req.body.sID;
-  let tempValue = req.body.tempValue;
-  let deviceString = req.body.device;
+router.post('/add', (req, res) => {
+	let sID = req.body.sID;
+	let tempValue = req.body.tempValue;
+	let deviceString = req.body.device;
+
+	client
+		.write('temperatureSensor')
+		.tag({
+			sensorID: sID,
+		})
+		.field({
+			temperature: tempValue,
+			measureDevice: deviceString,
+		})
 
   client
     .write("temperatureSensor")
