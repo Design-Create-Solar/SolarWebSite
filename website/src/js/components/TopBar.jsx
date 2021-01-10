@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import * as constants from "../constants";
+import * as constants from "./MultiplePages/constants";
 import { withStyles, fade } from "@material-ui/core/styles";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-import { Default, Mobile, Desktop } from "../constants";
+import { Default, Mobile, Desktop } from "./MultiplePages/constants";
 //know about logged in user
 import { UserContext, UserProvider } from "../../context/UserContext";
 
@@ -116,6 +116,18 @@ function TopBar(props) {
                   }
                 >
                   Meet The Team
+                </StyledButton>
+                <StyledButton
+                  style={{
+                    order: 3,
+                  }}
+                  onClick={() =>
+                    props.history.push({
+                      pathname: "/auth",
+                    })
+                  }
+                >
+                  LOGIN
                 </StyledButton>
                 {uploadButton()}
               </Box>

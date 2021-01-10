@@ -4,6 +4,7 @@ import "./index.css";
 import LandingPage from "./js/components/HomePage/LandingPage";
 import ProjectPage from "./js/components/ProgramsPage/ProjectPage";
 import MembersPage from "./js/components/MembersPage/MembersPage";
+import AuthPage from "./js/components/AuthPage/AuthPage";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BottomBanner from "./js/components/MultiplePages/BottomBanner";
@@ -34,6 +35,7 @@ ReactDOM.render(
             <Route path="/test" component={test} />
             <Route path="/team" component={SubsystemPage} />
             <Route path="/join" component={RecruitmentPage} />
+            <Route path="/auth" component={AuthPage} />
           </Switch>
         </ScrollToTop>
         <BottomBanner />
