@@ -20,6 +20,8 @@ import "./assets/base.css";
 import configureStore from "./config/configureStore";
 import { Provider } from "react-redux";
 
+import { UserProvider } from "./context/UserContext";
+
 const store = configureStore();
 
 ReactDOM.render(
@@ -36,7 +38,11 @@ ReactDOM.render(
             <Route path="/test" component={test} />
             <Route path="/team" component={SubsystemPage} />
             <Route path="/join" component={RecruitmentPage} />
-            <Route path="/login" component={Login} />
+            <Route path="/login">
+              <UserProvider>
+                <Login />
+              </UserProvider>
+            </Route>
           </Switch>
         </ScrollToTop>
         <BottomBanner />

@@ -34,7 +34,7 @@ const UserContext = React.createContext();
 
 function UserProvider(props) {
   console.log("in UserProvider");
-  let [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   if (userData == null) {
     let token = localStorage.getItem("auth-token");
     if (token === null) {

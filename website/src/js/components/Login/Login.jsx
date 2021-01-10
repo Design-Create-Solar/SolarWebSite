@@ -1,9 +1,9 @@
-import React from "react";
-// import { useHistory } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 import axios from "axios";
 
-// import { UserContext } from "../../../context/UserContext";
+import { UserContext } from "../../../context/UserContext";
 import * as constants from "../MultiplePages/constants";
 import TopBar from "../MultiplePages/TopBar";
 import GFXField from "./GFXField";
@@ -14,12 +14,18 @@ import { showErrorOnBlur } from "mui-rff";
 import { styled } from "@material-ui/styles";
 import { Paper, Grid } from "@material-ui/core";
 
-//const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const jwt = require("jsonwebtoken");
+
+// temporary access token
+const ACCESS_TOKEN_SECRET =
+  "52d8b9e835de6e141f68383a6b72e8ab780b546f9e4ebbcf0ecf6a2ac606e6b44de6eac9f87924286ad8a9af00eae6543a719fb5cc777cc9eb510c77dc914e20";
 
 const Login = (props) => {
-  // const { setUserData } = useContext(UserContext);
-  // const history = useHistory();
+  const { userData, setUserData } = useContext(UserContext);
+  const [isLogin, setLogin] = useState(false);
+  const history = useHistory();
 
+  // Async response to Local Storage & Backend
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300);
@@ -28,21 +34,32 @@ const Login = (props) => {
       .post("http://localhost:5000/auth/login", {
         name: values.username,
         password: values.password,
-        // check for matching username/password
       })
       .then((res) => {
+        // generate access token via JWT
+        const accessToken = jwt.sign(
+          { name: values.username, password: values.password },
+          ACCESS_TOKEN_SECRET
+        );
+
+        // sending data to Backend + LS
+        console.log(userData);
+        setUserData({
+          token: accessToken,
+          user: res.data.user,
+        });
+
+        localStorage.setItem("auth-token", accessToken);
+        history.push("/");
+
+        // change login state
+        setLogin(true);
         console.log(res);
-        // alert("Login success!");
-        // setUserData({
-        //   token: res.data.token,
-        //   user: res.data.user,
-        // });
-        localStorage.setItem("auth-token", res.data.token);
-        // history.push("/");
+        alert("Successful login!");
       })
       .catch((error) => {
         console.log(error);
-        alert("Login failed!");
+        alert("Failed to login.");
       });
   };
 
