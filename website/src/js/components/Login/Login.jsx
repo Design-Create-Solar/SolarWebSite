@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+// import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 import axios from "axios";
 
-import { UserContext } from "../../../context/UserContext";
+// import { UserContext } from "../../../context/UserContext";
 import * as constants from "../MultiplePages/constants";
 import TopBar from "../MultiplePages/TopBar";
 import GFXField from "./GFXField";
@@ -19,31 +19,31 @@ import { Paper, Grid } from "@material-ui/core";
 const Login = (props) => {
   // const { setUserData } = useContext(UserContext);
   // const history = useHistory();
-  // const onSubmit = async (values) => {
-  //   await axios
-  //     .post("http://localhost:5000/auth/login", {
-  //       name: values.name,
-  //       password: values.password,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       alert("Login success!");
-  //       setUserData({
-  //         token: res.data.token,
-  //         user: res.data.user,
-  //       });
-  //       localStorage.setItem("auth-token", res.data.token);
-  //       history.push("/");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert("Login Failed!");
-  //     });
-  // };
+
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300);
-    alert(JSON.stringify(values, 0, 2));
+    console.log(JSON.stringify(values, 0, 2));
+    await axios
+      .post("http://localhost:5000/auth/login", {
+        name: values.username,
+        password: values.password,
+        // check for matching username/password
+      })
+      .then((res) => {
+        console.log(res);
+        // alert("Login success!");
+        // setUserData({
+        //   token: res.data.token,
+        //   user: res.data.user,
+        // });
+        localStorage.setItem("auth-token", res.data.token);
+        // history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Login failed!");
+      });
   };
 
   const validate = (values) => {
@@ -151,6 +151,7 @@ const Login = (props) => {
                 </Grid>
               </Grid>
             </Paper>
+            <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
         )}
       />
