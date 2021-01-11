@@ -86,6 +86,9 @@ function TopBar(props) {
                 >
                   Join Us
                 </StyledButton>
+                <StyledButton style={{ order: 5 }} onClick={() => props.history.push({ pathname: "/donate" })}>
+                  Donate
+                </StyledButton>
                 {/* <StyledButton
 									style={{
 										order: 5
@@ -169,6 +172,9 @@ function TopBar(props) {
                 >
                   Join Us
                 </StyledButton>
+                <StyledButton style={{ order: 5 }} onClick={() => props.history.push({ pathname: "/donate" })}>
+                  Donate
+                </StyledButton>
                 {/* <StyledButton
 									style={{
 										order: 5
@@ -246,6 +252,9 @@ function TopBar(props) {
                   }
                 >
                   Join Us
+                </StyledButton>
+                <StyledButton style={{ order: 5 }} onClick={() => props.history.push({ pathname: "/donate" })}>
+                  Donate
                 </StyledButton>
                 {/* <StyledButton
 									style={{
