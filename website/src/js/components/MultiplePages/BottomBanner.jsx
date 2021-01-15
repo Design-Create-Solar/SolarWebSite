@@ -14,7 +14,7 @@ const BottomBanner = () => {
           Contact us!{" "}
           <Mailto href="mailto:designcreatesolar@gmail.com">Our Email</Mailto>
         </BannerText1>
-        <BannerText2>Copyright © SOLAR 2019-2020</BannerText2>
+        <BannerText2>Copyright © SOLAR 2019-2021</BannerText2>
       </Container>
     </GreyDiv>
   );

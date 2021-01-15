@@ -46,7 +46,7 @@ export default class LandingPage extends Component {
 							playsInline
 							autoplay={false}
 							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
 						/>
 					</BetterInfoContainer>
 				</Desktop>
@@ -58,7 +58,7 @@ export default class LandingPage extends Component {
 							playsInline
 							autoplay={false}
 							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
 						/>
 					</BetterInfoContainer>
 				</Default>
@@ -70,7 +70,7 @@ export default class LandingPage extends Component {
 							playsInline
 							autoplay={false}
 							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-1-363373488085.s3-us-west-1.amazonaws.com/test/poo.mp4'
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
 						/>
 					</BetterInfoContainerMObile>
 				</Mobile>
