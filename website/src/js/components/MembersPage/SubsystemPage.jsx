@@ -47,8 +47,8 @@ class SubsystemPage extends Component {
 
   componentDidMount() {
     Tabletop.init({
-      key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k", // 2019-2020
-      // key: "1Wa4MF0b-60QC1rmuP6A2jJmMIJL62NlvlG-NhhaCnR0", // 2020-2021
+      // key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k", // 2019-2020
+      key: "1Wa4MF0b-60QC1rmuP6A2jJmMIJL62NlvlG-NhhaCnR0", // 2020-2021
       callback: (googleData) => {
         this.setState({
           membersData: googleData,

@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import * as constants from "../MultiplePages/constants";
 import TopBar from "../MultiplePages/TopBar";
 import { styled } from "@material-ui/styles";
+import Button from "../MultiplePages/Button"
 
 class SponsorsPage extends Component {
+
+  handleClick() {
+    // do something meaningful, Promises, if/else, whatever, and then
+    window.location.assign('https://giving.ucla.edu/campaign/donate.aspx?Fund=64580C&AutoFN=Y');
+  }
   render() {
     return (
       <Container>
@@ -23,13 +29,16 @@ class SponsorsPage extends Component {
         >
           Sponsorship Packet:{" "}
         </h1>
-        <div style={{ display: "flex", justifyContent: "center", height: 800 }}>
+        <div style={{ display: "flex", justifyContent: "center", height: 700 }}>
           <iframe
             src="https://drive.google.com/file/d/1miL-m87M9KGKtba5hjTUZX6xXt_gnszT/preview"
             width="853.33333333333"
             height="640"
           ></iframe>
         </div>
+        <Button onClick={this.handleClick.bind(this)} style={{ margin: "auto", marginTop: 0, marginBottom: "2rem" }}>
+          Donate
+        </Button>
       </Container>
     );
   }
