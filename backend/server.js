@@ -25,12 +25,12 @@ app.use("/users", usersRoute);
 const block = require("./routes/blockRoute"); //for website builder blocks
 app.use("/block", block);
 
-console.log(process.env)
+// console.log(process.env)
 //connect to mongodb
 mongoose.connect(
-  process.env.LOCATIONS_DB_URL,
+  process.env.DB_URL,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-  () => console.log("Connection to MongoDB established.")
+  (err) => { if (err) console.log(err); else console.log("Connected") }
 );
 
 app.listen(PORT, () => console.log("Server listening on port " + PORT + "."));
