@@ -40,6 +40,11 @@ ReactDOM.render(
             <Route path="/test" component={test} />
             <Route path="/team" component={SubsystemPage} />
             <Route path="/join" component={RecruitmentPage} />
+            <Route path="/login">
+              <UserProvider>
+                <Login />
+              </UserProvider>
+            </Route>
             <Route path="/blocks" component={BlocksPage} />
           </Switch>
         </ScrollToTop>
