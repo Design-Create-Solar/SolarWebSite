@@ -11,6 +11,8 @@ import ScrollToTop from "./js/components/MultiplePages/ScrollToTop";
 import SponsorsPage from "./js/components/SponsorsPage/SponsorsPage";
 import SubsystemPage from "./js/components/MembersPage/SubsystemPage";
 import RecruitmentPage from "./js/components/RecruitmentPage/RecruitmentPage";
+import BlocksPage from "./js/components/BlocksPage/BlocksPage";
+
 import "./futura/futur.ttf";
 import test from "./js/components/sockettest.jsx";
 
@@ -34,6 +36,7 @@ ReactDOM.render(
             <Route path="/test" component={test} />
             <Route path="/team" component={SubsystemPage} />
             <Route path="/join" component={RecruitmentPage} />
+            <Route path="/blocks" component={BlocksPage} />
           </Switch>
         </ScrollToTop>
         <BottomBanner />
