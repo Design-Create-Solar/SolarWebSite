@@ -15,10 +15,8 @@ import { styled } from "@material-ui/styles";
 import { Paper, Grid } from "@material-ui/core";
 
 const jwt = require("jsonwebtoken");
-
-// temporary access token
-const ACCESS_TOKEN_SECRET =
-  "52d8b9e835de6e141f68383a6b72e8ab780b546f9e4ebbcf0ecf6a2ac606e6b44de6eac9f87924286ad8a9af00eae6543a719fb5cc777cc9eb510c77dc914e20";
+// const { TOKEN_SECRET } = process.env;
+const TOKEN_SECRET = "thisisarbitrary";
 
 const Login = (props) => {
   const { userData, setUserData } = useContext(UserContext);
@@ -27,33 +25,30 @@ const Login = (props) => {
 
   // Async response to Local Storage & Backend
   const onSubmit = async (values) => {
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    await sleep(300);
-    console.log(JSON.stringify(values, 0, 2));
     await axios
       .post("http://localhost:5000/auth/login", {
         name: values.username,
         password: values.password,
       })
       .then((res) => {
-        // generate access token via JWT
+        // generate access token via JWT (+ process.env.ACCESS_KEY_ID)
         const accessToken = jwt.sign(
           { name: values.username, password: values.password },
-          ACCESS_TOKEN_SECRET
+          TOKEN_SECRET
         );
 
         // sending data to Backend + LS
-        console.log(userData);
+        console.log("userData" + userData);
         setUserData({
           token: accessToken,
           user: res.data.user,
         });
 
         localStorage.setItem("auth-token", accessToken);
-        history.push("/");
+        history.push("/auth-success"); // send user to random page
 
         // change login state
-        setLogin(true);
+        setLogin(true); // no purpose as of now
         console.log(res);
         alert("Successful login!");
       })
