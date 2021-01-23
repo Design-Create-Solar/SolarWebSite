@@ -4,6 +4,8 @@ import "./index.css";
 import LandingPage from "./js/components/HomePage/LandingPage";
 import ProjectPage from "./js/components/ProgramsPage/ProjectPage";
 import MembersPage from "./js/components/MembersPage/MembersPage";
+import Login from "./js/components/Login/Login";
+
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BottomBanner from "./js/components/MultiplePages/BottomBanner";
@@ -17,6 +19,8 @@ import test from "./js/components/sockettest.jsx";
 import "./assets/base.css";
 import configureStore from "./config/configureStore";
 import { Provider } from "react-redux";
+
+import { UserProvider } from "./context/UserContext";
 
 const store = configureStore();
 
@@ -34,6 +38,11 @@ ReactDOM.render(
             <Route path="/test" component={test} />
             <Route path="/team" component={SubsystemPage} />
             <Route path="/join" component={RecruitmentPage} />
+            <Route path="/login">
+              <UserProvider>
+                <Login />
+              </UserProvider>
+            </Route>
           </Switch>
         </ScrollToTop>
         <BottomBanner />
