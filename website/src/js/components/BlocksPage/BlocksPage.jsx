@@ -126,7 +126,6 @@ const BlocksPage = (props) => {
       ),
     },
   ];
-
   return (
     <Container>
       <TopBar history={props.history} />
