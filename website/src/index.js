@@ -23,6 +23,7 @@ import configureStore from "./config/configureStore";
 import { Provider } from "react-redux";
 
 import { UserProvider } from "./context/UserContext";
+import LoginWrapper from "./js/components/utils/LoginWrapper";
 
 const store = configureStore();
 
@@ -45,7 +46,12 @@ ReactDOM.render(
                 <Login />
               </UserProvider>
             </Route>
-            <Route path="/blocks" component={BlocksPage} />
+            <Route path="/blocks">
+              <LoginWrapper>
+                <BlocksPage />
+              </LoginWrapper>
+            </Route>
+            {/* <Route path="/blocks" component={BlocksPage} /> */}
           </Switch>
         </ScrollToTop>
         <BottomBanner />

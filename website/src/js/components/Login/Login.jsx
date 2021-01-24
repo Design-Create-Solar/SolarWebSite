@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 import axios from "axios";
 
@@ -23,6 +23,7 @@ const Login = (props) => {
   const [isLogin, setLogin] = useState(false);
   const history = useHistory();
 
+  if (localStorage.getItem('auth-token')) { return (<Redirect to='/blocks' />) }
   // Async response to Local Storage & Backend
   const onSubmit = async (values) => {
     await axios
@@ -45,7 +46,8 @@ const Login = (props) => {
         });
 
         localStorage.setItem("auth-token", accessToken);
-        history.push("/auth-success"); // send user to random page
+        // history.push("/auth-success"); // send user to random page
+        history.push("/blocks")
 
         // change login state
         setLogin(true); // no purpose as of now
