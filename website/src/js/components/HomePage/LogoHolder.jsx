@@ -14,13 +14,13 @@ const LogoHolder = () => {
   return (
     <Container>
       <Default>
-        <img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+        <img alt="" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
       </Default>
       <Desktop>
-        <img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+        <img alt="" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
       </Desktop>
       <Mobile>
-        <img src={Logo} style={{ width: "100%", paddingBottom: "2em" }} />
+        <img alt="" src={Logo} style={{ width: "100%", paddingBottom: "2em" }} />
       </Mobile>
       <Box
         style={{

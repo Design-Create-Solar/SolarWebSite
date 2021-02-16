@@ -1,6 +1,4 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "../../../context/UserContext";
+import React, { useState } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
 import InfoArea from "../MultiplePages/InfoArea";
@@ -22,25 +20,20 @@ const BlocksPage = (props) => {
   // const { userData, setUserData } = useContext(UserContext);
   // const [isLogin, setLogin] = useState(false);
   // const history = useHistory();
-  const [infoArray, updateInfoArray] = useState({
+  const [infoArray, updateInfoArray] = useState([{
     header: "Sample Title",
     color: constants.HOME_PAGE_LIGHT_COLOR,
     text: "This is a standard block designed for testing purposes.",
     align: "center",
     images: [],
-  });
+  }]);
 
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    await sleep(300).then(
-      updateInfoArray({
-        header: values.header,
-        color: values.color,
-        text: values.text,
-        align: values.align,
-        images: values.images,
-      })
-    );
+    await sleep(300).then(() => {
+      const { header, color, text, align, images } = values
+      updateInfoArray((poo) => [...poo, { header, color, text, align, images }])
+    })
   };
 
   const validate = (values) => {
@@ -54,9 +47,9 @@ const BlocksPage = (props) => {
     if (!values.text) {
       errors.text = "Provide some text to support your header.";
     }
-    if (!values.images) {
-      errors.images = "Provide at least one image(s).";
-    }
+    // if (!values.images) {
+    //   errors.images = "Provide at least one image(s).";
+    // }
     return errors;
   };
 
@@ -120,7 +113,7 @@ const BlocksPage = (props) => {
           label="images"
           name="images"
           margin="none"
-          required={true}
+          required={false}
           showError={showErrorOnBlur}
         />
       ),
@@ -130,6 +123,17 @@ const BlocksPage = (props) => {
     <Container>
       <TopBar history={props.history} />
       <div style={{ height: "100px" }} />
+      {infoArray.map((block, idx) => {
+        return (
+          <InfoArea key={idx} header={block.header}
+            color={block.color}
+            text={block.text}
+            align={block.align}
+            images={block.images === undefined ? [] : block.images}
+          />
+
+        )
+      })}
       <Card style={styles.card}>
         <CardMedia
           style={styles.media}
@@ -193,7 +197,7 @@ const BlocksPage = (props) => {
           </form>
         )}
       />
-    </Container>
+    </Container >
   );
 };
 

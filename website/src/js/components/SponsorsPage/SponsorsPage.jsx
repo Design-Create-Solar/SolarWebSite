@@ -31,6 +31,7 @@ class SponsorsPage extends Component {
         </h1>
         <div style={{ display: "flex", justifyContent: "center", height: 700 }}>
           <iframe
+            title="sponsorspacket"
             src="https://drive.google.com/file/d/1miL-m87M9KGKtba5hjTUZX6xXt_gnszT/preview"
             width="853.33333333333"
             height="640"
