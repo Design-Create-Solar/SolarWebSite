@@ -53,7 +53,7 @@ function TopBar(props) {
                 {
                   topbarButtonInfo.map((obj, idx) => {
                     return (
-                      <StyledButton style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
+                      <StyledButton key={idx} style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
                         {obj.name}
                       </StyledButton>)
                   })
@@ -73,7 +73,7 @@ function TopBar(props) {
                 {
                   topbarButtonInfo.map((obj, idx) => {
                     return (
-                      <StyledButton style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
+                      <StyledButton key={idx} style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
                         {obj.name}
                       </StyledButton>)
                   })
@@ -93,7 +93,7 @@ function TopBar(props) {
                 {
                   topbarButtonInfo.map((obj, idx) => {
                     return (
-                      <StyledButton style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
+                      <StyledButton key={idx} style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
                         {obj.name}
                       </StyledButton>)
                   })

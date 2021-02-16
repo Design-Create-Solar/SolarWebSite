@@ -10,7 +10,6 @@ const fadeProperties = {
 };
 
 const Slideshow = props => {
-	console.log(props);
 	return (
 		<div className='slide-container'>
 			<Fade {...fadeProperties}>
