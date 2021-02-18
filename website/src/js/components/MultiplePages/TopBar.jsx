@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, Toolbar } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import { Default, Mobile, Desktop } from "./constants";
 import StyledButton from "./StyledButton";
+import { UserContext } from "../../../context/UserContext"
 const topbarButtonInfo = [
   {
     "name": "Home",
@@ -22,16 +23,12 @@ const topbarButtonInfo = [
   }, {
     "name": "Join Us",
     "link": "/join"
-  }, {
-    "name": "Login",
-    "link": "/login"
-  } /*, {
-    "name": "Data",
-    "link": "/data"
-  } */
+  }
 ]
-function TopBar(props) {
+function TopBar() {
   const history = useHistory();
+  const { userData, setUserData } = useContext(UserContext)
+
   return (
     <Router>
       <div>
@@ -58,6 +55,15 @@ function TopBar(props) {
                       </StyledButton>)
                   })
                 }
+                {
+                  userData && userData.token !== null ?
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                      Logout
+                  </StyledButton> :
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
+                      Login
+                  </StyledButton>
+                }
               </Box>
             </Mobile>
             <Desktop>
@@ -78,6 +84,15 @@ function TopBar(props) {
                       </StyledButton>)
                   })
                 }
+                {
+                  userData && userData.token !== null ?
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                      Logout
+                  </StyledButton> :
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
+                      Login
+                  </StyledButton>
+                }
               </Box>
             </Desktop>
             <Default>
@@ -97,6 +112,15 @@ function TopBar(props) {
                         {obj.name}
                       </StyledButton>)
                   })
+                }
+                {
+                  userData && userData.token !== null ?
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                      Logout
+                  </StyledButton> :
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
+                      Login
+                  </StyledButton>
                 }
               </Box>
             </Default>

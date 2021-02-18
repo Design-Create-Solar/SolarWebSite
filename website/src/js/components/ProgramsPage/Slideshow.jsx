@@ -13,8 +13,9 @@ const Slideshow = props => {
 	return (
 		<div className='slide-container'>
 			<Fade {...fadeProperties}>
-				{props.images.map(image => (
+				{props.images.map((image, idx) => (
 					<div
+						key={idx}
 						style={{
 							display: 'flex',
 							alignItems: 'center',

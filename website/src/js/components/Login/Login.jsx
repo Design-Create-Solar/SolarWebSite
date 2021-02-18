@@ -5,7 +5,6 @@ import axios from "axios";
 
 import { UserContext } from "../../../context/UserContext";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import GFXField from "./GFXField";
 import GFXButton from "./GFXButton";
 
@@ -39,7 +38,6 @@ const Login = (props) => {
         );
 
         // sending data to Backend + LS
-        console.log("userData" + userData);
         setUserData({
           token: accessToken,
           user: res.data.user,
@@ -100,7 +98,6 @@ const Login = (props) => {
 
   return (
     <Container>
-      <TopBar history={props.history} />
       <div style={{ height: "100px" }} />
       <h1
         style={{

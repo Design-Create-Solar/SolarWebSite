@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
 import InfoArea from "../MultiplePages/InfoArea";
-import TopBar from "../MultiplePages/TopBar";
 
 import GFXField from "./GFXField";
 import GFXButton from "./GFXButton";
@@ -17,9 +16,6 @@ import { Paper, Grid, Card, CardMedia } from "@material-ui/core";
 import img from "./testimage.jpg";
 
 const BlocksPage = (props) => {
-  // const { userData, setUserData } = useContext(UserContext);
-  // const [isLogin, setLogin] = useState(false);
-  // const history = useHistory();
   const [infoArray, updateInfoArray] = useState([{
     header: "Sample Title",
     color: constants.HOME_PAGE_LIGHT_COLOR,
@@ -121,7 +117,6 @@ const BlocksPage = (props) => {
   ];
   return (
     <Container>
-      <TopBar history={props.history} />
       <div style={{ height: "100px" }} />
       {infoArray.map((block, idx) => {
         return (
