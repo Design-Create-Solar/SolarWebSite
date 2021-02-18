@@ -15,6 +15,8 @@ import SubsystemPage from "./js/components/MembersPage/SubsystemPage";
 import RecruitmentPage from "./js/components/RecruitmentPage/RecruitmentPage";
 import BlocksPage from "./js/components/BlocksPage/BlocksPage";
 
+import TopBar from "./js/components/MultiplePages/TopBar"
+
 import "./futura/futur.ttf";
 import test from "./js/components/sockettest.jsx";
 
@@ -23,35 +25,39 @@ import configureStore from "./config/configureStore";
 import { Provider } from "react-redux";
 
 import { UserProvider } from "./context/UserContext";
+import { BlocksProvider } from "./context/BlocksContext"
 import LoginWrapper from "./js/components/utils/LoginWrapper";
 
 const store = configureStore();
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
+        <UserProvider>
+          <TopBar />
+        </UserProvider>
         <ScrollToTop>
           <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/home" component={LandingPage} />
-            <Route path="/programs" component={ProjectPage} />
-            <Route exact path="/team/officers" component={MembersPage} />
-            <Route path="/sponsors" component={SponsorsPage} />
-            <Route path="/test" component={test} />
-            <Route path="/team" component={SubsystemPage} />
-            <Route path="/join" component={RecruitmentPage} />
-            <Route path="/login">
-              <UserProvider>
-                <Login />
-              </UserProvider>
-            </Route>
-            <Route path="/blocks">
-              <LoginWrapper>
-                <BlocksPage />
-              </LoginWrapper>
-            </Route>
-            {/* <Route path="/blocks" component={BlocksPage} /> */}
+            <BlocksProvider>
+              <Route exact path="/" component={LandingPage} />
+              <Route exact path="/home" component={LandingPage} />
+              <Route path="/programs" component={ProjectPage} />
+              <Route exact path="/team/officers" component={MembersPage} />
+              <Route path="/sponsors" component={SponsorsPage} />
+              <Route path="/test" component={test} />
+              <Route path="/team" component={SubsystemPage} />
+              <Route path="/join" component={RecruitmentPage} />
+              <Route path="/login">
+                <UserProvider>
+                  <Login />
+                </UserProvider>
+              </Route>
+              <Route path="/blocks">
+                <LoginWrapper>
+                  <BlocksPage />
+                </LoginWrapper>
+              </Route>
+            </BlocksProvider>
           </Switch>
         </ScrollToTop>
         <BottomBanner />

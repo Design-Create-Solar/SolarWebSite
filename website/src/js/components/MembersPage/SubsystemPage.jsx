@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import Tabletop from "tabletop";
 import FlipCard from "react-flipcard-2";
 import bruh from "styled-components";
@@ -75,7 +74,6 @@ class SubsystemPage extends Component {
       <div>
         <constants.Desktop>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h1
                 style={{
@@ -171,7 +169,6 @@ class SubsystemPage extends Component {
         </constants.Desktop>
         <constants.Default>
           <Container>
-            <TopBar history={this.props.history} />
             <h1
               style={{
                 color: "white",
@@ -266,7 +263,6 @@ class SubsystemPage extends Component {
         </constants.Default>
         <constants.Mobile>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h1
                 style={{

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import "./card.css";
 import { styled } from "@material-ui/styles";
 import Tabletop from "tabletop";
@@ -74,7 +73,6 @@ class MembersPage extends Component {
       <div>
         <constants.Desktop>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h1
                 style={{
@@ -178,7 +176,6 @@ class MembersPage extends Component {
         </constants.Desktop>
         <constants.Default>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h1
                 style={{
@@ -283,7 +280,6 @@ class MembersPage extends Component {
         </constants.Default>
         <constants.Mobile>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h2
                 style={{
