@@ -10,13 +10,15 @@ import { BlocksContext } from "../../../context/BlocksContext"
 function LandingPage() {
 	const { blocks } = useContext(BlocksContext)
 	const homepageBlocks = blocks.filter((block) => block.page === "HOME")
+	const headerName = homepageBlocks[0]?.header
+	const textStuff = homepageBlocks[0]?.text
 	return (
 		<Container>
 			<LogoHolder />
 			<Desktop>
 				<Info>
-					<InfoHeader>{homepageBlocks[0].header}</InfoHeader>
-					<ActualText>{homepageBlocks[0].text}</ActualText>
+					<InfoHeader>{headerName}</InfoHeader>
+					<ActualText>{textStuff}</ActualText>
 					<div style={{ paddingBottom: "5rem" }}>
 						<Player
 							playsInline
@@ -33,8 +35,8 @@ function LandingPage() {
 			</Desktop>
 			<Default>
 				<Info>
-					<InfoHeader>{homepageBlocks[0].header}</InfoHeader>
-					<ActualText>{homepageBlocks[0].text}</ActualText>
+					<InfoHeader>{headerName}</InfoHeader>
+					<ActualText>{textStuff}</ActualText>
 					<div style={{ paddingBottom: "5rem" }}>
 						<Player
 							playsInline
@@ -51,8 +53,8 @@ function LandingPage() {
 			</Default>
 			<Mobile>
 				<InfoMobile>
-					<InfoHeader>{homepageBlocks[0].header}</InfoHeader>
-					<ActualText mobile>{homepageBlocks[0].text}</ActualText>
+					<InfoHeader>{headerName}</InfoHeader>
+					<ActualText mobile>{textStuff}</ActualText>
 					<div style={{ paddingBottom: "5rem" }}>
 						<Player
 							playsInline

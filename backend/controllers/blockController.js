@@ -1,6 +1,13 @@
 const Block = require("../models/blockModel");
 const uploadBase64 = require("../aws/uploadBase64");
 
+exports.block_details = (req, res) => {
+  Block.find({}, (err, block) => {
+    if (err) return err
+    res.send(block)
+  })
+}
+
 //GET BY DB ID
 exports.block_details_bydbid = (req, res) => {
   //send the block if found
