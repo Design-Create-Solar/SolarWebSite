@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
 import InfoArea from "../MultiplePages/InfoArea";
-
+import { DropzoneArea } from "material-ui-dropzone";
 import GFXField from "./GFXField";
 import GFXButton from "./GFXButton";
 import GFXFlourish from "./GFXFlourish";
@@ -16,10 +16,11 @@ import { Paper, Grid, Card, CardMedia } from "@material-ui/core";
 import { BlocksContext } from "../../../context/BlocksContext"
 
 import img from "./testimage.jpg";
+import Upload from "./Upload";
 
 const BlocksPage = (props) => {
   const { setBlocks } = useContext(BlocksContext)
-
+  const [images, setImages] = useState([])
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300).then(() => {
@@ -100,20 +101,13 @@ const BlocksPage = (props) => {
           showError={showErrorOnBlur}
         />
       ),
-    },
-    {
-      size: 12,
-      field: (
-        <GFXField
-          label="images"
-          name="images"
-          margin="none"
-          required={false}
-          showError={showErrorOnBlur}
-        />
-      ),
-    },
+    }
   ];
+  const handleSave = (files) => {
+    if (files.length > 0) {
+      setImages(files)
+    }
+  }
   return (
     <Container>
       <div style={{ height: "100px" }} />
@@ -155,6 +149,14 @@ const BlocksPage = (props) => {
                     </Grid>
                   ))}
                 </Grid>
+                <DropzoneArea
+                  filesLimit={10}
+                  maxFileSize={500000000000} // 50 MB
+                  acceptedFiles={["image/*"]}
+                  showPreviews={true}
+                  showPreviewsInDropzone={false}
+                  onChange={(files) => handleSave(files)}
+                />
                 <Grid item style={{ marginTop: 50 }}>
                   <GFXButton
                     type="button"
