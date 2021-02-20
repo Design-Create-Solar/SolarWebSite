@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
 import InfoArea from "../MultiplePages/InfoArea";
@@ -13,22 +13,18 @@ import { showErrorOnBlur } from "mui-rff";
 import { Form } from "react-final-form";
 import { Paper, Grid, Card, CardMedia } from "@material-ui/core";
 
+import { BlocksContext } from "../../../context/BlocksContext"
+
 import img from "./testimage.jpg";
 
 const BlocksPage = (props) => {
-  const [infoArray, updateInfoArray] = useState([{
-    header: "Sample Title",
-    color: constants.HOME_PAGE_LIGHT_COLOR,
-    text: "This is a standard block designed for testing purposes.",
-    align: "center",
-    images: [],
-  }]);
+  const { setBlocks } = useContext(BlocksContext)
 
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300).then(() => {
       const { header, color, text, align, images } = values
-      updateInfoArray((poo) => [...poo, { header, color, text, align, images }])
+      setBlocks((poo) => [...poo, { page="PROGRAMS", header, color, text, align, images }])
     })
   };
 
@@ -65,11 +61,14 @@ const BlocksPage = (props) => {
     {
       size: 12,
       field: (
-        <GFXField
-          label="color"
+        <GFXRadio
           name="color"
           margin="none"
           required={true}
+          data={[
+            { label: "white", value: constants.HOME_PAGE_LIGHT_COLOR },
+            { label: "black", value: constants.HOME_PAGE_DARK_COLOR },
+          ]}
           showError={showErrorOnBlur}
         />
       ),
@@ -118,17 +117,6 @@ const BlocksPage = (props) => {
   return (
     <Container>
       <div style={{ height: "100px" }} />
-      {infoArray.map((block, idx) => {
-        return (
-          <InfoArea key={idx} header={block.header}
-            color={block.color}
-            text={block.text}
-            align={block.align}
-            images={block.images === undefined ? [] : block.images}
-          />
-
-        )
-      })}
       <Card style={styles.card}>
         <CardMedia
           style={styles.media}
@@ -144,7 +132,7 @@ const BlocksPage = (props) => {
         onSubmit={onSubmit}
         initialValues={{}}
         validate={validate}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        render={({ handleSubmit, form, submitting, pristine }) => (
           <form onSubmit={handleSubmit} noValidate>
             <Paper
               elevation={3}

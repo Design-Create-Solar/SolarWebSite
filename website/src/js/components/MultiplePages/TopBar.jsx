@@ -55,15 +55,6 @@ function TopBar() {
                       </StyledButton>)
                   })
                 }
-                {
-                  userData && userData.token !== null ?
-                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
-                      Logout
-                  </StyledButton> :
-                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
-                      Login
-                  </StyledButton>
-                }
               </Box>
             </Mobile>
             <Desktop>
@@ -86,9 +77,16 @@ function TopBar() {
                 }
                 {
                   userData && userData.token !== null ?
-                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
-                      Logout
-                  </StyledButton> :
+                    (
+                      <>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/blocks" })}>
+                          Blocks
+                      </StyledButton>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 2 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                          Logout
+                    </StyledButton>
+                      </>
+                    ) :
                     <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
                       Login
                   </StyledButton>
@@ -115,9 +113,16 @@ function TopBar() {
                 }
                 {
                   userData && userData.token !== null ?
-                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
-                      Logout
-                  </StyledButton> :
+                    (
+                      <>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/blocks" })}>
+                          Blocks
+                      </StyledButton>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 2 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                          Logout
+                    </StyledButton>
+                      </>
+                    ) :
                     <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
                       Login
                   </StyledButton>
