@@ -24,7 +24,7 @@ const BlocksPage = (props) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300).then(() => {
       const { header, color, text, align, images } = values
-      setBlocks((poo) => [...poo, { page="PROGRAMS", header, color, text, align, images }])
+      setBlocks((poo) => [...poo, { page: "PROGRAMS", header, color, text, align, images }])
     })
   };
 

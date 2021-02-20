@@ -4,6 +4,9 @@ const router = express.Router();
 // Require the controllers
 const block_controller = require("../controllers/blockController");
 
+// GET ALL BLOCKS
+router.get("/getBlocks", block_controller.block_details)
+
 //GET BY DB ID
 router.get("/getByDBId/:id", block_controller.block_details_bydbid);
 
