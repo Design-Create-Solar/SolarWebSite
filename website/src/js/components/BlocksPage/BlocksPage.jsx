@@ -21,11 +21,16 @@ const BlocksPage = (props) => {
   const { setBlocks } = useContext(BlocksContext)
 
   const onSubmit = async (values) => {
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    await sleep(300).then(() => {
-      const { header, color, text, align, images } = values
-      setBlocks((poo) => [...poo, { page: "PROGRAMS", header, color, text, align, images }])
+    const { header, color, text, align } = values
+
+    const res = await fetch("http://localhost:5000/block/create", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ page: "PROGRAMS", header, color, text, align })
     })
+      .then((data) => data.json())
+      .then((res) => console.log(res))
   };
 
   const validate = (values) => {
