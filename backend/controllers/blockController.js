@@ -58,29 +58,25 @@ exports.block_create = async (req, res) => {
   }
 
   let block = new Block({
-    id: req.body.id,
     page: req.body.page,
-    type: req.body.type,
     text: req.body.text,
-    media: req.body.media,
     images: images,
-    direction: req.body.direction,
+    align: req.body.align,
     header: req.body.header,
     color: req.body.color,
   });
 
   //if id exists return 400 status (mainly for testing, this shouldn't happen because id will be generated)
-  const idExists = await Block.findOne({ id: req.body.id });
-  if (idExists) {
-    return res
-      .status(400)
-      .send("Block id already exists! Use update routes or use a new id.");
-  }
+  // const idExists = await Block.findOne({ id: req.body.id });
+  // if (idExists) {
+  //   return res
+  //     .status(400)
+  //     .send("Block id already exists! Use update routes or use a new id.");
+  // }
 
-  block.save((err) => {
+  block.save((err, info) => {
     if (err) return err;
-    console.log("Block created!");
-    res.send("Block created!");
+    res.json(info._id)
   });
 };
 
