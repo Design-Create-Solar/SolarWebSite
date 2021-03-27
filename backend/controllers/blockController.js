@@ -82,16 +82,16 @@ exports.block_create = async (req, res) => {
 
 //UPDATE BLOCK BY DB ID
 exports.block_update_db_id = async (req, res) => {
-  if (req.body.images) {
-    base64Array = req.body.images;
-    titlesArray = req.body.titles;
-    var images = [];
-    for (var i = 0; i < base64Array.length; i++) {
-      var url = await uploadBase64(base64Array[i], titlesArray[i]);
-      images.push(url);
-    }
-    req.body.images = images;
-  }
+  // if (req.body.images) {
+  //   base64Array = req.body.images;
+  //   titlesArray = req.body.titles;
+  //   var images = [];
+  //   for (var i = 0; i < base64Array.length; i++) {
+  //     var url = await uploadBase64(base64Array[i], titlesArray[i]);
+  //     images.push(url);
+  //   }
+  //   req.body.images = images;
+  // }
 
   Block.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
     if (err) return err;
@@ -132,10 +132,9 @@ exports.block_delete = async (req, res) => {
   const blockExists = await Block.findById(req.params.id);
   //if block exists, remove it
   if (blockExists) {
-    Block.findByIdAndRemove(req.params.id, (err) => {
-      if (err) return err;
-      res.send("Block was deleted successfully!");
-    });
+    Block.findByIdAndRemove(req.params.id)
+      .then(() => res.send("Block was deleted successfully!"))
+      .catch((err) => console.log(err))
   } else {
     res.send("Block does not exist!");
   }
