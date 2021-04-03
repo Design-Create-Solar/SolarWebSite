@@ -1,7 +1,7 @@
 const Block = require('../models/blockModel');
 const uploadBase64 = require('../aws/uploadBase64');
 
-const { processFile } = require("./s3Controller")
+const { processFile } = require('./s3Controller');
 
 exports.block_details = (req, res) => {
 	Block.find({}, (err, block) => {
@@ -53,13 +53,14 @@ exports.block_create = async (req, res) => {
 
 	const myFiles = req.files;
 
-	const names = Object.keys(myFiles).map(fileName => {
-		return processFile(myFiles[fileName])
-	})
-	console.log("NAME KBJAHSIOUPDKHABUFOIAJEF")
-	console.log(await Promise.all(names))
+	const names = Object.keys(myFiles).map((fileName) => {
+		return processFile(myFiles[fileName]);
+	});
+	console.log(names.length, Object.keys(myFiles).length);
+	console.log('NAME KBJAHSIOUPDKHABUFOIAJEF');
+	const imgs = await Promise.all(names);
+	console.log(imgs);
 
-	res.json(await Promise.all(names))
 	// const myFiles = req.files.file;
 
 	// const names = myFiles.map((file) => {
@@ -78,14 +79,16 @@ exports.block_create = async (req, res) => {
 	//   }
 	// }
 
-	// let block = new Block({
-	//   page: req.body.page,
-	//   text: req.body.text,
-	//   images: images,
-	//   align: req.body.align,
-	//   header: req.body.header,
-	//   color: req.body.color,
-	// });
+	let block = new Block({
+		page: req.query.page,
+		text: req.query.text,
+		images: imgs,
+		align: req.query.align,
+		header: req.query.header,
+		color: req.query.color,
+	});
+
+	console.log(block);
 
 	// //if id exists return 400 status (mainly for testing, this shouldn't happen because id will be generated)
 	// // const idExists = await Block.findOne({ id: req.body.id });
@@ -95,10 +98,10 @@ exports.block_create = async (req, res) => {
 	// //     .send("Block id already exists! Use update routes or use a new id.");
 	// // }
 
-	// block.save((err, info) => {
-	//   if (err) return err;
-	//   res.json(info._id)
-	// });
+	block.save((err, info) => {
+		if (err) return err;
+		res.json(info._id);
+	});
 };
 
 //UPDATE BLOCK BY DB ID

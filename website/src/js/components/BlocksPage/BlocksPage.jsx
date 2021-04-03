@@ -24,7 +24,9 @@ const BlocksPage = (props) => {
   const onSubmit = async (values) => {
     const { header, color, text, align } = values;
     const formdata = new FormData();
-    formdata.append("file", images[0]);
+    images.forEach((img, i) => {
+      formdata.append("file" + i, img);
+    });
     // console.log(formdata);
     const res = await fetch(
       "http://localhost:5000/block/create?" +
