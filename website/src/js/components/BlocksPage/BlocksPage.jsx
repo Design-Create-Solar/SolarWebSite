@@ -12,26 +12,38 @@ import { showErrorOnBlur } from "mui-rff";
 
 import { Form } from "react-final-form";
 import { Paper, Grid, Card, CardMedia } from "@material-ui/core";
-
-import { BlocksContext } from "../../../context/BlocksContext"
+import axios from "axios";
+import { BlocksContext } from "../../../context/BlocksContext";
 
 import img from "./testimage.jpg";
 import Upload from "./Upload";
 
 const BlocksPage = (props) => {
-  const { setBlocks } = useContext(BlocksContext)
-  const [images, setImages] = useState([])
+  const { setBlocks } = useContext(BlocksContext);
+  const [images, setImages] = useState([]);
   const onSubmit = async (values) => {
-    const { header, color, text, align } = values
-
-    const res = await fetch("http://localhost:5000/block/create", {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ page: "PROGRAMS", header, color, text, align })
-    })
+    const { header, color, text, align } = values;
+    const formdata = new FormData();
+    formdata.append("file", images[0]);
+    // console.log(formdata);
+    const res = await fetch(
+      "http://localhost:5000/block/create?" +
+        new URLSearchParams({
+          page: "PROGRAMS",
+          header,
+          color,
+          text,
+          align,
+        }),
+      {
+        method: "POST",
+        mode: "cors",
+        // headers: { "Content-Type": "xxx-urlencoded" },
+        body: formdata,
+      }
+    )
       .then((data) => data.json())
-      .then((res) => console.log(res))
+      .then((res) => console.log(res));
   };
 
   const validate = (values) => {
@@ -106,13 +118,13 @@ const BlocksPage = (props) => {
           showError={showErrorOnBlur}
         />
       ),
-    }
+    },
   ];
   const handleSave = (files) => {
     if (files.length > 0) {
-      setImages(files)
+      setImages(files);
     }
-  }
+  };
   return (
     <Container>
       <div style={{ height: "100px" }} />
@@ -187,7 +199,7 @@ const BlocksPage = (props) => {
           </form>
         )}
       />
-    </Container >
+    </Container>
   );
 };
 
