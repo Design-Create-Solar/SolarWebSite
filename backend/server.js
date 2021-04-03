@@ -25,6 +25,9 @@ app.use("/users", usersRoute);
 const block = require("./routes/blockRoute"); //for website builder blocks
 app.use("/block", block);
 
+const s3 = require('./routes/s3Route')
+app.use('s3', s3)
+
 // console.log(process.env)
 //connect to mongodb
 mongoose.connect(
