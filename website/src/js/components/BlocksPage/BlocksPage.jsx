@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
-import InfoArea from "../MultiplePages/InfoArea";
 
 import GFXField from "./GFXField";
 import GFXButton from "./GFXButton";
@@ -16,21 +15,26 @@ import { Paper, Grid, Card, CardMedia } from "@material-ui/core";
 import { BlocksContext } from "../../../context/BlocksContext"
 
 import img from "./testimage.jpg";
+import "./Blocks.css"
 
 const BlocksPage = (props) => {
-  const { setBlocks } = useContext(BlocksContext)
+  const { blocks, setBlocks } = useContext(BlocksContext)
 
   const onSubmit = async (values) => {
     const { header, color, text, align } = values
 
-    const res = await fetch("http://localhost:5000/block/create", {
+    const newBlock = { page: "PROGRAMS", header, color, text, align }
+    await fetch("http://localhost:5000/block/create", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ page: "PROGRAMS", header, color, text, align })
+      body: JSON.stringify(newBlock)
     })
       .then((data) => data.json())
-      .then((res) => console.log(res))
+      .then((newId) => setBlocks([...blocks, { ...newBlock, _id: newId }]))
+      .catch((err) => console.log(err))
+
+    window.alert("Block successfully added!")
   };
 
   const validate = (values) => {
@@ -67,6 +71,7 @@ const BlocksPage = (props) => {
       size: 12,
       field: (
         <GFXRadio
+          label="Color"
           name="color"
           margin="none"
           required={true}
@@ -82,6 +87,7 @@ const BlocksPage = (props) => {
       size: 12,
       field: (
         <GFXField
+          multiline
           label="text"
           name="text"
           margin="none"
@@ -94,6 +100,7 @@ const BlocksPage = (props) => {
       size: 12,
       field: (
         <GFXRadio
+          label="Align"
           name="align"
           margin="none"
           required={true}
@@ -119,6 +126,31 @@ const BlocksPage = (props) => {
       ),
     },
   ];
+
+  const onEdit = async (values) => {
+    await fetch("http://localhost:5000/block/updateByDBid/" + values.id, {
+      method: "PUT",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values)
+    })
+      .catch((err) => console.log(err))
+    window.alert("Successfully edited!")
+  }
+
+  const onDelete = async (id) => {
+    await fetch("http://localhost:5000/block/delete/" + id, {
+      method: "PUT",
+      mode: "cors"
+    })
+      .then(() => {
+        setBlocks(blocks.filter(block => block._id !== id))
+      })
+      .catch((err) => console.log(err))
+
+    window.alert("Successfuly deleted!")
+  }
+
   return (
     <Container>
       <div style={{ height: "100px" }} />
@@ -132,18 +164,20 @@ const BlocksPage = (props) => {
         <div style={styles.overlay}>Add/Edit</div>
       </Card>
 
+      {/* FOR ADDING BLOCKS */}
+      <FancyH1>Add Blocks</FancyH1>
       <GFXFlourish />
       <Form
         onSubmit={onSubmit}
         initialValues={{}}
         validate={validate}
         render={({ handleSubmit, form, submitting, pristine }) => (
-          <form onSubmit={handleSubmit} noValidate>
+          <form className="add-blocks-form" onSubmit={handleSubmit} noValidate>
             <Paper
               elevation={3}
               style={{
                 padding: "10rem",
-                margin: "0 20% 20% 20%",
+                margin: "0 20% 5% 20%",
                 backgroundColor: "#1F1B24",
               }}
             >
@@ -177,7 +211,7 @@ const BlocksPage = (props) => {
                     type="submit"
                     disabled={submitting}
                   >
-                    Submit
+                    Add Block
                   </GFXButton>
                 </Grid>
               </Grid>
@@ -185,11 +219,109 @@ const BlocksPage = (props) => {
           </form>
         )}
       />
+      {/* FOR EDITING BLOCKS */}
+      <FancyH1>Edit Blocks</FancyH1>
+      <GFXFlourish />
+      {
+        blocks.map((block) => {
+          return (
+            <Form
+              key={block._id}
+              onSubmit={onEdit}
+              initialValues={{
+                align: block.align,
+                header: block.header,
+                color: block.color,
+                images: block.images,
+                text: block.text,
+                page: block.page,
+                id: block._id
+              }}
+              validate={validate}
+              render={({ handleSubmit, form, submitting, pristine }) => (
+                <form className="edit-blocks-form" onSubmit={handleSubmit} noValidate>
+                  <Paper
+                    elevation={3}
+                    style={{
+                      padding: "10rem",
+                      margin: "0 20% 5% 20%",
+                      backgroundColor: "#1F1B24",
+                    }}
+                  >
+                    <Grid
+                      container
+                      direction="column"
+                      alignItems="center"
+                      spacing={2}
+                    >
+                      <Grid container alignItems="flex-end" spacing={5}>
+                        <Grid item xs={12}>
+                          <GFXField
+                            label="_id"
+                            name="id"
+                            margin="none"
+                            required={true}
+                            disabled
+                            showError={showErrorOnBlur}
+                          />
+                        </Grid>
+                        {formFields.map((item, idx) => (
+                          <Grid item xs={item.size} key={idx}>
+                            {item.field}
+                          </Grid>
+                        ))}
+                        <Grid item xs={12}>
+                          <GFXRadio
+                            label="Page"
+                            name="page"
+                            margin="none"
+                            required={true}
+                            data={[
+                              { label: "HOME", value: "HOME" },
+                              { label: "PROGRAMS", value: "PROGRAMS" },
+                            ]}
+                            showError={showErrorOnBlur}
+                          />
+                        </Grid>
+                      </Grid>
+                      <Grid item style={{ marginTop: 50 }}>
+                        <GFXButton
+                          variant="contained"
+                          color="primary"
+                          type="submit"
+                          disabled={submitting}
+                        >
+                          Edit Block
+                      </GFXButton>
+                      </Grid>
+                      <Grid item style={{ marginTop: 16 }}>
+                        <GFXButton
+                          type="button"
+                          variant="contained"
+                          onClick={() => onDelete(block._id)}
+                        >
+                          Delete Block
+                      </GFXButton>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </form>
+              )
+              } />
+          )
+        })
+      }
     </Container >
   );
 };
 
 export default BlocksPage;
+
+const FancyH1 = styled("h1")({
+  color: "white",
+  margin: "3% 20%",
+  fontFamily: "Futura"
+})
 
 const Container = styled("div")({
   display: "flex",
