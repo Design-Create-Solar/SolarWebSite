@@ -1,6 +1,8 @@
 const Block = require('../models/blockModel');
 const uploadBase64 = require('../aws/uploadBase64');
 
+const { processFile } = require("./s3Controller")
+
 exports.block_details = (req, res) => {
 	Block.find({}, (err, block) => {
 		if (err) return err;
@@ -41,29 +43,23 @@ exports.block_details_bytype = (req, res) => {
 	});
 };
 
-const processFile = async (file) => {
-	await file.mv(`public/${file.name}`, function (err) {
-		if (err) {
-			console.log(err);
-			return 'Error occured';
-		}
-		return 'File saved';
-	});
-
-	return;
-};
-
 //CREATE BLOCK
 exports.block_create = async (req, res) => {
 	//each images[i] corresponds to a titles[i]
 
 	//for each base64 string in req.body.images
 	//run upload base64 and add the result to images array
-	console.log(req.query, req.body);
-	res.json('hi');
-	const myFiles = req.body.file;
+	// console.log(req.query, req.body);
 
-	console.log(myFiles);
+	const myFiles = req.files;
+
+	const names = Object.keys(myFiles).map(fileName => {
+		return processFile(myFiles[fileName])
+	})
+	console.log("NAME KBJAHSIOUPDKHABUFOIAJEF")
+	console.log(await Promise.all(names))
+
+	res.json(await Promise.all(names))
 	// const myFiles = req.files.file;
 
 	// const names = myFiles.map((file) => {
@@ -170,9 +166,9 @@ exports.block_delete_params = async (req, res) => {
 	/*req.body example:
 
   {
-    text: This is the text of the block,
-    header: Header text,
-    direction: right
+	text: This is the text of the block,
+	header: Header text,
+	direction: right
   }
 
   */
