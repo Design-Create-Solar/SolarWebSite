@@ -18,7 +18,7 @@ const jwt = require("jsonwebtoken");
 const TOKEN_SECRET = "thisisarbitrary";
 
 const Login = (props) => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
   const [isLogin, setLogin] = useState(false);
   const history = useHistory();
 

@@ -18,9 +18,9 @@ var BlockSchema = new Schema({
     type: String,
     max: 20000,
   },
-  // images: {
-  //   type: [String],
-  // },
+  images: {
+    type: [String],
+  },
   align: {
     type: String,
   },
