@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
-
+import { DropzoneArea } from "material-ui-dropzone";
 import GFXField from "./GFXField";
 import GFXButton from "./GFXButton";
 import GFXFlourish from "./GFXFlourish";
@@ -11,27 +11,35 @@ import { showErrorOnBlur } from "mui-rff";
 
 import { Form } from "react-final-form";
 import { Paper, Grid, Card, CardMedia } from "@material-ui/core";
-
-import { BlocksContext } from "../../../context/BlocksContext"
+import { BlocksContext } from "../../../context/BlocksContext";
 
 import img from "./testimage.jpg";
 import "./Blocks.css"
 
 const BlocksPage = (props) => {
-  const { blocks, setBlocks } = useContext(BlocksContext)
-
+  const { blocks, setBlocks } = useContext(BlocksContext);
+  const [images, setImages] = useState([]);
   const onSubmit = async (values) => {
-    const { header, color, text, align } = values
+    const { header, color, text, align } = values;
+    const formdata = new FormData();
+    images.forEach((img, i) => {
+      formdata.append("file" + i, img);
+    })
 
     const newBlock = { page: "PROGRAMS", header, color, text, align }
-    await fetch("http://localhost:5000/block/create", {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newBlock)
-    })
+    await fetch(
+      "http://localhost:5000/block/create?" +
+      new URLSearchParams(newBlock),
+      {
+        method: "POST",
+        mode: "cors",
+        body: formdata,
+      }
+    )
       .then((data) => data.json())
-      .then((newId) => setBlocks([...blocks, { ...newBlock, _id: newId }]))
+      .then((newId) => {
+        setBlocks([...blocks, { ...newBlock, _id: newId }])
+      })
       .catch((err) => console.log(err))
 
     window.alert("Block successfully added!")
@@ -113,18 +121,6 @@ const BlocksPage = (props) => {
         />
       ),
     },
-    {
-      size: 12,
-      field: (
-        <GFXField
-          label="images"
-          name="images"
-          margin="none"
-          required={false}
-          showError={showErrorOnBlur}
-        />
-      ),
-    },
   ];
 
   const onEdit = async (values) => {
@@ -151,6 +147,11 @@ const BlocksPage = (props) => {
     window.alert("Successfuly deleted!")
   }
 
+  const handleSave = (files) => {
+    if (files.length > 0) {
+      setImages(files);
+    }
+  };
   return (
     <Container>
       <div style={{ height: "100px" }} />
@@ -194,6 +195,14 @@ const BlocksPage = (props) => {
                     </Grid>
                   ))}
                 </Grid>
+                <DropzoneArea
+                  filesLimit={10}
+                  maxFileSize={500000000000} // 50 MB
+                  acceptedFiles={["image/*"]}
+                  showPreviews={true}
+                  showPreviewsInDropzone={false}
+                  onChange={(files) => handleSave(files)}
+                />
                 <Grid item style={{ marginTop: 50 }}>
                   <GFXButton
                     type="button"
@@ -280,6 +289,16 @@ const BlocksPage = (props) => {
                               { label: "HOME", value: "HOME" },
                               { label: "PROGRAMS", value: "PROGRAMS" },
                             ]}
+                            showError={showErrorOnBlur}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <GFXField
+                            label="Image Links"
+                            name="images"
+                            margin="none"
+                            required={true}
+                            disabled
                             showError={showErrorOnBlur}
                           />
                         </Grid>
