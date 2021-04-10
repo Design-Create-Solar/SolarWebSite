@@ -41,12 +41,17 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
-						{/* <video src='http://localhost:5000/static/poo.mp4' /> */}
+						<div style={{ paddingBottom: "5rem" }}>
+							<Player
+								playsInline
+								autoplay={false}
+								src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
+							/>
+						</div>
 						<Player
 							playsInline
 							autoplay={false}
-							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
 						/>
 					</BetterInfoContainer>
 				</Desktop>
@@ -54,11 +59,17 @@ export default class LandingPage extends Component {
 					<BetterInfoContainer>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText>{infoArray[1].text}</ActualText>
+						<div style={{ paddingBottom: "5rem" }}>
+							<Player
+								playsInline
+								autoplay={false}
+								src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
+							/>
+						</div>
 						<Player
 							playsInline
 							autoplay={false}
-							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
 						/>
 					</BetterInfoContainer>
 				</Default>
@@ -66,11 +77,17 @@ export default class LandingPage extends Component {
 					<BetterInfoContainerMObile>
 						<InfoHeader>{infoArray[1].header}</InfoHeader>
 						<ActualText mobile>{infoArray[1].text}</ActualText>
+						<div style={{ paddingBottom: "5rem" }}>
+							<Player
+								playsInline
+								autoplay={false}
+								src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
+							/>
+						</div>
 						<Player
 							playsInline
 							autoplay={false}
-							// poster="/assets/poster.png"
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
 						/>
 					</BetterInfoContainerMObile>
 				</Mobile>
@@ -118,5 +135,6 @@ const InfoHeader = styled('h4')({
 });
 
 const ActualText = styled('div')({
-	color: constants.HOME_PAGE_DARK_TEXT_COLOR
+	color: constants.HOME_PAGE_DARK_TEXT_COLOR,
+	paddingBottom: "2rem"
 });
