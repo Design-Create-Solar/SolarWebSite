@@ -169,18 +169,6 @@ function TopBar(props) {
                 >
                   Join Us
                 </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 5,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/login",
-                    })
-                  }
-                >
-                  Login
-                </StyledButton>
                 {/* <StyledButton
 									style={{
 										order: 5
