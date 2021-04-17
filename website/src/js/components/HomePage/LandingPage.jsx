@@ -5,13 +5,13 @@ import * as constants from '../MultiplePages/constants';
 import '../../../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
 import { Default, Mobile, Desktop } from '../MultiplePages/constants';
-import { BlocksContext } from "../../../context/BlocksContext"
+import { BlocksContext } from '../../../context/BlocksContext';
 
 function LandingPage() {
-	const { blocks } = useContext(BlocksContext)
-	const homepageBlocks = blocks.filter((block) => block.page === "HOME")
-	const headerName = homepageBlocks[0]?.header
-	const textStuff = homepageBlocks[0]?.text
+	const { blocks } = useContext(BlocksContext);
+	const homepageBlocks = blocks.filter((block) => block.page === 'HOME');
+	const headerName = homepageBlocks[0]?.header;
+	const textStuff = homepageBlocks[0]?.text;
 	return (
 		<Container>
 			<LogoHolder />
@@ -56,7 +56,7 @@ const InfoMobile = styled('div')({
 	textAlign: 'center',
 	fontFamily: 'Futura',
 	fontSize: '2em',
-	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR
+	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
 });
 
 const Info = styled('div')({
@@ -66,8 +66,8 @@ const Info = styled('div')({
 	fontFamily: 'Futura',
 	fontSize: '2em',
 	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
-	display: "flex",
-	flexDirection: "column"
+	display: 'flex',
+	flexDirection: 'column',
 });
 
 const Container = styled('div')({
@@ -75,7 +75,7 @@ const Container = styled('div')({
 	flexDirection: 'column',
 	width: '100%',
 	height: '100%',
-	overflow: 'none'
+	overflow: 'none',
 });
 
 const InfoHeader = styled('h4')({
@@ -83,12 +83,12 @@ const InfoHeader = styled('h4')({
 	fontSize: '1.5em',
 	textTransform: 'uppercase',
 	fontFamily: 'Futura',
-	color: constants.HOME_PAGE_DARK_COLOR
+	color: constants.HOME_PAGE_DARK_COLOR,
 });
 
 const ActualText = styled('div')({
 	color: constants.HOME_PAGE_DARK_TEXT_COLOR,
-	paddingBottom: "1.5rem"
+	paddingBottom: '1.5rem',
 });
 
-export default LandingPage
+export default LandingPage;
