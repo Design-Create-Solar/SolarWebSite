@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, Toolbar } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import { Default, Mobile, Desktop } from "./constants";
 import StyledButton from "./StyledButton";
-function TopBar(props) {
+import { UserContext } from "../../../context/UserContext"
+const topbarButtonInfo = [
+  {
+    "name": "Home",
+    "link": "/"
+  },
+  {
+    "name": "Programs",
+    "link": "/programs"
+  },
+  {
+    "name": "Sponsors",
+    "link": "/sponsors"
+  }, {
+    "name": "Meet the Team",
+    "link": "/team/officers"
+  }, {
+    "name": "Join Us",
+    "link": "/join"
+  }
+]
+function TopBar() {
+  const history = useHistory();
+  const { userData, setUserData } = useContext(UserContext)
+
   return (
     <Router>
       <div>
         <AppBar position="fixed" style={{ backgroundColor: "black" }}>
           <Toolbar
             style={{
-              //overflow: 'scroll',
               justifyContent: "center",
               alignItems: "center",
               padding: 0,
@@ -21,244 +44,89 @@ function TopBar(props) {
               <Box
                 style={{
                   display: "flex",
-                  //	alignSelf: 'center',
-                  // justifyContent: 'center',
-                  // alignItems: 'center',
                   overflowX: "scroll",
-                  //padding: '10px'
-                  //	flexGrow: 1,
-                  //	width: '100%'
                 }}
               >
-                <StyledButton
-                  style={{
-                    order: 1,
-                  }}
-                  onClick={() => props.history.push({ pathname: "/" })}
-                >
-                  Home
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 2,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/programs",
-                    })
-                  }
-                >
-                  Programs
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 3,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/sponsors",
-                    })
-                  }
-                >
-                  Sponsors
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 4,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/team/officers",
-                    })
-                  }
-                >
-                  Meet The Team
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 4,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/join",
-                    })
-                  }
-                >
-                  Join Us
-                </StyledButton>
-                {/* <StyledButton
-									style={{
-										order: 5
-									}}
-									onClick={() =>
-										props.history.push({
-											pathname: '/data'
-										})
-									}
-								>
-									Data
-								</StyledButton> */}
+                {
+                  topbarButtonInfo.map((obj, idx) => {
+                    return (
+                      <StyledButton key={idx} style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
+                        {obj.name}
+                      </StyledButton>)
+                  })
+                }
               </Box>
             </Mobile>
             <Desktop>
               <Box
                 style={{
                   display: "flex",
-                  //	alignSelf: 'center',
                   justifyContent: "center",
                   alignItems: "center",
-                  //overflowX: 'scroll'
-                  //padding: '10px'
                   flexGrow: 1,
                   width: "100%",
                 }}
               >
-                <StyledButton
-                  style={{
-                    order: 1,
-                  }}
-                  onClick={() => props.history.push({ pathname: "/" })}
-                >
-                  Home
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 2,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/programs",
-                    })
-                  }
-                >
-                  Programs
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 3,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/sponsors",
-                    })
-                  }
-                >
-                  Sponsors
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 4,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/team/officers",
-                    })
-                  }
-                >
-                  Meet the Team
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 4,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/join",
-                    })
-                  }
-                >
-                  Join Us
-                </StyledButton>
-                {/* <StyledButton
-									style={{
-										order: 5
-									}}
-									onClick={() =>
-										props.history.push({
-											pathname: '/data'
-										})
-									}
-								>
-									Data
-								</StyledButton> */}
+                {
+                  topbarButtonInfo.map((obj, idx) => {
+                    return (
+                      <StyledButton key={idx} style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
+                        {obj.name}
+                      </StyledButton>)
+                  })
+                }
+                {
+                  userData && userData.token !== null ?
+                    (
+                      <>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/blocks" })}>
+                          Blocks
+                      </StyledButton>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 2 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                          Logout
+                    </StyledButton>
+                      </>
+                    ) :
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
+                      Login
+                  </StyledButton>
+                }
               </Box>
             </Desktop>
             <Default>
               <Box
                 style={{
                   display: "flex",
-                  //	alignSelf: 'center',
                   justifyContent: "center",
                   alignItems: "center",
-                  //overflowX: 'scroll'
-                  //padding: '10px'
                   flexGrow: 1,
                   width: "100%",
                 }}
               >
-                <StyledButton
-                  style={{
-                    order: 1,
-                  }}
-                  onClick={() => props.history.push({ pathname: "/" })}
-                >
-                  Home
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 2,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/programs",
-                    })
-                  }
-                >
-                  Programs
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 3,
-                  }}
-                >
-                  Sponsor
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 4,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/team/officers",
-                    })
-                  }
-                >
-                  Meet The Team
-                </StyledButton>
-                <StyledButton
-                  style={{
-                    order: 4,
-                  }}
-                  onClick={() =>
-                    props.history.push({
-                      pathname: "/join",
-                    })
-                  }
-                >
-                  Join Us
-                </StyledButton>
-                {/* <StyledButton
-									style={{
-										order: 5
-									}}
-									onClick={() =>
-										props.history.push({
-											pathname: '/data'
-										})
-									}
-								>
-									Data
-								</StyledButton> */}
+                {
+                  topbarButtonInfo.map((obj, idx) => {
+                    return (
+                      <StyledButton key={idx} style={{ order: idx + 1 }} onClick={() => history.push({ pathname: obj.link })}>
+                        {obj.name}
+                      </StyledButton>)
+                  })
+                }
+                {
+                  userData && userData.token !== null ?
+                    (
+                      <>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/blocks" })}>
+                          Blocks
+                      </StyledButton>
+                        <StyledButton style={{ order: topbarButtonInfo.length + 2 }} onClick={() => { localStorage.removeItem("auth-token"); setUserData(null) }}>
+                          Logout
+                    </StyledButton>
+                      </>
+                    ) :
+                    <StyledButton style={{ order: topbarButtonInfo.length + 1 }} onClick={() => history.push({ pathname: "/login" })}>
+                      Login
+                  </StyledButton>
+                }
               </Box>
             </Default>
           </Toolbar>

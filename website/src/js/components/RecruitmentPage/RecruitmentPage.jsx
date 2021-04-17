@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { styled } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import { Default, Mobile, Desktop } from "../MultiplePages/constants";
 
 export default class RecruitmentPage extends Component {
   render() {
     return (
       <Container>
-        <TopBar history={this.props.history} />
         <Desktop>
           <div
             style={{
@@ -18,6 +16,7 @@ export default class RecruitmentPage extends Component {
             }}
           >
             <iframe
+              title="joinform"
               src="https://docs.google.com/forms/d/e/1FAIpQLSc2fQoHgrmrQSVNNdTDIXKew-SNxTc6g-ALmlwZkCraILVgwA/viewform?embedded=true"
               width="640"
               height="975"

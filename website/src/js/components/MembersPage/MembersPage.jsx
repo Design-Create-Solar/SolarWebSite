@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import "./card.css";
 import { styled } from "@material-ui/styles";
 import Tabletop from "tabletop";
@@ -48,7 +47,8 @@ class MembersPage extends Component {
   componentDidMount() {
     Tabletop.init({
       // key: "1FuVIG3TqJK7jfQs853T-clF_QsQpi5t4_iIuIRoyxJI",
-      key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k",
+      // key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k", // 2019-2020
+      key: "1Wa4MF0b-60QC1rmuP6A2jJmMIJL62NlvlG-NhhaCnR0", // 2020-2021
       callback: (googleData) => {
         this.setState({
           membersData: googleData,
@@ -73,7 +73,6 @@ class MembersPage extends Component {
       <div>
         <constants.Desktop>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h1
                 style={{
@@ -177,7 +176,6 @@ class MembersPage extends Component {
         </constants.Desktop>
         <constants.Default>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h1
                 style={{
@@ -282,7 +280,6 @@ class MembersPage extends Component {
         </constants.Default>
         <constants.Mobile>
           <Container>
-            <TopBar history={this.props.history} />
             <Heading>
               <h2
                 style={{
