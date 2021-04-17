@@ -1,0 +1,12 @@
+h4.info-header{
+    font-weight: 500;
+    font-size: 40px;
+    text-transform: uppercase;
+    /*padding: 20px;*/
+    font-family: "Futura";
+    text-shadow: 2px 3px 2px gray;
+}
+
+h4.info-header.mobile-header{
+    margin: 0 0 0 0;
+}

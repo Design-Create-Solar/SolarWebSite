@@ -1,152 +1,438 @@
-import React, { Component } from "react"
-import * as constants from "../../constants"
-import TopBar from "../TopBar"
-import "./card.css"
-import Card from "./Card"
-import {styled} from '@material-ui/styles'
-import AnchorLink from 'react-anchor-link-smooth-scroll'
+import React, { Component } from "react";
+import * as constants from "../MultiplePages/constants";
+import TopBar from "../MultiplePages/TopBar";
+import "./card.css";
+import { styled } from "@material-ui/styles";
+import Tabletop from "tabletop";
+import FlipCard from "react-flipcard-2";
+import bruh from "styled-components";
+import StyledButton from "../MultiplePages/StyledButton";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Heading from "./Heading";
 
-const memberInfo = [
-  {
-      name: "Card 1",
-      position: "President",
-      image: [require('../../../images/person1.jpg')], 
-      email: "email1@g.ucla.edu",
-      summary: "I'm interested in world peace and pancakes. I'm in this club to make cool things." 
-  },
-  {
-      name: "Card 2",
-      position: "Vice President",
-      image: [require('../../../images/usericon.png')],
-      email: "email2@g.ucla.edu",
-      summary: "I'm interested in cats and poodles. I'm in this club to interact with people from different majors." 
-  },
-  {
-    name: "Card 3",
-    position: "Prom King",
-    image: [require('../../../images/usericon.png')],
-    email: "email3@g.ucla.edu",
-    summary: "I'm interested in water and bushes. I'm in this club to inhale poisonous fumes." 
-  },
-  {
-    name: "Card 4",
-    position: "Head Honcho",
-    image: [require('../../../images/usericon.png')],
-    email: "email@g.ucla.edu",
-    summary: "I'm interested in mechas and space. I'm in this club to immerse myself in fun." 
-  },
-  {
-    name: "Card 5",
-    position: "Ultimate Mama",
-    image: [require('../../../images/usericon.png')],
-    email: "email@g.ucla.edu",
-    summary: "I'm interested in bananas and frosting. I'm in this club to tinker better than Tinker Bell.aassssagqfsgdjgafwjgyef asdhfaos aosidhfoaisd oashdfoiadsfi oiaus dof oiaj dsfoi oasidf uoaisdhf " 
-  },
-  {
-    name: "Card 6",
-    image: [require('../../../images/usericon.png')]
+class MembersPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      // data: [],
+      membersData: [],
+      teamsData: [],
+      isFlipped: false,
+    };
   }
-]
 
-class MembersPage extends Component  {
-    render() {
-      return (
-        <Container>
-            <TopBar history={this.props.history}/>
+  showBack() {
+    this.setState({
+      isFlipped: true,
+    });
+  }
+
+  showFront() {
+    this.setState({
+      isFlipped: false,
+    });
+  }
+
+  handleOnFlip(flipped) {
+    if (flipped) {
+      this.refs.backButton.getDOWNode().focus();
+    }
+  }
+
+  handleKeyDown(e) {
+    if (this.state.isFlipped && e.keyCode === 27) {
+      this.showFront();
+    }
+  }
+
+  componentDidMount() {
+    Tabletop.init({
+      // key: "1FuVIG3TqJK7jfQs853T-clF_QsQpi5t4_iIuIRoyxJI",
+      // key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k", // 2019-2020
+      key: "1Wa4MF0b-60QC1rmuP6A2jJmMIJL62NlvlG-NhhaCnR0", // 2020-2021
+      callback: (googleData) => {
+        this.setState({
+          membersData: googleData,
+        });
+      },
+      simpleSheet: true,
+    });
+    Tabletop.init({
+      key: "1bOLQA-3072h9-_BmdceXsM4QT3aREskoQSeOQ42kg5k",
+      callback: (googleData) => {
+        this.setState({
+          teamsData: googleData,
+        });
+      },
+      simpleSheet: true,
+    });
+  }
+
+  render() {
+    const { membersData, teamsData } = this.state;
+    return (
+      <div>
+        <constants.Desktop>
+          <Container>
+            <TopBar history={this.props.history} />
             <Heading>
-                    {/* <PageName>Members</PageName> */}
-                    <h2 style={{color: "white", paddingTop: "5%", fontFamily: "Avenir Next", margin: "0 0 5px 0"}}>Meeting Info: </h2>
-                    <MeetingInfo>Under the full moon, 2 a.m. sharp every second Monday of the month</MeetingInfo>
-                    <AnchorLink offset="90" href="#join_team_form" style={{color: "white", fontFamily: "Avenir Next", marginTop: "2%", fontSize: "50px", textDecoration: "none", fontWeight: "500"}}>
-                      Join the team
-                    </AnchorLink>
+              <h1
+                style={{
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                <a
+                  href="https://ucla.zoom.us/j/91281986263"
+                  style={{ color: "white" }}
+                >
+                  Meeting Link
+                </a>
+              </h1>
+              {/* <MeetingInfo>Where: Boelter SCC Space</MeetingInfo> */}
+              <h1
+                style={{
+                  color: "white",
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                The Rest of the Team
+              </h1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <StyledButton
+                  onClick={() =>
+                    this.props.history.push({ pathname: "/team/officers" })
+                  }
+                >
+                  Officers
+                </StyledButton>
+                {teamsData.map((obj) => {
+                  let pathStr = "/team/" + obj.Name;
+                  return (
+                    <StyledButton
+                      onClick={() =>
+                        this.props.history.push({ pathname: pathStr })
+                      }
+                    >
+                      {obj.Name}
+                    </StyledButton>
+                  );
+                })}
+              </div>
+              <h1
+                style={{
+                  color: "white",
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                Officers:{" "}
+              </h1>
             </Heading>
             <div className="grid-container">
-              <Card name={memberInfo[0].name} position={memberInfo[0].position} image={memberInfo[0].image} email={memberInfo[0].email} summary={memberInfo[0].summary} /> 
-              <Card name={memberInfo[1].name} position={memberInfo[1].position} image={memberInfo[1].image} email={memberInfo[1].email} summary={memberInfo[1].summary} />
-              <Card name={memberInfo[2].name} position={memberInfo[2].position} image={memberInfo[2].image} email={memberInfo[2].email} summary={memberInfo[2].summary} />
-              <Card name={memberInfo[3].name} position={memberInfo[3].position} image={memberInfo[3].image} email={memberInfo[3].email} summary={memberInfo[3].summary} />
-              <Card name={memberInfo[4].name} position={memberInfo[4].position} image={memberInfo[4].image} email={memberInfo[4].email} summary={memberInfo[4].summary} />
+              <TransitionGroup component={null}>
+                {membersData
+                  .filter((obj) => obj["IsLead"] === "TRUE")
+                  .map((obj) => {
+                    return (
+                      <CSSTransition classNames="cardboi" timeout={300}>
+                        <FlipCard>
+                          {/* FRONT */}
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <ImageThing image={obj.Image} />
+                            <TextPart>
+                              <div>{obj.Name}</div>
+                              <div>{obj.Position}</div>
+                            </TextPart>
+                          </div>
+
+                          {/* BACK */}
+                          <Back>
+                            <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
+                            <div style={{}}>{obj.Email}</div>
+                          </Back>
+                        </FlipCard>
+                      </CSSTransition>
+                    );
+                  })}
+              </TransitionGroup>
             </div>
-            <a id="join_team_form" style={{ paddingTop: "1%", color: "white", display: "flex", justifyContent: "center"}}>
-              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc2fQoHgrmrQSVNNdTDIXKew-SNxTc6g-ALmlwZkCraILVgwA/viewform?embedded=true" width="640" height="856" frameborder="0" marginheight="0" marginwidth="0">
-                Loading…
-              </iframe>
-            </a>
-        </Container>
-      );
-    }
-  };
+          </Container>
+        </constants.Desktop>
+        <constants.Default>
+          <Container>
+            <TopBar history={this.props.history} />
+            <Heading>
+              <h1
+                style={{
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                <a
+                  href="https://ucla.zoom.us/j/91281986263"
+                  style={{ color: "white" }}
+                >
+                  Meeting Link
+                </a>
+              </h1>
 
-  
+              <h1
+                style={{
+                  color: "white",
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                The Rest of the Team
+              </h1>
 
-const Container = styled('div')({
-    display: "flex",
-    flexDirection:"column",
-    width:"100%",
-    height:"100%",
-    overflow:"scroll",
-    backgroundColor: constants.HOME_PAGE_DARK_COLOR
-})
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <StyledButton
+                  onClick={() =>
+                    this.props.history.push({ pathname: "/team/officers" })
+                  }
+                >
+                  Officers
+                </StyledButton>
+                {teamsData.map((obj) => {
+                  let pathStr = "/team/" + obj.Name;
+                  return (
+                    <StyledButton
+                      onClick={() =>
+                        this.props.history.push({ pathname: pathStr })
+                      }
+                    >
+                      {obj.Name}
+                    </StyledButton>
+                  );
+                })}
+              </div>
+              <h1
+                style={{
+                  color: "white",
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                Officers:{" "}
+              </h1>
+            </Heading>
+            <div className="grid-container">
+              <TransitionGroup component={null}>
+                {membersData
+                  .filter((obj) => obj["IsLead"] === "TRUE")
+                  .map((obj) => {
+                    return (
+                      <CSSTransition classNames="cardboi" timeout={300}>
+                        <FlipCard>
+                          {/* FRONT */}
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <ImageThing image={obj.Image} />
+                            <TextPart>
+                              <div>{obj.Name}</div>
+                              <div>{obj.Position}</div>
+                            </TextPart>
+                          </div>
 
-const Heading = styled('div') ({
-  //background: "pink",/*"linear-gradient(to bottom, #1d2951, white)"*/
-  padding: "30px 0px 60px 0px",
+                          {/* BACK */}
+                          <Back>
+                            <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
+                            <div style={{}}>{obj.Email}</div>
+                          </Back>
+                        </FlipCard>
+                      </CSSTransition>
+                    );
+                  })}
+              </TransitionGroup>
+            </div>
+          </Container>
+        </constants.Default>
+        <constants.Mobile>
+          <Container>
+            <TopBar history={this.props.history} />
+            <Heading>
+              <h2
+                style={{
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                <a
+                  href="https://ucla.zoom.us/j/91281986263"
+                  style={{ color: "white" }}
+                >
+                  Meeting Link
+                </a>
+              </h2>
+              <h2
+                style={{
+                  color: "white",
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                The Rest of the Team
+              </h2>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <StyledButton
+                  onClick={() =>
+                    this.props.history.push({ pathname: "/team/officers" })
+                  }
+                >
+                  Officers
+                </StyledButton>
+                {teamsData.map((obj) => {
+                  let pathStr = "/team/" + obj.Name;
+                  return (
+                    <StyledButton
+                      onClick={() =>
+                        this.props.history.push({ pathname: pathStr })
+                      }
+                    >
+                      {obj.Name}
+                    </StyledButton>
+                  );
+                })}
+              </div>
+
+              <h2
+                style={{
+                  color: "white",
+                  paddingTop: "5%",
+                  fontFamily: "Futura",
+                  margin: "0 0 5px 0",
+                }}
+              >
+                Officers:{" "}
+              </h2>
+            </Heading>
+            <div className="grid-container">
+              <TransitionGroup component={null}>
+                {membersData
+                  .filter((obj) => obj["IsLead"] === "TRUE")
+                  .map((obj) => {
+                    return (
+                      <CSSTransition classNames="cardboi" timeout={300}>
+                        <FlipCard>
+                          {/* FRONT */}
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <ImageThing image={obj.Image} />
+                            <TextPart>
+                              <div>{obj.Name}</div>
+                              <div>{obj.Position}</div>
+                            </TextPart>
+                          </div>
+
+                          {/* BACK */}
+                          <Back>
+                            <div style={{ flexGrow: 1 }}>
+                              {obj.Bio.substr(0, 350)}
+                              {obj.Bio.length > 350 && "..."}
+                            </div>
+                            <div style={{}}>{obj.Email}</div>
+                          </Back>
+                        </FlipCard>
+                      </CSSTransition>
+                    );
+                  })}
+              </TransitionGroup>
+            </div>
+          </Container>
+        </constants.Mobile>
+      </div>
+    );
+  }
+}
+
+const Back = styled("div")({
+  fontFamily: "Futura",
+  fontSize: "1.1rem",
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
+
+  color: constants.HOME_PAGE_DARK_TEXT_COLOR,
+});
+
+const ImageThing = bruh.div`
+    background-image: url(${(props) => props.image});
+    height: 70%;
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+`;
+
+const TextPart = styled("div")({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-})
+  fontFamily: "Futura",
+  fontSize: "1.4rem",
+  fontWeight: 550,
+  color: constants.MEMBERS_PAGE_LIGHT_GRAY,
+});
 
-const PageName = styled('h3')({
-  textAlign: "center",
-  fontSize: "100px",
-  textShadow: "4px 4px 3px gray",
-  color: constants.MEMBERS_PAGE_YELLOW,
-  fontFamily: "Avenir Next",
-  padding: "80px 0 0 0",
-  margin: "0 0 0 0"
-})
+const Container = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  height: "100%",
+  overflow: "none",
+  backgroundColor: constants.HOME_PAGE_DARK_COLOR,
+});
 
-const MeetingInfo = styled('p') ({
-  textAlign: "center",
-  padding: "0 0 0 0",
-  margin: "0 0 0 0",
-  width: "400px",
-  fontFamily: "Avenir Next",
-  color: constants.HOME_PAGE_LIGHT_COLOR
-})
-
-export default MembersPage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export default class MembersPage extends Component {
-//     render() {
-//         return(
-//             <div style={{ backgroundColor: constants.HOME_PAGE_DARK_COLOR }}>
-//                 <h1>kill me</h1> 
-//                 <div className="card-container">
-//                     <div className="card-body">
-//                         <FrontCard />
-//                         <BackCard />
-//                     </div>
-//                 </div>
-//                 <h1>hit me baby one more time</h1>
-//             </div>
-//         )
-//     }
-// }
+export default MembersPage;
