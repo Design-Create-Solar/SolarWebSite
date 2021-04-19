@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { styled, makeStyles } from "@material-ui/styles";
 import * as constants from "../MultiplePages/constants";
 import GFXField from "./GFXField";
@@ -18,34 +18,37 @@ import img from "./testimage.jpg";
 import "./Blocks.css"
 
 const BlocksPage = (props) => {
-  const { blocks, setBlocks } = useContext(BlocksContext);
+  const context = useContext(BlocksContext);
   const [images, setImages] = useState([]);
+  const blocks = context.blocks
+  const setBlocks = context.setBlocks
+  const imgs = context.imgs
 
   const useStyles = makeStyles(() => ({
     previewContainer: {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'flex-start',
-      backgroundColor:'rgb(36, 32, 41)',
-      justifyContent:'flex-start',
+      backgroundColor: 'rgb(36, 32, 41)',
+      justifyContent: 'flex-start',
       width: "100%",
       margin: "1rem 0",
       padding: "0",
       color: "white",
     },
     preview: {
-      backgroundColor:'rgb(31, 27, 36)',
+      backgroundColor: 'rgb(31, 27, 36)',
       boxShadow: "0.2rem 0.2rem rgba(0,0,0,0.2)",
-      width:'100%',
-      height:'100%',
+      width: '100%',
+      height: '100%',
       objectFit: 'cover',
     },
     previewImg: {
-      objectFit:'cover',
-      color:'rgb(31, 27, 36)',
-      backgroundColor:'rgb(31, 27, 36)',
-      padding:'2rem',
-      margin:'2rem',
+      objectFit: 'cover',
+      color: 'rgb(31, 27, 36)',
+      backgroundColor: 'rgb(31, 27, 36)',
+      padding: '2rem',
+      margin: '2rem',
       border: "1px solid yellow",
     },
   }));
@@ -231,7 +234,7 @@ const BlocksPage = (props) => {
                   ))}
                 </Grid>
                 <GFXDropzone
-                  dropzoneText="Drop/click images"  
+                  dropzoneText="Drop/click images"
                   filesLimit={10}
                   maxFileSize={500000000000} // 50 MB
                   acceptedFiles={["image/*"]}
@@ -268,7 +271,7 @@ const BlocksPage = (props) => {
       <FancyH1>Edit Blocks</FancyH1>
       <GFXFlourish />
       {
-        blocks.map((block) => {
+        blocks.map((block, ind) => {
           return (
             <Form
               key={block._id}
@@ -277,7 +280,6 @@ const BlocksPage = (props) => {
                 align: block.align,
                 header: block.header,
                 color: block.color,
-                images: block.images,
                 text: block.text,
                 page: block.page,
                 id: block._id
@@ -316,7 +318,6 @@ const BlocksPage = (props) => {
                           </Grid>
                         ))}
                         <Grid item xs={12}>
-                  
                           <GFXRadio
                             label="Page"
                             name="page"
@@ -329,31 +330,23 @@ const BlocksPage = (props) => {
                             showError={showErrorOnBlur}
                           />
                         </Grid>
-                        <GFXDropzone
-                          dropzoneText="Drop/click images"
-                          previewGridClasses={{
-                            container: classes.previewContainer,
-                            item: classes.preview,
-                            image: classes.previewImg,
-                          }}
-                          filesLimit={10}
-                          initialFiles={block.images}
-                          maxFileSize={500000000000} // 50 MB
-                          acceptedFiles={["image/*"]}
-                          showPreviews={true}
-                          showFileNames={true}
-                          previewText={""}
-                          showPreviewsInDropzone={false}
-                          onChange={(files) => handleSave(files)}
-                        />
                         <Grid item xs={12}>
-                          <GFXField
-                            label="Image Links"
-                            name="images"
-                            margin="none"
-                            required={true}
-                            disabled
-                            showError={showErrorOnBlur}
+                          <GFXDropzone
+                            dropzoneText="Drop/click images"
+                            previewGridClasses={{
+                              container: classes.previewContainer,
+                              item: classes.preview,
+                              image: classes.previewImg,
+                            }}
+                            filesLimit={10}
+                            initialFiles={imgs[ind]}
+                            maxFileSize={500000000000} // 50 MB
+                            acceptedFiles={["image/*"]}
+                            showPreviews={true}
+                            showFileNames={true}
+                            previewText={""}
+                            showPreviewsInDropzone={false}
+                            onChange={(files) => handleSave(files)}
                           />
                         </Grid>
                       </Grid>
