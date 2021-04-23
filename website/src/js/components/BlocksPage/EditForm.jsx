@@ -5,10 +5,10 @@ import { showErrorOnBlur } from "mui-rff";
 import { makeStyles } from "@material-ui/styles";
 import { formFields } from "./formFields";
 import { BlocksContext } from "../../../context/BlocksContext";
-import GFXField from "./GFXElems/GFXField";
-import GFXRadio from "./GFXElems/GFXRadio";
-import GFXDropzone from "./GFXElems/GFXDropzone";
-import GFXButton from "./GFXElems/GFXButton";
+import GFXField from "../GFX/GFXField";
+import GFXRadio from "../GFX/GFXRadio";
+import GFXDropzone from "../GFX/GFXDropzone";
+import GFXButton from "../GFX/GFXButton";
 import "./Blocks.css";
 
 export default function EditForm() {

@@ -2,8 +2,8 @@ import React from "react";
 import { Form } from "react-final-form";
 import { Paper, Grid } from "@material-ui/core";
 import { formFields } from "./formFields";
-import GFXButton from "./GFXElems/GFXButton";
-import GFXDropzone from "./GFXElems/GFXDropzone";
+import GFXButton from "../GFX/GFXButton";
+import GFXDropzone from "../GFX/GFXDropzone";
 import { BlocksContext } from "../../../context/BlocksContext";
 import "./Blocks.css";
 

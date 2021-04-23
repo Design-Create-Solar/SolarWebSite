@@ -1,7 +1,7 @@
 import React from "react";
 import * as constants from "../MultiplePages/constants";
-import GFXField from "./GFXElems/GFXField";
-import GFXRadio from "./GFXElems/GFXRadio";
+import GFXField from "../GFX/GFXField";
+import GFXRadio from "../GFX/GFXRadio";
 import { showErrorOnBlur } from "mui-rff";
 
 export const formFields = [

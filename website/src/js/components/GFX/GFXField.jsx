@@ -1,6 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { TextField } from "mui-rff";
-import * as constants from "../../MultiplePages/constants";
+import * as constants from "../MultiplePages/constants";
 
 const GFXField = withStyles({
   root: {

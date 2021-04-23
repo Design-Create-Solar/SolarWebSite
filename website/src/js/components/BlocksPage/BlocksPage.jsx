@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "@material-ui/styles";
 import { Card, CardMedia } from "@material-ui/core";
-import GFXFlourish from "./GFXElems/GFXFlourish";
+import GFXFlourish from "../GFX/GFXFlourish";
 
 import AddForm from "./AddForm";
 import EditForm from "./EditForm";
 
-import img from "./testimage.jpg";
+import img from "../GFX/testimage.jpg";
 
 const BlocksPage = () => {
   return (
