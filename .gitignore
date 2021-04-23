@@ -1,3 +1,6 @@
+.elasticbeanstalk/*
+.DS_Store
+
 public/
 
 # Logs
