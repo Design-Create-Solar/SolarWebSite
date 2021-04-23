@@ -57,11 +57,14 @@ const BlocksPage = (props) => {
     const { header, color, text, align } = values;
     const formdata = new FormData();
 
+    const imgNames = [];
     images.forEach((img, i) => {
       formdata.append("file" + i, img);
+      imgNames.push(`myapp/${img.name}`);
     })
 
-    const newBlock = { page: "PROGRAMS", header, color, text, align }
+    const newBlock = { page: "PROGRAMS", header, color, text, align, images: imgNames };
+
     await fetch(
       "http://localhost:5000/block/create?" +
       new URLSearchParams(newBlock),
