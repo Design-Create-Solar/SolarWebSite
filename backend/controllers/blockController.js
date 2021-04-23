@@ -1,7 +1,7 @@
 const Block = require('../models/blockModel');
 const uploadBase64 = require('../aws/uploadBase64');
 
-const { processFile } = require("./s3Controller")
+const { processFile, deleteFromS3 } = require("./s3Controller")
 
 exports.block_details = (req, res) => {
 	Block.find({}, (err, block) => {
@@ -114,28 +114,35 @@ exports.block_update_id = async (req, res) => {
 
 //DELETE BLOCK BY DB ID
 exports.block_delete = async (req, res) => {
-	const blockExists = await Block.findById(req.params.id);
-	//if block exists, remove it
-	if (blockExists) {
-		Block.findByIdAndRemove(req.params.id)
+	const block = await Block.findById(req.params.id);
+
+	// if block exists, remove it
+	if (block) {
+		const s3Delete = block.images.map(fileLink => {
+			return deleteFromS3(fileLink);
+		})
+		const mongoDelete = Block.findByIdAndRemove(req.params.id);
+
+		Promise.all([s3Delete, mongoDelete])
 			.then(() => res.send("Block was deleted successfully!"))
-			.catch((err) => console.log(err))
+			.catch((err) => console.log(err));
 	} else {
 		res.send("Block does not exist!");
 	}
 };
 
+
 //DELETE BLOCK BY PARAMS
 exports.block_delete_params = async (req, res) => {
 	/*req.body example:
 
-  {
+	{
 	text: This is the text of the block,
 	header: Header text,
 	direction: right
-  }
+	}
 
-  */
+	*/
 	const blockExists = await Block.findOne(req.body);
 	if (blockExists) {
 		Block.findOneAndDelete(req.body, (err) => {

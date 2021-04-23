@@ -9,6 +9,20 @@ const s3bucket = new AWS.S3({
   secretAccessKey: IAM_USER_SECRET
 })
 
+function deleteFromS3(fileName) {
+  const params = {
+    Bucket: BUCKET_NAME,
+    Key: fileName,
+  };
+
+  return new Promise((resolve, reject) => {
+    s3bucket.deleteObject(params, function (err, data) {
+      if (err) return reject(err);
+      return resolve(data);
+    })
+  })
+}
+
 function uploadToS3(fileName) {
   const readStream = fs.createReadStream(`public/${fileName}`);
 
@@ -59,5 +73,5 @@ const saveImage = (req, res) => {
 
 
 module.exports = {
-  saveImage, processFile
+  saveImage, processFile, deleteFromS3
 }
