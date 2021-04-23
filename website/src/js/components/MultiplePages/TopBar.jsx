@@ -97,10 +97,7 @@ function TopBar() {
 									<>
 										<div className={css.flexVertical} style={{ order: navInfo.length + 1 }}>
 											<StyledButton
-												onClick={() => {
-													setRoute('/blocks')
-													onDropdown()
-												}}
+												onClick={() => { onDropdown() }}
 												className={css.button}
 											>
 												Edit
@@ -142,7 +139,7 @@ function TopBar() {
 									<>
 										<StyledButton
 											style={{ order: navInfo.length + 1 }}
-											onClick={() => setRoute('/blocks')}
+											onClick={() => onDropdown()}
 											className={css.button}
 										>
 											Blocks
