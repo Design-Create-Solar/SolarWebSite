@@ -24,6 +24,7 @@ function deleteFromS3(fileName) {
 }
 
 function uploadToS3(fileName, finalFileName) {
+	const readStream = fs.createReadStream(`public/${fileName}`);
 	const params = {
 		Bucket: BUCKET_NAME,
 		Key: finalFileName,
@@ -44,8 +45,7 @@ function uploadToS3(fileName, finalFileName) {
 }
 
 async function processFile(myFile) {
-	const readStream = fs.createReadStream(`public/${fileName}`);
-
+	const fileName = myFile.name;
 	const fileNameWithExt = fileName.split('/').slice(-1)[0];
 
 	const fileNameWithoutTime = fileNameWithExt.split('.')[0];

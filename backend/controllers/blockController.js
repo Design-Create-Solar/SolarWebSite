@@ -71,6 +71,7 @@ exports.block_edit = async (req, res) => {
 	//for each base64 string in req.body.images
 	//run upload base64 and add the result to images array
 	const { id } = req.query;
+	console.log(req.query);
 
 	Block.findById(id, async (err, block) => {
 		if (err) return err;
