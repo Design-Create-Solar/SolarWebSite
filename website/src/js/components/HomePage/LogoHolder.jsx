@@ -4,8 +4,8 @@ import * as constants from "../MultiplePages/constants";
 import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box";
 import { Default, Mobile, Desktop } from "../MultiplePages/constants";
+import Logo from './logo2.png';
 
-const Logo = require("./logo2.png");
 const texts = ["DESIGNERS", "CREATORS", "SOLAR"];
 
 const base = "WE ARE  ";
@@ -30,13 +30,13 @@ const LogoHolder = () => {
         <Typing loop={true} hideCursor={true}>
           <Text>{base}</Text>
           <SpecialText>{texts[0]}</SpecialText>
-          <Typing.Backspace count={texts[0].length + 1} delay={900} />
+          <Typing.Backspace count={texts[0].length + 1} delay={1500} />
           <SpecialText>{texts[1]}</SpecialText>
-          <Typing.Backspace count={texts[1].length + 1} delay={900} />
+          <Typing.Backspace count={texts[1].length + 1} delay={1500} />
           <SpecialText>{texts[2]}</SpecialText>
           <Typing.Backspace
             count={texts[2].length + base.length + 3}
-            delay={500}
+            delay={1000}
           />
         </Typing>
       </Box>

@@ -56,7 +56,6 @@ export const formFields = [
         required={true}
         data={[
           { label: "left", value: "left" },
-          { label: "center", value: "center" },
           { label: "right", value: "right" },
         ]}
         showError={showErrorOnBlur}

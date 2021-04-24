@@ -1,7 +1,7 @@
 const Block = require('../models/blockModel');
-const uploadBase64 = require('../aws/uploadBase64');
+const mongoose = require('mongoose');
 
-const { processFile, deleteFromS3 } = require("./s3Controller")
+const { processFile, deleteFromS3 } = require('./s3Controller');
 
 exports.block_details = (req, res) => {
 	Block.find({}, (err, block) => {
@@ -45,23 +45,64 @@ exports.block_details_bytype = (req, res) => {
 
 //CREATE BLOCK
 exports.block_create = async (req, res) => {
-	//each images[i] corresponds to a titles[i]
-
-	//for each base64 string in req.body.images
-	//run upload base64 and add the result to images array
-
 	const myFiles = req.files;
 
-	const names = Object.keys(myFiles).map(fileName => {
-		return processFile(myFiles[fileName])
-	})
+	const names = Object.keys(myFiles).map((fileName) => {
+		return processFile(myFiles[fileName]);
+	});
 
-	const fileNames = await Promise.all(names)
+	const fileNames = await Promise.all(names);
 	let block = new Block({ ...req.query, images: fileNames });
 
 	block.save((err, info) => {
 		if (err) return err;
-		res.json(info._id)
+		res.json({newId: info._id, fileNames});
+	});
+};
+
+exports.block_edit = async (req, res) => {
+	const { _id } = req.query;
+	Block.findById(mongoose.Types.ObjectId(_id), async (err, oldData) => {
+		if (err) return err;
+
+		const newData = req.files ? req.files : {};
+
+		// figure out which images to delete
+		// 1. get files that remained untouched by user
+		// 2. get those files' names
+		// 3. the files in oldData that don't have those file names must've been deleted
+		const filesAlreadyIncluded = Object.values(newData).filter((file) => 
+			oldData.images.includes(`myapp/${file.name}`)
+		);
+		const filesAlreadyIncludedNames = filesAlreadyIncluded.map(
+			(file) => `myapp/${file.name}`
+		);
+		const toDelete = oldData.images.filter(
+			(name) => !filesAlreadyIncludedNames.includes(name)
+		);
+		const s3Delete = toDelete.map((fileLink) => {
+			return deleteFromS3(fileLink);
+		});
+
+		// figure out which images to add
+		const filesExcluded = Object.values(newData).filter((file) => 
+			!oldData.images.includes(`myapp/${file.name}`)
+		);
+		const filesAdded = Object.keys(filesExcluded).map((fileName) => {
+			return processFile(filesExcluded[fileName]);
+		});	
+
+		Promise.all(filesAdded)
+		.then((namesToAdd) => {
+			req.query.images = [...namesToAdd, ...filesAlreadyIncludedNames];
+			const updateBlock = Block.findByIdAndUpdate(_id, { $set: req.query });
+
+			Promise.all([s3Delete, updateBlock])
+			.then(() => {
+				console.log('DONE!');
+				res.send('Block updated!');
+			})
+		})
 	});
 };
 
@@ -80,37 +121,37 @@ exports.block_update_db_id = async (req, res) => {
 
 	Block.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
 		if (err) return err;
-		res.send("Block updated!");
+		res.send('Block updated!');
 	});
 };
 
 //UPDATE BLOCK BY CUSTOM ID
-exports.block_update_id = async (req, res) => {
-	//check if block exists
-	const blockExists = await Block.findOne({ id: req.params.id });
-	if (!blockExists) {
-		res.send('Block does not exist.');
-		console.log('Update was attempted on block id that does not exist.');
-		return;
-	}
+// exports.block_update_id = async (req, res) => {
+// 	//check if block exists
+// 	const blockExists = await Block.findOne({ id: req.params.id });
+// 	if (!blockExists) {
+// 		res.send('Block does not exist.');
+// 		console.log('Update was attempted on block id that does not exist.');
+// 		return;
+// 	}
 
-	if (req.body.images) {
-		base64Array = req.body.images;
-		titlesArray = req.body.titles;
-		var images = [];
-		for (var i = 0; i < base64Array.length; i++) {
-			var url = await uploadBase64(base64Array[i], titlesArray[i]);
-			images.push(url);
-		}
+// 	if (req.body.images) {
+// 		base64Array = req.body.images;
+// 		titlesArray = req.body.titles;
+// 		var images = [];
+// 		for (var i = 0; i < base64Array.length; i++) {
+// 			var url = await uploadBase64(base64Array[i], titlesArray[i]);
+// 			images.push(url);
+// 		}
 
-		req.body.images = images;
-	}
+// 		req.body.images = images;
+// 	}
 
-	await Block.findOneAndUpdate({ id: req.params.id }, req.body, (err) => {
-		if (err) return err;
-		res.send('Block updated!');
-	});
-};
+// 	await Block.findOneAndUpdate({ id: req.params.id }, req.body, (err) => {
+// 		if (err) return err;
+// 		res.send('Block updated!');
+// 	});
+// };
 
 //DELETE BLOCK BY DB ID
 exports.block_delete = async (req, res) => {
@@ -118,19 +159,18 @@ exports.block_delete = async (req, res) => {
 
 	// if block exists, remove it
 	if (block) {
-		const s3Delete = block.images.map(fileLink => {
+		const s3Delete = block.images.map((fileLink) => {
 			return deleteFromS3(fileLink);
-		})
+		});
 		const mongoDelete = Block.findByIdAndRemove(req.params.id);
 
 		Promise.all([s3Delete, mongoDelete])
-			.then(() => res.send("Block was deleted successfully!"))
+			.then(() => res.send('Block was deleted successfully!'))
 			.catch((err) => console.log(err));
 	} else {
-		res.send("Block does not exist!");
+		res.send('Block does not exist!');
 	}
 };
-
 
 //DELETE BLOCK BY PARAMS
 exports.block_delete_params = async (req, res) => {

@@ -14,8 +14,13 @@ import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 export default function EditForm() {
   const context = React.useContext(BlocksContext);
-  const { blocks, setBlocks, handleSave, validate } = context;
+  const { blocks, setBlocks, validate } = context;
   const [imgs, setImages] = React.useState([]);
+
+  function handleSave(files, ind) {
+    imgs[ind] = files;
+    setImages(imgs);
+  }
 
   React.useEffect(() => {
     let res = [];
@@ -29,28 +34,39 @@ export default function EditForm() {
     setImages(res);
   }, [blocks])
 
-  const onEdit = async (values) => {
-    await fetch(`${BACK_BASE_URL}/block/updateByDBid/${values.id}`, {
-      method: "PUT",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values)
+  const onEdit = (values, ind) => {
+    if (!window.confirm("Are you sure you want to edit this block?")) return;
+
+    const { page, header, color, text, align, _id } = values;
+
+    const formdata = new FormData();
+    imgs[ind].forEach((img, i) => {
+      // the key is `file${i}` rather than img.name since 
+      // the user could upload multiple imgs of the same name
+      formdata.append(`file${i}`, img);
     })
+    const block = { page, header, color, text, align, _id };
+    fetch(`${BACK_BASE_URL}/block/editBlock?${new URLSearchParams(block)}`, {
+      method: "POST",
+      mode: "cors",
+      body: formdata
+    })
+      .then(() => window.alert("Successfully edited!"))
       .catch((err) => console.log(err))
-    window.alert("Successfully edited!")
   }
 
-  const onDelete = async (id) => {
-    await fetch(`${BACK_BASE_URL}/block/delete/${id}`, {
+  const onDelete = (id) => {
+    if (!window.confirm("Do you really want to delete this block?")) return;
+
+    fetch(`${BACK_BASE_URL}/block/delete/${id}`, {
       method: "PUT",
       mode: "cors"
     })
       .then(() => {
         setBlocks(blocks.filter(block => block._id !== id))
       })
+      .then(() => window.alert("Successfully deleted!"))
       .catch((err) => console.log(err))
-
-    window.alert("Successfuly deleted!")
   }
 
   const useStyles = makeStyles(() => ({
@@ -89,14 +105,14 @@ export default function EditForm() {
         blocks.map((block, ind) => {
           return (
             <Form
-              onSubmit={onEdit}
+              onSubmit={(vals) => onEdit(vals, ind)}
               initialValues={{
                 align: block.align,
                 header: block.header,
                 color: block.color,
                 text: block.text,
                 page: block.page,
-                id: block._id
+                _id: block._id
               }}
               validate={validate}
               render={({ handleSubmit, submitting }) => (
@@ -119,7 +135,7 @@ export default function EditForm() {
                         <Grid item xs={12}>
                           <GFXField
                             label="_id"
-                            name="id"
+                            name="_id"
                             margin="none"
                             required={true}
                             disabled
@@ -161,7 +177,7 @@ export default function EditForm() {
                             showFileNames={true}
                             previewText={""}
                             showPreviewsInDropzone={false}
-                            onChange={(files) => handleSave(files)}
+                            onChange={(files) => handleSave(files, ind)}
                           />
                         </Grid>
                       </Grid>
@@ -173,7 +189,7 @@ export default function EditForm() {
                           disabled={submitting}
                         >
                           Edit Block
-                          </GFXButton>
+                        </GFXButton>
                       </Grid>
                       <Grid item style={{ marginTop: 16 }}>
                         <GFXButton
@@ -182,7 +198,7 @@ export default function EditForm() {
                           onClick={() => onDelete(block._id)}
                         >
                           Delete Block
-                          </GFXButton>
+                        </GFXButton>
                       </Grid>
                     </Grid>
                   </Paper>

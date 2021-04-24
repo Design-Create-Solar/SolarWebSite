@@ -5,13 +5,6 @@ const BlocksContext = React.createContext();
 
 function BlocksProvider(props) {
     const [blocks, setBlocks] = useState([]);
-    const [images, setImages] = useState([]);
-
-    function handleSave(files) {
-        if (files.length > 0) {
-            setImages(files);
-        }
-    };
 
     function validate(values) {
         const errors = {};
@@ -44,8 +37,6 @@ function BlocksProvider(props) {
         <BlocksContext.Provider value={{
             blocks,
             setBlocks,
-            images,
-            handleSave,
             validate
         }}>{props.children}</BlocksContext.Provider>
     );
