@@ -33,6 +33,7 @@ const Login = (props) => {
   }, []);
 
   const onSubmit = (values) => {
+    console.log(`req sent to ${BACK_BASE_URL}/auth/login`);
     fetch(`${BACK_BASE_URL}/auth/login`, {
       method: "POST",
       credentials: 'include',

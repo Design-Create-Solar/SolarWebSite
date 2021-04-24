@@ -10,7 +10,9 @@ import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 export default function AddForm() {
   const context = React.useContext(BlocksContext);
-  const { blocks, setBlocks, images, handleSave, validate } = context;
+  const { blocks, setBlocks, validate } = context;
+
+  const [images, setImages] = React.useState([]);
 
   const onSubmit = async (values) => {
     const { header, color, text, align } = values;
@@ -33,8 +35,8 @@ export default function AddForm() {
       }
     )
       .then((data) => data.json())
-      .then((newId) => {
-        setBlocks([...blocks, { ...newBlock, _id: newId }])
+      .then(({newId, fileNames}) => {
+        setBlocks([...blocks, { ...newBlock, images: fileNames, _id: newId }])
       })
       .catch((err) => console.log(err))
 
@@ -75,7 +77,7 @@ export default function AddForm() {
                 acceptedFiles={["image/*"]}
                 showPreviews={true}
                 showPreviewsInDropzone={false}
-                onChange={(files) => handleSave(files)}
+                onChange={(files) => setImages(files)}
               />
               <Grid item style={{ marginTop: 50 }}>
                 <GFXButton

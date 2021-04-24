@@ -49,10 +49,10 @@ router.post("/login", async (req, res) => {
 
 // verify session
 router.get("/verify", (req, res) => {
-  if (!req.cookies.jwt) res.status(403).send("No jwt cookie");
+  if (!req.cookies.jwt) res.status(400).send("No jwt cookie");
   else
     jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET, function (err, decoded) {
-      if (err) res.status(402).send(err);
+      if (err) res.status(400).send(err);
       else res.status(200).send("Good session");
     })
 });
