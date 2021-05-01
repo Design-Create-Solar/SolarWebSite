@@ -32,15 +32,15 @@ const navInfo = [
 ];
 
 const useStyles = makeStyles(() => ({
-    toolbar: {
+	toolbar: {
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 0,
-    },
-    box: {
+	},
+	box: {
 		display: 'flex',
 		overflowX: 'scroll',
-    },
+	},
 	boxDesktop: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -48,9 +48,9 @@ const useStyles = makeStyles(() => ({
 		flexGrow: 1,
 		width: '100%',
 	},
-    button: {
+	button: {
 		fontSize: '1rem',
-    },
+	},
 	sizing: {
 		height: '63px',
 	},
@@ -65,7 +65,7 @@ const useStyles = makeStyles(() => ({
 		display: "flex",
 		flexDirection: "column",
 	},
-  }));
+}));
 
 
 function TopBar() {
@@ -87,12 +87,12 @@ function TopBar() {
 					<Toolbar className={css.toolbar}>
 						<Mobile>
 							<Box className={css.box}>
-								<Header arr="navInfo" onRoute={setRoute}/>
+								<Header arr={[...navInfo]} onRoute={setRoute} />
 							</Box>
 						</Mobile>
 						<Desktop>
 							<Box className={css.boxDesktop}>
-								<Header arr={[...navInfo]} onRoute={setRoute}/>
+								<Header arr={[...navInfo]} onRoute={setRoute} />
 								{userData && userData.token !== null ? (
 									<>
 										<div className={css.flexVertical} style={{ order: navInfo.length + 1 }}>
@@ -102,18 +102,18 @@ function TopBar() {
 											>
 												Edit
 											</StyledButton>
-											{ dropdown ? (
+											{dropdown ? (
 												<div className={css.dropdown}>
-												<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
-													Blocks
-												</StyledButton>										
-												<StyledButton className={css.button} onClick={() => setRoute("/members")}>
-													Members
+													<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
+														Blocks
+												</StyledButton>
+													<StyledButton className={css.button} onClick={() => setRoute("/members")}>
+														Members
 												</StyledButton>
 												</div>
 											) : ''}
 										</div>
-										<StyledButton 
+										<StyledButton
 											style={{ order: navInfo.length + 2 }}
 											onClick={() => clearAuth()}
 											className={css.button}
@@ -123,7 +123,7 @@ function TopBar() {
 									</>
 								) : (
 									<StyledButton
-										style={{ order: navInfo.length + 1,}}
+										style={{ order: navInfo.length + 1, }}
 										onClick={() => setRoute('/login')}
 										className={css.button}
 									>
@@ -134,7 +134,7 @@ function TopBar() {
 						</Desktop>
 						<Default>
 							<Box className={css.boxDesktop}>
-							<Header arr={[...navInfo]} onRoute={setRoute}/>
+								<Header arr={[...navInfo]} onRoute={setRoute} />
 								{userData && userData.token !== null ? (
 									<>
 										<StyledButton
@@ -144,19 +144,15 @@ function TopBar() {
 										>
 											Blocks
 										</StyledButton>
-										{ 
-                      dropdown ? (
-                        <div className={css.dropdown}>
-                          <StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
-                            Blocks
-                          </StyledButton>										
-                          <StyledButton className={css.button} onClick={() => setRoute("/members")}>
-                            Members
-                          </StyledButton>
-                        </div>
-                      ) :
-                      0
-                    }
+										{dropdown ? (
+											<div className={css.dropdown}>
+												<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
+													Blocks
+											</StyledButton>
+												<StyledButton className={css.button} onClick={() => setRoute("/members")}>
+													Members
+											</StyledButton>
+											</div>) : 0}
 										<StyledButton
 											style={{ order: navInfo.length + 2 }}
 											onClick={() => clearAuth()}
@@ -167,8 +163,9 @@ function TopBar() {
 									</>
 								) : (
 									<StyledButton
-										style={{ order: navInfo.length + 1 }}
-										onClick={() => history.push({ pathname: '/login' })}
+										style={{ order: navInfo.length + 1, }}
+										onClick={() => setRoute('/login')}
+										className={css.button}
 									>
 										Login
 									</StyledButton>
