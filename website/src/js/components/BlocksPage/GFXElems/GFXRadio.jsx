@@ -1,6 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { Radios } from "mui-rff";
-import * as constants from "../MultiplePages/constants";
+import * as constants from "../../MultiplePages/constants";
 
 const GFXRadio = withStyles({
   root: {

@@ -1,10 +1,34 @@
 import React, { useState, useEffect } from "react"
-// import * as constants from "../js/components/MultiplePages/constants"
 
 const BlocksContext = React.createContext()
-let imgs = []
+
 function BlocksProvider(props) {
     const [blocks, setBlocks] = useState([]);
+    const [images, setImages] = useState([]);
+
+    function handleSave(files) {
+        if (files.length > 0) {
+            setImages(files);
+        }
+    };
+
+    function validate(values) {
+        const errors = {};
+        if (!values.header) {
+            errors.header = "Provide a valid heading/title.";
+        }
+        if (!values.color) {
+            errors.color = "Provide a valid color, preferably in hexadecimal.";
+        }
+        if (!values.text) {
+            errors.text = "Provide some text to support your header.";
+        }
+        // if (!values.images) {
+        //   errors.images = "Provide at least one image(s).";
+        // }
+        return errors;
+    };
+
     useEffect(() => {
         let mounted = true
         fetch("http://localhost:5000/block/getBlocks")
@@ -15,20 +39,14 @@ function BlocksProvider(props) {
         return () => mounted = false
     }, [])
 
-    useEffect(() => {
-        let mounted = true
-        for (const block of blocks) {
-            let tmp = []
-            for (const img of block.images) {
-                tmp.push("https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/" + img)
-            }
-            imgs.push(tmp)
-        }
-        return () => mounted = false
-    }, [blocks])
-
     return (
-        <BlocksContext.Provider value={{ blocks, setBlocks, imgs }}>{props.children}</BlocksContext.Provider>
+        <BlocksContext.Provider value={{
+            blocks,
+            setBlocks,
+            images,
+            handleSave,
+            validate
+        }}>{props.children}</BlocksContext.Provider>
     );
 }
 
