@@ -1,6 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
-import * as constants from "../MultiplePages/constants";
+import * as constants from "../../MultiplePages/constants";
 
 const GFXButton = withStyles({
   root: {
