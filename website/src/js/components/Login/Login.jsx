@@ -5,8 +5,8 @@ import axios from "axios";
 
 import { UserContext } from "../../../context/UserContext";
 import * as constants from "../MultiplePages/constants";
-import GFXField from "./GFXField";
-import GFXButton from "./GFXButton";
+import GFXField from "../GFX/GFXField";
+import GFXButton from "../GFX/GFXButton";
 
 import { showErrorOnBlur } from "mui-rff";
 

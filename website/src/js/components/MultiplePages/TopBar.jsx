@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { Default, Mobile, Desktop } from './constants';
-import StyledButton from './StyledButton';
 import { UserContext } from '../../../context/UserContext';
-const topbarButtonInfo = [
+import { styled, makeStyles } from "@material-ui/styles";
+import Header from "./Header";
+import StyledButton from './StyledButton';
+
+const navInfo = [
 	{
 		name: 'Home',
 		link: '/',
@@ -19,116 +22,110 @@ const topbarButtonInfo = [
 		link: '/sponsors',
 	},
 	{
-		name: 'Meet the Team',
+		name: 'Team',
 		link: '/team/officers',
 	},
 	{
-		name: 'Join Us',
+		name: 'Join',
 		link: '/join',
 	},
 ];
+
+const useStyles = makeStyles(() => ({
+	toolbar: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: 0,
+	},
+	box: {
+		display: 'flex',
+		overflowX: 'scroll',
+	},
+	boxDesktop: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'flex-start',
+		flexGrow: 1,
+		width: '100%',
+	},
+	button: {
+		fontSize: '1rem',
+	},
+	sizing: {
+		height: '63px',
+	},
+	dropdown: {
+		display: "flex",
+		flexDirection: "column",
+		position: "absolute",
+		top: "63px",
+		backgroundColor: 'black',
+	},
+	flexVertical: {
+		display: "flex",
+		flexDirection: "column",
+	},
+}));
+
+
 function TopBar() {
 	const history = useHistory();
 	const { userData, setUserData } = useContext(UserContext);
+	const [dropdown, setDropdown] = useState(false);
+	const css = useStyles();
+	const setRoute = (str) => { history.push({ pathname: str }) }
+	const onDropdown = () => { setDropdown(!dropdown); }
+	const clearAuth = () => {
+		localStorage.removeItem('auth-token');
+		setUserData(null);
+	}
 
 	return (
 		<Router>
 			<div>
 				<AppBar position='fixed' style={{ backgroundColor: 'black' }}>
-					<Toolbar
-						style={{
-							justifyContent: 'center',
-							alignItems: 'center',
-							padding: 0,
-						}}
-					>
+					<Toolbar className={css.toolbar}>
 						<Mobile>
-							<Box
-								style={{
-									display: 'flex',
-									overflowX: 'scroll',
-								}}
-							>
-								{topbarButtonInfo.map((obj, idx) => {
-									return (
-										<StyledButton
-											key={idx}
-											style={{ order: idx + 1 }}
-											onClick={() =>
-												history.push({
-													pathname: obj.link,
-												})
-											}
-										>
-											{obj.name}
-										</StyledButton>
-									);
-								})}
+							<Box className={css.box}>
+								<Header arr={[...navInfo]} onRoute={setRoute} />
 							</Box>
 						</Mobile>
 						<Desktop>
-							<Box
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									flexGrow: 1,
-									width: '100%',
-								}}
-							>
-								{topbarButtonInfo.map((obj, idx) => {
-									return (
-										<StyledButton
-											key={idx}
-											style={{ order: idx + 1 }}
-											onClick={() =>
-												history.push({
-													pathname: obj.link,
-												})
-											}
-										>
-											{obj.name}
-										</StyledButton>
-									);
-								})}
+							<Box className={css.boxDesktop}>
+								<Header arr={[...navInfo]} onRoute={setRoute} />
 								{userData && userData.token !== null ? (
 									<>
+										<div className={css.flexVertical} style={{ order: navInfo.length + 1 }}>
+											<StyledButton
+												onClick={() => { onDropdown() }}
+												className={css.button}
+											>
+												Edit
+											</StyledButton>
+											{dropdown ? (
+												<div className={css.dropdown}>
+													<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
+														Blocks
+												</StyledButton>
+													<StyledButton className={css.button} onClick={() => setRoute("/members")}>
+														Members
+												</StyledButton>
+												</div>
+											) : ''}
+										</div>
 										<StyledButton
-											style={{
-												order:
-													topbarButtonInfo.length + 1,
-											}}
-											onClick={() =>
-												history.push({
-													pathname: '/blocks',
-												})
-											}
-										>
-											Blocks
-										</StyledButton>
-										<StyledButton
-											style={{
-												order:
-													topbarButtonInfo.length + 2,
-											}}
-											onClick={() => {
-												localStorage.removeItem(
-													'auth-token'
-												);
-												setUserData(null);
-											}}
+											style={{ order: navInfo.length + 2 }}
+											onClick={() => clearAuth()}
+											className={css.button}
 										>
 											Logout
 										</StyledButton>
 									</>
 								) : (
 									<StyledButton
-										style={{
-											order: topbarButtonInfo.length + 1,
-										}}
-										onClick={() =>
-											history.push({ pathname: '/login' })
-										}
+										style={{ order: navInfo.length + 1, }}
+										onClick={() => setRoute('/login')}
+										className={css.button}
 									>
 										Login
 									</StyledButton>
@@ -136,68 +133,39 @@ function TopBar() {
 							</Box>
 						</Desktop>
 						<Default>
-							<Box
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									flexGrow: 1,
-									width: '100%',
-								}}
-							>
-								{topbarButtonInfo.map((obj, idx) => {
-									return (
-										<StyledButton
-											key={idx}
-											style={{ order: idx + 1 }}
-											onClick={() =>
-												history.push({
-													pathname: obj.link,
-												})
-											}
-										>
-											{obj.name}
-										</StyledButton>
-									);
-								})}
+							<Box className={css.boxDesktop}>
+								<Header arr={[...navInfo]} onRoute={setRoute} />
 								{userData && userData.token !== null ? (
 									<>
 										<StyledButton
-											style={{
-												order:
-													topbarButtonInfo.length + 1,
-											}}
-											onClick={() =>
-												history.push({
-													pathname: '/blocks',
-												})
-											}
+											style={{ order: navInfo.length + 1 }}
+											onClick={() => onDropdown()}
+											className={css.button}
 										>
 											Blocks
 										</StyledButton>
+										{dropdown ? (
+											<div className={css.dropdown}>
+												<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
+													Blocks
+											</StyledButton>
+												<StyledButton className={css.button} onClick={() => setRoute("/members")}>
+													Members
+											</StyledButton>
+											</div>) : 0}
 										<StyledButton
-											style={{
-												order:
-													topbarButtonInfo.length + 2,
-											}}
-											onClick={() => {
-												localStorage.removeItem(
-													'auth-token'
-												);
-												setUserData(null);
-											}}
+											style={{ order: navInfo.length + 2 }}
+											onClick={() => clearAuth()}
+											className={css.button}
 										>
 											Logout
 										</StyledButton>
 									</>
 								) : (
 									<StyledButton
-										style={{
-											order: topbarButtonInfo.length + 1,
-										}}
-										onClick={() =>
-											history.push({ pathname: '/login' })
-										}
+										style={{ order: navInfo.length + 1, }}
+										onClick={() => setRoute('/login')}
+										className={css.button}
 									>
 										Login
 									</StyledButton>
@@ -207,13 +175,13 @@ function TopBar() {
 					</Toolbar>
 				</AppBar>
 				<Mobile>
-					<div style={{ height: '63px' }}></div>
+					<div className={css.sizing} />
 				</Mobile>
 				<Default>
-					<div style={{ height: '63px' }}></div>
+					<div className={css.sizing} />
 				</Default>
 				<Desktop>
-					<div style={{ height: '63px' }}></div>
+					<div className={css.sizing} />
 				</Desktop>
 			</div>
 		</Router>

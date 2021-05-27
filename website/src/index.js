@@ -14,8 +14,9 @@ import SponsorsPage from "./js/components/SponsorsPage/SponsorsPage";
 import SubsystemPage from "./js/components/MembersPage/SubsystemPage";
 import RecruitmentPage from "./js/components/RecruitmentPage/RecruitmentPage";
 import BlocksPage from "./js/components/BlocksPage/BlocksPage";
+import EditMembersPage from "./js/components/EditMembersPage/EditMembersPage";
 
-import TopBar from "./js/components/MultiplePages/TopBar"
+import TopBar from "./js/components/MultiplePages/TopBar";
 
 import "./futura/futur.ttf";
 import test from "./js/components/sockettest.jsx";
@@ -25,7 +26,7 @@ import configureStore from "./config/configureStore";
 import { Provider } from "react-redux";
 
 import { UserProvider } from "./context/UserContext";
-import { BlocksProvider } from "./context/BlocksContext"
+import { BlocksProvider } from "./context/BlocksContext";
 import LoginWrapper from "./js/components/utils/LoginWrapper";
 
 const store = configureStore();
@@ -55,6 +56,11 @@ ReactDOM.render(
               <Route path="/blocks">
                 <LoginWrapper>
                   <BlocksPage />
+                </LoginWrapper>
+              </Route>
+              <Route path="/members">
+                <LoginWrapper>
+                  <EditMembersPage />
                 </LoginWrapper>
               </Route>
             </BlocksProvider>
