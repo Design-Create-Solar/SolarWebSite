@@ -3,13 +3,11 @@ const dotenv = require('dotenv').config();
 const fileUpload = require('express-fileupload');
 
 //Databases
-const Influx = require('influxdb-nodejs');
 const mongoose = require('mongoose');
 
 const express = require('express'),
 	app = express(),
 	PORT = 5000;
-const bodyParser = require('body-parser');
 const cors = require('cors');
 app.use(cors());
 
