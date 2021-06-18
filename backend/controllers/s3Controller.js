@@ -29,7 +29,8 @@ function uploadToS3(fileName) {
   const params = {
     Bucket: BUCKET_NAME,
     Key: "myapp" + "/" + fileName.split('/')[fileName.split('/').length - 1],
-    Body: readStream
+    Body: readStream,
+    ContentType: "image/*"
   };
 
   return new Promise((resolve, reject) => {
