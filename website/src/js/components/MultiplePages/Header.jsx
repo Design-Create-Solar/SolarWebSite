@@ -1,7 +1,7 @@
 import React from 'react'
 import StyledButton from './StyledButton';
 
-import { styled, makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
     button: {
