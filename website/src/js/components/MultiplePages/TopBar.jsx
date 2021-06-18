@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { Default, Mobile, Desktop } from './constants';
 import { UserContext } from '../../../context/UserContext';
-import { styled, makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import StyledButton from './StyledButton';
 

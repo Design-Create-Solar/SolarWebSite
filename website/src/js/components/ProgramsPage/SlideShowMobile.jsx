@@ -50,7 +50,7 @@ const SlideshowMobile = props => {
 							}}
 							className='image-container'
 						>
-							<img src={image} alt={'Program Image'} />
+							<img src={`https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/${image}`} alt={'Program Image'} />
 						</div>
 						{/* <h2>Second Slide</h2> */}
 					</div>

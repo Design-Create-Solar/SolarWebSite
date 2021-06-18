@@ -5,7 +5,7 @@ import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box";
 import { Default, Mobile, Desktop } from "../MultiplePages/constants";
 
-const Logo = require("../../../images/logo2.png");
+const Logo = require("./logo2.png");
 const texts = ["DESIGNERS", "CREATORS", "SOLAR"];
 
 const base = "WE ARE  ";
@@ -14,13 +14,13 @@ const LogoHolder = () => {
   return (
     <Container>
       <Default>
-        <img alt="" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+        <img alt="logo" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
       </Default>
       <Desktop>
-        <img alt="" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+        <img alt="logo" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
       </Desktop>
       <Mobile>
-        <img alt="" src={Logo} style={{ width: "100%", paddingBottom: "2em" }} />
+        <img alt="logo" src={Logo} style={{ width: "100%", paddingBottom: "2em" }} />
       </Mobile>
       <Box
         style={{

@@ -22,54 +22,49 @@ import "./futura/futur.ttf";
 import test from "./js/components/sockettest.jsx";
 
 import "./assets/base.css";
-import configureStore from "./config/configureStore";
-import { Provider } from "react-redux";
 
 import { UserProvider } from "./context/UserContext";
 import { BlocksProvider } from "./context/BlocksContext";
 import LoginWrapper from "./js/components/utils/LoginWrapper";
 
-const store = configureStore();
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <div>
-        <UserProvider>
-          <TopBar />
-        </UserProvider>
-        <ScrollToTop>
-          <Switch>
-            <BlocksProvider>
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/home" component={LandingPage} />
-              <Route path="/programs" component={ProjectPage} />
-              <Route exact path="/team/officers" component={MembersPage} />
-              <Route path="/sponsors" component={SponsorsPage} />
-              <Route path="/test" component={test} />
-              <Route path="/team" component={SubsystemPage} />
-              <Route path="/join" component={RecruitmentPage} />
-              <Route path="/login">
-                <UserProvider>
-                  <Login />
-                </UserProvider>
-              </Route>
-              <Route path="/blocks">
-                <LoginWrapper>
-                  <BlocksPage />
-                </LoginWrapper>
-              </Route>
-              <Route path="/members">
-                <LoginWrapper>
-                  <EditMembersPage />
-                </LoginWrapper>
-              </Route>
-            </BlocksProvider>
-          </Switch>
-        </ScrollToTop>
-        <BottomBanner />
-      </div>
-    </Router>
-  </Provider>,
+  <Router>
+    <div>
+      <UserProvider>
+        <TopBar />
+      </UserProvider>
+      <ScrollToTop>
+        <Switch>
+          <BlocksProvider>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/home" component={LandingPage} />
+            <Route path="/programs" component={ProjectPage} />
+            <Route exact path="/team/officers" component={MembersPage} />
+            <Route path="/sponsors" component={SponsorsPage} />
+            <Route path="/test" component={test} />
+            <Route path="/team" component={SubsystemPage} />
+            <Route path="/join" component={RecruitmentPage} />
+            <Route path="/login">
+              <UserProvider>
+                <Login />
+              </UserProvider>
+            </Route>
+            <Route path="/blocks">
+              <LoginWrapper>
+                <BlocksPage />
+              </LoginWrapper>
+            </Route>
+            <Route path="/members">
+              <LoginWrapper>
+                <EditMembersPage />
+              </LoginWrapper>
+            </Route>
+          </BlocksProvider>
+        </Switch>
+      </ScrollToTop>
+      <BottomBanner />
+    </div>
+  </Router>,
 
   document.getElementById("root")
 );
