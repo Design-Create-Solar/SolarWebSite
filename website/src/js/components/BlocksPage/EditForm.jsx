@@ -4,7 +4,7 @@ import { Paper, Grid } from "@material-ui/core";
 import { showErrorOnBlur } from "mui-rff";
 import { makeStyles } from "@material-ui/styles";
 import { formFields } from "./formFields";
-import { BlocksContext } from "../../../context/BlocksContext";
+import { BlocksContext } from "./BlocksContext";
 import GFXField from "./GFXElems/GFXField";
 import GFXRadio from "./GFXElems/GFXRadio";
 import GFXDropzone from "./GFXElems/GFXDropzone";

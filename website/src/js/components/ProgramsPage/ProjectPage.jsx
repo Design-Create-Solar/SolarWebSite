@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { styled } from '@material-ui/styles';
 import InfoArea from '../MultiplePages/InfoArea';
-import { BlocksContext } from "../../../context/BlocksContext"
+import { BlocksContext } from "../BlocksPage/BlocksContext"
 
 function ProjectPage() {
 	const { blocks } = useContext(BlocksContext)
