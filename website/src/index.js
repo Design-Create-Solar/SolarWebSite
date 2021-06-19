@@ -14,7 +14,7 @@ import SponsorsPage from "./js/components/SponsorsPage/SponsorsPage";
 import SubsystemPage from "./js/components/MembersPage/SubsystemPage";
 import RecruitmentPage from "./js/components/RecruitmentPage/RecruitmentPage";
 import BlocksPage from "./js/components/BlocksPage/BlocksPage";
-import EditMembersPage from "./js/components/EditMembersPage/EditMembersPage";
+// import EditMembersPage from "./js/components/EditMembersPage/EditMembersPage";
 
 import TopBar from "./js/components/MultiplePages/TopBar";
 
@@ -25,49 +25,45 @@ import "./assets/base.css";
 import configureStore from "./config/configureStore";
 import { Provider } from "react-redux";
 
-import { UserProvider } from "./context/UserContext";
-import { BlocksProvider } from "./context/BlocksContext";
-import LoginWrapper from "./js/components/utils/LoginWrapper";
+import { UserProvider } from "./js/components/Login/UserContext";
+import { BlocksProvider } from "./js/components/BlocksPage/BlocksContext";
+import LoginWrapper from "./js/components/Login/LoginWrapper";
 
 const store = configureStore();
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <div>
         <UserProvider>
           <TopBar />
-        </UserProvider>
-        <ScrollToTop>
-          <Switch>
-            <BlocksProvider>
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/home" component={LandingPage} />
-              <Route path="/programs" component={ProjectPage} />
-              <Route exact path="/team/officers" component={MembersPage} />
-              <Route path="/sponsors" component={SponsorsPage} />
-              <Route path="/test" component={test} />
-              <Route path="/team" component={SubsystemPage} />
-              <Route path="/join" component={RecruitmentPage} />
-              <Route path="/login">
-                <UserProvider>
+          <ScrollToTop>
+            <Switch>
+              <BlocksProvider>
+                <Route exact path="/" component={LandingPage} />
+                <Route exact path="/home" component={LandingPage} />
+                <Route path="/programs" component={ProjectPage} />
+                <Route exact path="/team/officers" component={MembersPage} />
+                <Route path="/sponsors" component={SponsorsPage} />
+                <Route path="/test" component={test} />
+                <Route path="/team" component={SubsystemPage} />
+                <Route path="/join" component={RecruitmentPage} />
+                <Route path="/login">
                   <Login />
-                </UserProvider>
-              </Route>
-              <Route path="/blocks">
-                <LoginWrapper>
-                  <BlocksPage />
-                </LoginWrapper>
-              </Route>
-              <Route path="/members">
-                <LoginWrapper>
-                  <EditMembersPage />
-                </LoginWrapper>
-              </Route>
-            </BlocksProvider>
-          </Switch>
-        </ScrollToTop>
-        <BottomBanner />
-      </div>
+                </Route>
+                <Route path="/blocks">
+                  <LoginWrapper>
+                    <BlocksPage />
+                  </LoginWrapper>
+                </Route>
+                {/* <Route path="/editmembers">
+                  <LoginWrapper>
+                    <EditMembersPage />
+                  </LoginWrapper>
+                </Route> */}
+              </BlocksProvider>
+            </Switch>
+          </ScrollToTop>
+          <BottomBanner />
+        </UserProvider>
     </Router>
   </Provider>,
 
