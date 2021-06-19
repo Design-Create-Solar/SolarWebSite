@@ -4,7 +4,7 @@ import { Paper, Grid } from "@material-ui/core";
 import { formFields } from "./formFields";
 import GFXButton from "./GFXElems/GFXButton";
 import GFXDropzone from "./GFXElems/GFXDropzone";
-import { BlocksContext } from "../../../context/BlocksContext";
+import { BlocksContext } from "./BlocksContext";
 import "./Blocks.css";
 
 export default function AddForm() {

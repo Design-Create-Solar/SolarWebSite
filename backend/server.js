@@ -1,6 +1,7 @@
 // ENV VARIABLES
 const dotenv = require('dotenv').config();
 const fileUpload = require('express-fileupload');
+var cookieParser = require('cookie-parser');
 
 //Databases
 const mongoose = require('mongoose');
@@ -9,7 +10,9 @@ const express = require('express'),
 	app = express(),
 	PORT = 5000;
 const cors = require('cors');
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
+app.use(cookieParser());
 
 // app.use(bodyParser.json({ limit: '50mb' }));
 // app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
@@ -23,8 +26,6 @@ const dataRoutes = require('./routes/dataRoute'); //for time series db
 app.use('/data', dataRoutes);
 const authRoute = require('./routes/authRoute'); //contains register and login endpoints eg: /auth/register, /auth/login
 app.use('/auth', authRoute);
-const usersRoute = require('./routes/usersRoute');
-app.use('/users', usersRoute);
 const block = require('./routes/blockRoute'); //for website builder blocks
 app.use('/block', block);
 
