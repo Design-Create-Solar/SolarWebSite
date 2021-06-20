@@ -10,6 +10,7 @@ import GFXRadio from "./GFXElems/GFXRadio";
 import GFXDropzone from "./GFXElems/GFXDropzone";
 import GFXButton from "./GFXElems/GFXButton";
 import "./Blocks.css";
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 export default function EditForm() {
   const context = React.useContext(BlocksContext);
@@ -29,7 +30,7 @@ export default function EditForm() {
   }, [blocks])
 
   const onEdit = async (values) => {
-    await fetch("http://localhost:5000/block/updateByDBid/" + values.id, {
+    await fetch(`${BACK_BASE_URL}/block/updateByDBid/${values.id}`, {
       method: "PUT",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -40,7 +41,7 @@ export default function EditForm() {
   }
 
   const onDelete = async (id) => {
-    await fetch("http://localhost:5000/block/delete/" + id, {
+    await fetch(`${BACK_BASE_URL}/block/delete/${id}`, {
       method: "PUT",
       mode: "cors"
     })

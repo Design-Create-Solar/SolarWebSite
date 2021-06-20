@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import StyledButton from './StyledButton';
 import { UserContext } from '../Login/UserContext';
+import { BACK_BASE_URL } from '../MultiplePages/constants';
 
 const navInfo = [
 	{
@@ -74,7 +75,7 @@ function TopBar() {
 	const [dropdown, setDropdown] = useState(false);
 
 	useEffect(() => {
-    fetch("http://localhost:5000/auth/verify", {
+    fetch(`${BACK_BASE_URL}/auth/verify`, {
       credentials: 'include',
       mode: 'cors',
       headers: {
@@ -93,7 +94,7 @@ function TopBar() {
 	const setRoute = (str) => { history.push({ pathname: str }) }
 	const onDropdown = () => { setDropdown(!dropdown); }
 	const clearAuth = () => {
-		fetch("http://localhost:5000/auth/logout", {
+		fetch(`${BACK_BASE_URL}/auth/logout`, {
 			"method": "POST",
 			credentials: 'include',
       mode: 'cors',

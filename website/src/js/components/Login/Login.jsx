@@ -11,13 +11,14 @@ import { showErrorOnBlur } from "mui-rff";
 import { styled } from "@material-ui/styles";
 import { Paper, Grid } from "@material-ui/core";
 import { UserContext } from './UserContext';
+import { BACK_BASE_URL } from '../MultiplePages/constants';
 
 const Login = (props) => {
   const history = useHistory();
   const { setLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/auth/verify", {
+    fetch(`${BACK_BASE_URL}/auth/verify`, {
       credentials: 'include',
       mode: 'cors',
       headers: {
@@ -32,7 +33,7 @@ const Login = (props) => {
   }, []);
 
   const onSubmit = (values) => {
-    fetch("http://localhost:5000/auth/login", {
+    fetch(`${BACK_BASE_URL}/auth/login`, {
       method: "POST",
       credentials: 'include',
       mode: 'cors',

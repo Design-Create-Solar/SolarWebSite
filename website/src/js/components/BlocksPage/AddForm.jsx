@@ -6,6 +6,7 @@ import GFXButton from "./GFXElems/GFXButton";
 import GFXDropzone from "./GFXElems/GFXDropzone";
 import { BlocksContext } from "./BlocksContext";
 import "./Blocks.css";
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 export default function AddForm() {
   const context = React.useContext(BlocksContext);
@@ -24,8 +25,7 @@ export default function AddForm() {
     const newBlock = { page: "PROGRAMS", header, color, text, align, images: imgNames };
 
     await fetch(
-      "http://localhost:5000/block/create?" +
-      new URLSearchParams(newBlock),
+      `${BACK_BASE_URL}/block/create?${new URLSearchParams(newBlock)}`,
       {
         method: "POST",
         mode: "cors",

@@ -1,5 +1,5 @@
 import React from 'react';
-import MediaQuery from 'react-responsive'
+import MediaQuery from 'react-responsive';
 
 export const HOME_PAGE_DARK_COLOR = "black";
 //export const HOME_PAGE_DARK_COLOR = "#1d2951"; the dark blue
@@ -15,6 +15,8 @@ export const HOME_PAGE_TYPING_TEXT_COLOR = "#FFB81C";
 export const MEMBERS_PAGE_YELLOW = "gray";
 //export const MEMBERS_PAGE_YELLOW = "#ffee85";
 export const MEMBERS_PAGE_LIGHT_GRAY = "#888888";
+
+export const BACK_BASE_URL = process.env.NODE_ENV === "production" ? "http://designcreatesolar.org/api" : "http://localhost:5000";
 
 export const Desktop = (props) => <MediaQuery {...props} minDeviceWidth={1224} />;
 // export const Tablet = (props) => <MediaQuery {...props} minDeviceWidth={768} maxDeviceWidth={1224} />;

@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import socketIOClient from "socket.io-client";
+import {BACK_BASE_URL} from "../../../../MultiplePages/constants";
 
 import {
     Row, Col,
@@ -52,7 +53,7 @@ export default class AnalyticsDashboard1 extends Component {
             dropdownOpen: false,
             activeTab1: '11',
             data3: [],
-            endpoint: "http://127.0.0.1:5000",
+            endpoint: BACK_BASE_URL,
             response: false
         };
         this.toggle = this.toggle.bind(this);
@@ -81,7 +82,7 @@ export default class AnalyticsDashboard1 extends Component {
         const socket = socketIOClient(endpoint);
         socket.on("FromAPI", data => this.setState({ response: data }));
 
-        fetch("http://localhost:5000/data/query/BMS/all")
+        fetch(`${BACK_BASE_URL}/data/query/BMS/all`)
         .then(async results => {
             
             const resultJson = await results.json();
