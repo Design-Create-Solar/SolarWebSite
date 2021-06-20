@@ -10,7 +10,7 @@ const express = require('express'),
 	app = express(),
 	PORT = 5000;
 const cors = require('cors');
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: process.env.ENV === 'production' ? 'http://designcreatesolar.org' : 'http://localhost:3000'}));
 
 app.use(cookieParser());
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
+import { BACK_BASE_URL } from '../MultiplePages/constants';
 
 export default function LoginWrapper({ children }) {
     const [comp, setComp] = React.useState(
@@ -26,7 +27,7 @@ export default function LoginWrapper({ children }) {
     const history = useHistory();
     React.useEffect(() => {
         async function verify() {
-            const res = await fetch("http://localhost:5000/auth/verify", {
+            const res = await fetch(`${BACK_BASE_URL}/auth/verify`, {
                 credentials: 'include',
                 mode: 'cors',
                 headers: {
