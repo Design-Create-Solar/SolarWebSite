@@ -5,7 +5,7 @@ import * as constants from '../MultiplePages/constants';
 import '../../../../node_modules/video-react/dist/video-react.css'; // import css
 import { Player } from 'video-react';
 import { Default, Mobile, Desktop } from '../MultiplePages/constants';
-import { BlocksContext } from '../../../context/BlocksContext';
+import { BlocksContext } from '../BlocksPage/BlocksContext';
 
 function LandingPage() {
 	const { blocks } = useContext(BlocksContext);

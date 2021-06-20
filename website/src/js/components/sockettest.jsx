@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
+import { BACK_BASE_URL } from "./MultiplePages/constants";
+
 class App extends Component {
     constructor() {
         super();
         this.state = {
             response: false,
-            endpoint: "http://127.0.0.1:5000"
+            endpoint: BACK_BASE_URL
         };
     }
     componentDidMount() {

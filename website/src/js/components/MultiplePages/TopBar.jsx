@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { Default, Mobile, Desktop } from './constants';
-import { UserContext } from '../../../context/UserContext';
-import { styled, makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import StyledButton from './StyledButton';
+import { UserContext } from '../Login/UserContext';
+import { BACK_BASE_URL } from '../MultiplePages/constants';
 
 const navInfo = [
 	{
@@ -70,14 +71,45 @@ const useStyles = makeStyles(() => ({
 
 function TopBar() {
 	const history = useHistory();
-	const { userData, setUserData } = useContext(UserContext);
+	const { loggedIn, setLoggedIn } = useContext(UserContext);
 	const [dropdown, setDropdown] = useState(false);
+
+	useEffect(() => {
+    fetch(`${BACK_BASE_URL}/auth/verify`, {
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        "Access-Control-Allow-Credentials": true,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((res) => {
+      if (res.status === 200) setLoggedIn(true);
+			else setLoggedIn(false);
+    })
+    .catch((err) => console.error(err))
+  }, [loggedIn, setLoggedIn]);
+
 	const css = useStyles();
 	const setRoute = (str) => { history.push({ pathname: str }) }
 	const onDropdown = () => { setDropdown(!dropdown); }
 	const clearAuth = () => {
-		localStorage.removeItem('auth-token');
-		setUserData(null);
+		fetch(`${BACK_BASE_URL}/auth/logout`, {
+			"method": "POST",
+			credentials: 'include',
+      mode: 'cors',
+      headers: {
+        "Access-Control-Allow-Credentials": true,
+        'Content-Type': 'application/json',
+      },
+			body: JSON.stringify({ page: window.location.pathname })
+		})
+		.then((res) => {
+			if (res.status === 301) {
+				history.push("/")
+			}
+		});
+		setLoggedIn(false);
 	}
 
 	return (
@@ -93,7 +125,7 @@ function TopBar() {
 						<Desktop>
 							<Box className={css.boxDesktop}>
 								<Header arr={[...navInfo]} onRoute={setRoute} />
-								{userData && userData.token !== null ? (
+								{loggedIn ? (
 									<>
 										<div className={css.flexVertical} style={{ order: navInfo.length + 1 }}>
 											<StyledButton
@@ -106,10 +138,10 @@ function TopBar() {
 												<div className={css.dropdown}>
 													<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
 														Blocks
-												</StyledButton>
-													<StyledButton className={css.button} onClick={() => setRoute("/members")}>
+													</StyledButton>
+													{/* <StyledButton className={css.button} onClick={() => setRoute("/members")}>
 														Members
-												</StyledButton>
+													</StyledButton> */}
 												</div>
 											) : ''}
 										</div>
@@ -135,7 +167,7 @@ function TopBar() {
 						<Default>
 							<Box className={css.boxDesktop}>
 								<Header arr={[...navInfo]} onRoute={setRoute} />
-								{userData && userData.token !== null ? (
+								{loggedIn ? (
 									<>
 										<StyledButton
 											style={{ order: navInfo.length + 1 }}
@@ -148,10 +180,10 @@ function TopBar() {
 											<div className={css.dropdown}>
 												<StyledButton className={css.button} onClick={() => setRoute("/blocks")}>
 													Blocks
-											</StyledButton>
-												<StyledButton className={css.button} onClick={() => setRoute("/members")}>
+												</StyledButton>
+												{/* <StyledButton className={css.button} onClick={() => setRoute("/members")}>
 													Members
-											</StyledButton>
+												</StyledButton> */}
 											</div>) : 0}
 										<StyledButton
 											style={{ order: navInfo.length + 2 }}

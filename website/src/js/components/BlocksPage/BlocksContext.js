@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 
-const BlocksContext = React.createContext()
+const BlocksContext = React.createContext();
 
 function BlocksProvider(props) {
     const [blocks, setBlocks] = useState([]);
@@ -31,7 +32,7 @@ function BlocksProvider(props) {
 
     useEffect(() => {
         let mounted = true
-        fetch("http://localhost:5000/block/getBlocks")
+        fetch(`${BACK_BASE_URL}/block/getBlocks`)
             .then(data => data.json())
             .then(blocks => {
                 if (mounted) setBlocks(blocks)
