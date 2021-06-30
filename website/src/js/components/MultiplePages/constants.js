@@ -18,7 +18,7 @@ export const MEMBERS_PAGE_LIGHT_GRAY = "#888888";
 
 export const BACK_BASE_URL = process.env.NODE_ENV === "production" ? "http://designcreatesolar.org/api" : "http://localhost:5000";
 
-export const Desktop = (props) => <MediaQuery {...props} minDeviceWidth={1224} />;
+export const Desktop = (props) => <MediaQuery {...props} minDeviceWidth={1225} />;
 // export const Tablet = (props) => <MediaQuery {...props} minDeviceWidth={768} maxDeviceWidth={1224} />;
-export const Mobile = (props) => <MediaQuery {...props} maxDeviceWidth={767} />;
+export const Mobile = (props) => <MediaQuery {...props} maxDeviceWidth={766} />;
 export const Default = (props) => <MediaQuery {...props} minDeviceWidth={767} maxDeviceWidth={1224} />;
