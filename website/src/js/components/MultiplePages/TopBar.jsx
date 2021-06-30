@@ -24,7 +24,7 @@ const navInfo = [
 	},
 	{
 		name: 'Team',
-		link: '/team/officers',
+		link: '/team',
 	},
 	{
 		name: 'Join',
