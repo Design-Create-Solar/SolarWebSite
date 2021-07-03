@@ -8,7 +8,7 @@ const StyledButton = withStyles({
 		borderRadius: 0,
 		border: 0,
 		color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,
-		miHeight: 48,
+		minHeight: 48,
 		padding: '10px 10px 10px 10px',
 		fontSize: '20px',
 		fontFamily: 'Futura',

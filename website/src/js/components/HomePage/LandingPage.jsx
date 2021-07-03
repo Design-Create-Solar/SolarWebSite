@@ -19,13 +19,13 @@ function LandingPage() {
 				<Info>
 					<InfoHeader>{headerName}</InfoHeader>
 					<ActualText>{textStuff}</ActualText>
-					<div style={{ paddingBottom: "5rem" }}>
+					<PaddedBottom>
 						<Player
 							playsInline
 							autoplay={false}
 							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
 						/>
-					</div>
+					</PaddedBottom>
 					<Player
 						playsInline
 						autoplay={false}
@@ -37,13 +37,13 @@ function LandingPage() {
 				<Info>
 					<InfoHeader>{headerName}</InfoHeader>
 					<ActualText>{textStuff}</ActualText>
-					<div style={{ paddingBottom: "5rem" }}>
+					<PaddedBottom>
 						<Player
 							playsInline
 							autoplay={false}
 							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
 						/>
-					</div>
+					</PaddedBottom>
 					<Player
 						playsInline
 						autoplay={false}
@@ -54,34 +54,41 @@ function LandingPage() {
 			<Mobile>
 				<InfoMobile>
 					<InfoHeader>{headerName}</InfoHeader>
-					<ActualText mobile>{textStuff}</ActualText>
-					<div style={{ paddingBottom: "5rem" }}>
+					<ActualText>{textStuff}</ActualText>
+					<PaddedBottom>
 						<Player
 							playsInline
 							autoplay={false}
 							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
 						/>
-					</div>
-					<Player
-						playsInline
-						autoplay={false}
-						src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
-					/>
+					</PaddedBottom>
+					<PaddedBottom>
+						<Player
+							playsInline
+							autoplay={false}
+							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
+						/>
+					</PaddedBottom>
 				</InfoMobile>
 			</Mobile>
 		</Container>
 	);
 }
 
+const PaddedBottom = styled('div')({
+	paddingBottom: '5rem',
+});
+
 const InfoMobile = styled('div')({
 	textAlign: 'center',
 	fontFamily: 'Futura',
-	fontSize: '2em',
-	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR
+	fontSize: '1.9em',
+	margin: '3rem 2rem 0 2rem',
+	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
 });
 
 const Info = styled('div')({
-	padding: '4em 5em',
+	padding: '2em',
 	// margin: "0 5em",
 	textAlign: 'center',
 	fontFamily: 'Futura',
@@ -101,7 +108,7 @@ const Container = styled('div')({
 
 const InfoHeader = styled('h4')({
 	fontWeight: 500,
-	fontSize: '1.5em',
+	fontSize: '2.3rem',
 	textTransform: 'uppercase',
 	fontFamily: 'Futura',
 	color: constants.HOME_PAGE_DARK_COLOR

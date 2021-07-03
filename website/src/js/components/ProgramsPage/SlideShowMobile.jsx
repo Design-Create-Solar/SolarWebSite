@@ -10,7 +10,6 @@ const fadeProperties = {
 };
 
 const SlideshowMobile = props => {
-	console.log(props);
 	return (
 		<div className='slide-container-mobile'>
 			<Fade {...fadeProperties}>
