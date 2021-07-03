@@ -23,6 +23,7 @@ class SponsorsPage extends Component {
             alignItems: "center",
             justifyContent: "center",
             display: "flex",
+            textAlign: "center",
           }}
         >
           Sponsorship Packet:{" "}

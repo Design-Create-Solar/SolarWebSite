@@ -44,10 +44,9 @@ class MembersPage extends Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.teamName !== this.state.teamName) {
-      this.state.teamsData.filter((obj) => {
-        console.log(obj)
-        return obj["Name"] === this.state.teamName
-      })
+      this.state.teamsData.filter((obj) =>
+        obj["Name"] === this.state.teamName
+      );
     }
   }
 
@@ -375,7 +374,7 @@ const Back = styled("div")({
 
 const ImageThing = styled("div")({
     height: "70%",
-    backgroundSize: "contain", 
+    backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     flexGrow: 1,

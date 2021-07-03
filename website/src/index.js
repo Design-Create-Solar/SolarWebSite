@@ -15,7 +15,7 @@ import RecruitmentPage from "./js/components/RecruitmentPage/RecruitmentPage";
 import BlocksPage from "./js/components/BlocksPage/BlocksPage";
 // import EditMembersPage from "./js/components/EditMembersPage/EditMembersPage";
 
-import TopBar from "./js/components/MultiplePages/TopBar";
+import SideMenu from "./js/components/MultiplePages/SideMenu";
 
 import "./futura/futur.ttf";
 import test from "./js/components/sockettest.jsx";
@@ -29,7 +29,7 @@ import LoginWrapper from "./js/components/Login/LoginWrapper";
 ReactDOM.render(
   <Router>
     <UserProvider>
-      <TopBar />
+      <SideMenu />
       <ScrollToTop>
         <Switch>
           <BlocksProvider>
@@ -37,7 +37,7 @@ ReactDOM.render(
             <Route exact path="/home" component={LandingPage} />
             <Route path="/programs" component={ProjectPage} />
             <Route path="/sponsors" component={SponsorsPage} />
-            <Route path="/test" component={test} />
+            <Route path="/test" component={SideMenu} />
             <Route path="/team" component={MembersPage} />
             <Route path="/join" component={RecruitmentPage} />
             <Route path="/login" component={Login} />
