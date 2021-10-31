@@ -1,45 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { BACK_BASE_URL } from "../MultiplePages/constants";
 
-const BlocksContext = React.createContext();
+const BlocksContext = createContext();
 
 function BlocksProvider(props) {
-    const [blocks, setBlocks] = useState([]);
+  const [blocks, setBlocks] = useState([]);
 
-    function validate(values) {
-        const errors = {};
-        if (!values.header) {
-            errors.header = "Provide a valid heading/title.";
-        }
-        if (!values.color) {
-            errors.color = "Provide a valid color, preferably in hexadecimal.";
-        }
-        if (!values.text) {
-            errors.text = "Provide some text to support your header.";
-        }
-        // if (!values.images) {
-        //   errors.images = "Provide at least one image(s).";
-        // }
-        return errors;
-    };
+  function validate(values) {
+    const errors = {};
+    if (!values.header) {
+      errors.header = "Provide a valid heading/title.";
+    }
+    if (!values.color) {
+      errors.color = "Provide a valid color, preferably in hexadecimal.";
+    }
+    if (!values.text) {
+      errors.text = "Provide some text to support your header.";
+    }
+    // if (!values.images) {
+    //   errors.images = "Provide at least one image(s).";
+    // }
+    return errors;
+  }
 
-    useEffect(() => {
-        let mounted = true
-        fetch(`${BACK_BASE_URL}/block/getBlocks`)
-            .then(data => data.json())
-            .then(blocks => {
-                if (mounted) setBlocks(blocks)
-            })
-        return () => mounted = false
-    }, [])
+  useEffect(() => {
+    let mounted = true;
+    fetch(`${BACK_BASE_URL}/block/getBlocks`)
+      .then((data) => data.json())
+      .then((blocks) => {
+        if (mounted) setBlocks(blocks);
+      });
+    return () => (mounted = false);
+  }, []);
 
-    return (
-        <BlocksContext.Provider value={{
-            blocks,
-            setBlocks,
-            validate
-        }}>{props.children}</BlocksContext.Provider>
-    );
+  return (
+    <BlocksContext.Provider
+      value={{
+        blocks,
+        setBlocks,
+        validate,
+      }}
+    >
+      {props.children}
+    </BlocksContext.Provider>
+  );
 }
 
-export { BlocksContext, BlocksProvider }
+export { BlocksContext, BlocksProvider };

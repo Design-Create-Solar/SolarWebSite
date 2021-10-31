@@ -1,0 +1,42 @@
+.pad {
+  padding-bottom: 5rem;
+}
+
+.info-mobile {
+  text-align: center;
+  font-family: "Futura";
+  font-size: 1.9em;
+  margin: 3rem 2rem 0 2rem;
+  background-color: var(--home-light);
+}
+
+.info {
+  padding: 2em;
+  text-align: center;
+  font-family: "Futura";
+  font-size: 2em;
+  background-color: var(--home-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: none;
+}
+
+.header {
+  font-weight: 500;
+  font-size: 2.3rem;
+  text-transform: uppercase;
+  font-family: "Futura";
+  color: var(--home-dark);
+}
+
+.text {
+  color: var(--dark-text);
+  padding-bottom: 1.5rem;
+}

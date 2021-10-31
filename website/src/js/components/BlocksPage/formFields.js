@@ -1,14 +1,13 @@
 import React from "react";
 import * as constants from "../MultiplePages/constants";
-import GFXField from "./GFXElems/GFXField";
-import GFXRadio from "./GFXElems/GFXRadio";
+import { Field, Radio } from "../MultiplePages/GFXElems";
 import { showErrorOnBlur } from "mui-rff";
 
 export const formFields = [
   {
     size: 12,
     field: (
-      <GFXField
+      <Field
         label="header"
         name="header"
         margin="none"
@@ -20,7 +19,7 @@ export const formFields = [
   {
     size: 12,
     field: (
-      <GFXRadio
+      <Radio
         label="Color"
         name="color"
         margin="none"
@@ -36,7 +35,7 @@ export const formFields = [
   {
     size: 12,
     field: (
-      <GFXField
+      <Field
         multiline
         label="text"
         name="text"
@@ -49,7 +48,7 @@ export const formFields = [
   {
     size: 12,
     field: (
-      <GFXRadio
+      <Radio
         label="Align"
         name="align"
         margin="none"

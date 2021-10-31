@@ -1,0 +1,21 @@
+.iframe {
+  /* frame-border: 0; */
+  margin: 0;
+  width: 640;
+  height: 975;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  background-color: var(--home-dark);
+}
