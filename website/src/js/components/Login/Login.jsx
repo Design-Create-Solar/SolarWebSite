@@ -3,15 +3,13 @@ import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
 
 import * as constants from "../MultiplePages/constants";
-import GFXField from "./GFXField";
-import GFXButton from "./GFXButton";
-
+import { Field, Button } from "../MultiplePages/GFXElems";
 import { showErrorOnBlur } from "mui-rff";
 
 import { styled } from "@material-ui/styles";
 import { Paper, Grid } from "@material-ui/core";
-import { UserContext } from './UserContext';
-import { BACK_BASE_URL } from '../MultiplePages/constants';
+import { UserContext } from "./UserContext";
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 const Login = (props) => {
   const history = useHistory();
@@ -19,45 +17,47 @@ const Login = (props) => {
 
   useEffect(() => {
     fetch(`${BACK_BASE_URL}/auth/verify`, {
-      credentials: 'include',
-      mode: 'cors',
+      credentials: "include",
+      mode: "cors",
       headers: {
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
-    .then((res) => {
-      if (res.status === 200) history.push("/blocks");
-    })
-    .catch((err) => console.log(err))
-  }, []);
+      .then((res) => {
+        if (res.status === 200) {
+          history.push("/blocks");
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [history]);
 
   const onSubmit = (values) => {
     console.log(`req sent to ${BACK_BASE_URL}/auth/login`);
     fetch(`${BACK_BASE_URL}/auth/login`, {
       method: "POST",
-      credentials: 'include',
-      mode: 'cors',
+      credentials: "include",
+      mode: "cors",
       headers: {
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: values.username,
         password: values.password,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          setLoggedIn(true);
+          // history.push("/auth-success"); // send user to random page
+          history.push("/blocks");
+        } else alert("Wrong username or password");
       })
-    })
-    .then((res) => {
-      if (res.status === 200) {
-        setLoggedIn(true);
-        // history.push("/auth-success"); // send user to random page
-        history.push("/blocks");
-      } else alert("Wrong username or password");
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("Failed to login.");
-    });
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to login.");
+      });
   };
 
   const validate = (values) => {
@@ -75,7 +75,7 @@ const Login = (props) => {
     {
       size: 12,
       field: (
-        <GFXField
+        <Field
           label="username"
           name="username"
           margin="none"
@@ -87,7 +87,7 @@ const Login = (props) => {
     {
       size: 12,
       field: (
-        <GFXField
+        <Field
           label="pass"
           name="password"
           type="password"
@@ -143,24 +143,24 @@ const Login = (props) => {
                   ))}
                 </Grid>
                 <Grid item style={{ marginTop: 50 }}>
-                  <GFXButton
+                  <Button
                     type="button"
                     variant="contained"
                     onClick={form.reset}
                     disabled={submitting || pristine}
                   >
                     Reset
-                  </GFXButton>
+                  </Button>
                 </Grid>
                 <Grid item style={{ marginTop: 16 }}>
-                  <GFXButton
+                  <Button
                     variant="contained"
                     color="primary"
                     type="submit"
                     disabled={submitting}
                   >
                     Submit
-                  </GFXButton>
+                  </Button>
                 </Grid>
               </Grid>
             </Paper>

@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Form } from "react-final-form";
 import { Paper, Grid } from "@material-ui/core";
 import { formFields } from "./formFields";
-import GFXButton from "./GFXElems/GFXButton";
-import GFXDropzone from "./GFXElems/GFXDropzone";
+import GFXButton from "../MultiplePages/GFXElems/GFXButton";
+import GFXDropzone from "../MultiplePages/GFXElems/GFXDropzone";
 import { BlocksContext } from "./BlocksContext";
 import "./Blocks.css";
 import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 export default function AddForm() {
-  const context = React.useContext(BlocksContext);
+  const context = useContext(BlocksContext);
   const { blocks, setBlocks, validate } = context;
 
-  const [images, setImages] = React.useState([]);
+  const [images, setImages] = useState([]);
 
   const onSubmit = async (values) => {
     const { header, color, text, align } = values;
@@ -22,9 +22,16 @@ export default function AddForm() {
     images.forEach((img, i) => {
       formdata.append("file" + i, img);
       imgNames.push(`myapp/${img.name}`);
-    })
+    });
 
-    const newBlock = { page: "PROGRAMS", header, color, text, align, images: imgNames };
+    const newBlock = {
+      page: "PROGRAMS",
+      header,
+      color,
+      text,
+      align,
+      images: imgNames,
+    };
 
     await fetch(
       `${BACK_BASE_URL}/block/create?${new URLSearchParams(newBlock)}`,
@@ -35,12 +42,12 @@ export default function AddForm() {
       }
     )
       .then((data) => data.json())
-      .then(({newId, fileNames}) => {
-        setBlocks([...blocks, { ...newBlock, images: fileNames, _id: newId }])
+      .then(({ newId, fileNames }) => {
+        setBlocks([...blocks, { ...newBlock, images: fileNames, _id: newId }]);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
 
-    window.alert("Block successfully added!")
+    window.alert("Block successfully added!");
   };
   return (
     <Form
@@ -57,12 +64,7 @@ export default function AddForm() {
               backgroundColor: "#1F1B24",
             }}
           >
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              spacing={2}
-            >
+            <Grid container direction="column" alignItems="center" spacing={2}>
               <Grid container alignItems="flex-end" spacing={5}>
                 {formFields.map((item, idx) => (
                   <Grid item xs={item.size} key={idx}>
@@ -87,7 +89,7 @@ export default function AddForm() {
                   disabled={submitting || pristine}
                 >
                   Reset
-                  </GFXButton>
+                </GFXButton>
               </Grid>
               <Grid item style={{ marginTop: 16 }}>
                 <GFXButton
@@ -97,12 +99,12 @@ export default function AddForm() {
                   disabled={submitting}
                 >
                   Add Block
-                  </GFXButton>
+                </GFXButton>
               </Grid>
             </Grid>
           </Paper>
         </form>
       )}
     />
-  )
+  );
 }

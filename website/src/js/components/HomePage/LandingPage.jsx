@@ -1,122 +1,74 @@
-import React, { useContext } from 'react';
-import LogoHolder from './LogoHolder';
-import { styled } from '@material-ui/styles';
-import * as constants from '../MultiplePages/constants';
-import '../../../../node_modules/video-react/dist/video-react.css'; // import css
-import { Player } from 'video-react';
-import { Default, Mobile, Desktop } from '../MultiplePages/constants';
-import { BlocksContext } from '../BlocksPage/BlocksContext';
+import React, { useContext } from "react";
+import { BlocksContext } from "../BlocksPage/BlocksContext";
 
-function LandingPage() {
-	const { blocks } = useContext(BlocksContext)
-	const homepageBlocks = blocks.filter((block) => block.page === "HOME")
-	const headerName = homepageBlocks[0]?.header
-	const textStuff = homepageBlocks[0]?.text
-	return (
-		<Container>
-			<LogoHolder />
-			<Desktop>
-				<Info>
-					<InfoHeader>{headerName}</InfoHeader>
-					<ActualText>{textStuff}</ActualText>
-					<PaddedBottom>
-						<Player
-							playsInline
-							autoplay={false}
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
-						/>
-					</PaddedBottom>
-					<Player
-						playsInline
-						autoplay={false}
-						src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
-					/>
-				</Info>
-			</Desktop>
-			<Default>
-				<Info>
-					<InfoHeader>{headerName}</InfoHeader>
-					<ActualText>{textStuff}</ActualText>
-					<PaddedBottom>
-						<Player
-							playsInline
-							autoplay={false}
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
-						/>
-					</PaddedBottom>
-					<Player
-						playsInline
-						autoplay={false}
-						src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
-					/>
-				</Info>
-			</Default>
-			<Mobile>
-				<InfoMobile>
-					<InfoHeader>{headerName}</InfoHeader>
-					<ActualText>{textStuff}</ActualText>
-					<PaddedBottom>
-						<Player
-							playsInline
-							autoplay={false}
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4'
-						/>
-					</PaddedBottom>
-					<PaddedBottom>
-						<Player
-							playsInline
-							autoplay={false}
-							src='https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4'
-						/>
-					</PaddedBottom>
-				</InfoMobile>
-			</Mobile>
-		</Container>
-	);
-}
+import { Player } from "video-react";
+import "../../../../node_modules/video-react/dist/video-react.css";
 
-const PaddedBottom = styled('div')({
-	paddingBottom: '5rem',
-});
+import { Default, Mobile, Desktop } from "../MultiplePages/constants";
+import LogoHolder from "./LogoHolder";
 
-const InfoMobile = styled('div')({
-	textAlign: 'center',
-	fontFamily: 'Futura',
-	fontSize: '1.9em',
-	margin: '3rem 2rem 0 2rem',
-	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
-});
+import styles from "./LandingPage.module.css";
 
-const Info = styled('div')({
-	padding: '2em',
-	// margin: "0 5em",
-	textAlign: 'center',
-	fontFamily: 'Futura',
-	fontSize: '2em',
-	backgroundColor: constants.HOME_PAGE_LIGHT_COLOR,
-	display: "flex",
-	flexDirection: "column"
-});
+const LandingPage = () => {
+  const { blocks } = useContext(BlocksContext);
+  const homepageBlocks = blocks.filter((block) => block.page === "HOME");
+  const header = homepageBlocks[0]?.header;
+  const text = homepageBlocks[0]?.text;
 
-const Container = styled('div')({
-	display: 'flex',
-	flexDirection: 'column',
-	width: '100%',
-	height: '100%',
-	overflow: 'none'
-});
+  const Block = () => {
+    return (
+      <div className={styles.info}>
+        <h4 className={styles.header}>{header}</h4>
+        <div className={styles.text}>{text}</div>
+        <div className={styles.pad}>
+          <Player
+            playsInline
+            autoplay={false}
+            src="https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4"
+          />
+        </div>
+        <Player
+          playsInline
+          autoplay={false}
+          src="https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4"
+        />
+      </div>
+    );
+  };
 
-const InfoHeader = styled('h4')({
-	fontWeight: 500,
-	fontSize: '2.3rem',
-	textTransform: 'uppercase',
-	fontFamily: 'Futura',
-	color: constants.HOME_PAGE_DARK_COLOR
-});
+  return (
+    <div className="landing">
+      <LogoHolder />
+      <Desktop>
+        <Block />
+      </Desktop>
+      <Default>
+        <Block />
+      </Default>
+      <Mobile>
+        <div className={styles.infoMobile}>
+          <div className={styles.info}>
+            <h4 className={styles.header}>{header}</h4>
+            <div className={styles.text}>{text}</div>
+            <div className={styles.pad}>
+              <Player
+                playsInline
+                autoplay={false}
+                src="https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/club-vid.mp4"
+              />
+            </div>
+            <div className="pad">
+              <Player
+                playsInline
+                autoplay={false}
+                src="https://elasticbeanstalk-us-west-2-127661128201.s3-us-west-2.amazonaws.com/site-content/Hydroponics+Video.mp4"
+              />
+            </div>
+          </div>
+        </div>
+      </Mobile>
+    </div>
+  );
+};
 
-const ActualText = styled('div')({
-	color: constants.HOME_PAGE_DARK_TEXT_COLOR,
-	paddingBottom: "1.5rem"
-});
-
-export default LandingPage
+export default LandingPage;

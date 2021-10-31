@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const EditMembersPage = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return <div>{/* TODO */}</div>;
+};
 
-export default EditMembersPage
+export default EditMembersPage;

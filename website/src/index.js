@@ -18,7 +18,7 @@ import BlocksPage from "./js/components/BlocksPage/BlocksPage";
 import SideMenu from "./js/components/MultiplePages/SideMenu";
 
 import "./futura/futur.ttf";
-import test from "./js/components/sockettest.jsx";
+// import test from "./js/components/sockettest.jsx";
 
 import "./assets/base.css";
 

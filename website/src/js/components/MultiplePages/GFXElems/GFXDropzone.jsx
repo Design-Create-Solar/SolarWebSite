@@ -1,7 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
-import * as constants from "../../MultiplePages/constants";
-import { DropzoneArea } from 'material-ui-dropzone'
-
+import * as constants from "../constants";
+import { DropzoneArea } from "material-ui-dropzone";
 
 const GFXDropzone = withStyles({
   root: {
@@ -27,8 +26,6 @@ const GFXDropzone = withStyles({
       "& .MuiDropzoneArea-icon": {
         color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,
       },
-
-
     },
 
     "& .MuiDropzoneArea-active": {
@@ -51,7 +48,6 @@ const GFXDropzone = withStyles({
       fontFamily: "Futura",
       width: "36px",
       margin: "0",
-
     },
   },
 })(DropzoneArea);

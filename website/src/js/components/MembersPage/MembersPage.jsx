@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as constants from "../MultiplePages/constants";
 import "./card.css";
-import Tabletop from "tabletop";
+// import Tabletop from "tabletop";
 import FlipCard from "react-flipcard-2";
 import { styled } from "@material-ui/styles";
 import StyledButton from "../MultiplePages/StyledButton";
@@ -44,32 +44,29 @@ class MembersPage extends Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.teamName !== this.state.teamName) {
-      this.state.teamsData.filter((obj) =>
-        obj["Name"] === this.state.teamName
-      );
+      this.state.teamsData.filter((obj) => obj["Name"] === this.state.teamName);
     }
   }
 
   componentDidMount() {
-    Tabletop.init({
-      // key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k", // 2019-2020
-      key: "1Wa4MF0b-60QC1rmuP6A2jJmMIJL62NlvlG-NhhaCnR0", // 2020-2021
-      callback: (googleData) => {
-        this.setState({
-          membersData: googleData,
-        });
-      },
-      simpleSheet: true,
-    });
-    Tabletop.init({
-      key: "1bOLQA-3072h9-_BmdceXsM4QT3aREskoQSeOQ42kg5k",
-      callback: (googleData) => {
-        this.setState({
-          teamsData: googleData,
-        });
-      },
-      simpleSheet: true,
-    });
+    // Tabletop.init({
+    //   key: "https://docs.google.com/spreadsheets/d/1lcp2ovegwMb3Zb0r6l9-Y5gDKvCDYae06-nj_50iiog/edit?usp=sharing",
+    //   callback: (googleData) => {
+    //     this.setState({
+    //       membersData: googleData,
+    //     });
+    //   },
+    //   simpleSheet: true,
+    // });
+    // Tabletop.init({
+    //   key: "124guwEjc7R_D7vGsppeW2pQBkFJuqH6pt5a8qY0aya4",
+    //   callback: (googleData) => {
+    //     this.setState({
+    //       teamsData: googleData,
+    //     });
+    //   },
+    //   simpleSheet: true,
+    // });
   }
 
   render() {
@@ -87,9 +84,7 @@ class MembersPage extends Component {
               </a>
             </MiniHeader>
             {/* <MeetingInfo>Where: Boelter SCC Space</MeetingInfo> */}
-            <MiniHeader>
-              The Rest of the Team
-            </MiniHeader>
+            <MiniHeader>The Rest of the Team</MiniHeader>
             <div className="grid-container">
               <StyledButton
                 onClick={() => this.setState({ teamName: "officers" })}
@@ -106,22 +101,19 @@ class MembersPage extends Component {
                 );
               })}
             </div>
-            {
-              teamName === "officers" ? (
-                <MiniHeader>Officers:{" "}</MiniHeader>
-              ) : (
-                teamsData
+            {teamName === "officers" ? (
+              <MiniHeader>Officers: </MiniHeader>
+            ) : (
+              teamsData
                 .filter((obj) => obj["Name"] === teamName)
                 .map((obj) => <TeamDescrip>{obj.Descrip}</TeamDescrip>)
-              )
-            }
+            )}
           </Heading>
           <div className="grid-container">
             <TransitionGroup component={null}>
               {membersData
                 .filter((obj) => {
-                  if (teamName === "officers")
-                    return obj["IsLead"] === "TRUE";
+                  if (teamName === "officers") return obj["IsLead"] === "TRUE";
                   else return obj["Team"] === teamName;
                 })
                 .map((obj) => {
@@ -137,7 +129,9 @@ class MembersPage extends Component {
                             flexDirection: "column",
                           }}
                         >
-                          <ImageThing style={{ backgroundImage: `url(${obj.Image})` }} />
+                          <ImageThing
+                            style={{ backgroundImage: `url(${obj.Image})` }}
+                          />
                           <TextPart>
                             <div>{obj.Name}</div>
                             <div>{obj.Position}</div>
@@ -166,9 +160,7 @@ class MembersPage extends Component {
                 Meeting Link
               </a>
             </MiniHeader>
-            <MiniHeader>
-              The Rest of the Team
-            </MiniHeader>
+            <MiniHeader>The Rest of the Team</MiniHeader>
             <div className="grid-container">
               <StyledButton
                 onClick={() => this.setState({ teamName: "officers" })}
@@ -185,26 +177,22 @@ class MembersPage extends Component {
                 );
               })}
             </div>
-            {
-              teamName === "officers" ? (
-                <MiniHeader>Officers:{" "}</MiniHeader>
-              ) : (
-                teamsData
+            {teamName === "officers" ? (
+              <MiniHeader>Officers: </MiniHeader>
+            ) : (
+              teamsData
                 .filter((obj) => {
-                  if (teamName === "officers")
-                    return obj["IsLead"] === "TRUE";
+                  if (teamName === "officers") return obj["IsLead"] === "TRUE";
                   else return obj["Name"] === teamName;
                 })
                 .map((obj) => <TeamDescrip>{obj.Descrip}</TeamDescrip>)
-              )
-            }
+            )}
           </Heading>
           <div className="grid-container">
             <TransitionGroup component={null}>
               {membersData
                 .filter((obj) => {
-                  if (teamName === "officers")
-                    return obj["IsLead"] === "TRUE";
+                  if (teamName === "officers") return obj["IsLead"] === "TRUE";
                   else return obj["Team"] === teamName;
                 })
                 .map((obj) => {
@@ -220,7 +208,9 @@ class MembersPage extends Component {
                             flexDirection: "column",
                           }}
                         >
-                          <ImageThing style={{ backgroundImage: `url(${obj.Image})` }} />
+                          <ImageThing
+                            style={{ backgroundImage: `url(${obj.Image})` }}
+                          />
                           <TextPart>
                             <div>{obj.Name}</div>
                             <div>{obj.Position}</div>
@@ -281,22 +271,19 @@ class MembersPage extends Component {
                 );
               })}
             </div>
-            {
-              teamName === "officers" ? (
-                <MiniHeader>Officers:{" "}</MiniHeader>
-              ) : (
-                teamsData
+            {teamName === "officers" ? (
+              <MiniHeader>Officers: </MiniHeader>
+            ) : (
+              teamsData
                 .filter((obj) => obj["Name"] === teamName)
                 .map((obj) => <TeamDescrip>{obj.Descrip}</TeamDescrip>)
-              )
-            }
+            )}
           </Heading>
           <div className="grid-container">
             <TransitionGroup component={null}>
               {membersData
                 .filter((obj) => {
-                  if (teamName === "officers")
-                    return obj["IsLead"] === "TRUE";
+                  if (teamName === "officers") return obj["IsLead"] === "TRUE";
                   else return obj["Team"] === teamName;
                 })
                 .map((obj) => {
@@ -312,7 +299,9 @@ class MembersPage extends Component {
                             flexDirection: "column",
                           }}
                         >
-                          <ImageThing style={{ backgroundImage: `url(${obj.Image})` }} />
+                          <ImageThing
+                            style={{ backgroundImage: `url(${obj.Image})` }}
+                          />
                           <TextPart>
                             <div>{obj.Name}</div>
                             <div>{obj.Position}</div>
@@ -373,12 +362,12 @@ const Back = styled("div")({
 });
 
 const ImageThing = styled("div")({
-    height: "70%",
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    flexGrow: 1,
-    marginBottom: "1rem",
+  height: "70%",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  flexGrow: 1,
+  marginBottom: "1rem",
 });
 
 const TextPart = styled("div")({
