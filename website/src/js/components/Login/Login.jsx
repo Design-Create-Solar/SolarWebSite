@@ -10,8 +10,8 @@ import { showErrorOnBlur } from "mui-rff";
 
 import { styled } from "@material-ui/styles";
 import { Paper, Grid } from "@material-ui/core";
-import { UserContext } from './UserContext';
-import { BACK_BASE_URL } from '../MultiplePages/constants';
+import { UserContext } from "./UserContext";
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 const Login = (props) => {
   const history = useHistory();
@@ -19,45 +19,45 @@ const Login = (props) => {
 
   useEffect(() => {
     fetch(`${BACK_BASE_URL}/auth/verify`, {
-      credentials: 'include',
-      mode: 'cors',
+      credentials: "include",
+      mode: "cors",
       headers: {
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
-    .then((res) => {
-      if (res.status === 200) history.push("/blocks");
-    })
-    .catch((err) => console.log(err))
-  }, []);
+      .then((res) => {
+        if (res.status === 200) history.push("/blocks");
+      })
+      .catch((err) => console.log(err));
+  });
 
   const onSubmit = (values) => {
     console.log(`req sent to ${BACK_BASE_URL}/auth/login`);
     fetch(`${BACK_BASE_URL}/auth/login`, {
       method: "POST",
-      credentials: 'include',
-      mode: 'cors',
+      credentials: "include",
+      mode: "cors",
       headers: {
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: values.username,
         password: values.password,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          setLoggedIn(true);
+          // history.push("/auth-success"); // send user to random page
+          history.push("/blocks");
+        } else alert("Wrong username or password");
       })
-    })
-    .then((res) => {
-      if (res.status === 200) {
-        setLoggedIn(true);
-        // history.push("/auth-success"); // send user to random page
-        history.push("/blocks");
-      } else alert("Wrong username or password");
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("Failed to login.");
-    });
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to login.");
+      });
   };
 
   const validate = (values) => {
