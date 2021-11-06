@@ -1,399 +1,369 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import "./card.css";
-import { styled } from "@material-ui/styles";
-import Tabletop from "tabletop";
 import FlipCard from "react-flipcard-2";
-import bruh from "styled-components";
+import { styled } from "@material-ui/styles";
 import StyledButton from "../MultiplePages/StyledButton";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import Heading from "./Heading";
+import usePrevious from "../../../utils/hooks/usePrevious";
 
-class MembersPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      // data: [],
-      membersData: [],
-      teamsData: [],
-      isFlipped: false,
-    };
-  }
+const MembersPage = () => {
+  const [data, setData] = useState({
+    membersData: [],
+    teamsData: [],
+    isFlipped: false,
+    teamName: "officers",
+  });
+  const prevData = usePrevious(data);
 
-  showBack() {
-    this.setState({
-      isFlipped: true,
-    });
-  }
+  // const showBack = () => {
+  //   setData({
+  //     ...data,
+  //     isFlipped: true,
+  //   });
+  // };
 
-  showFront() {
-    this.setState({
-      isFlipped: false,
-    });
-  }
+  // const showFront = () => {
+  //   setData({
+  //     ...data,
+  //     isFlipped: false,
+  //   });
+  // };
 
-  handleOnFlip(flipped) {
-    if (flipped) {
-      this.refs.backButton.getDOWNode().focus();
-    }
-  }
+  // const handleOnFlip = (flipped) => {
+  //   if (flipped) {
+  //     this.refs.backButton.getDOWNode().focus();
+  //   }
+  // };
 
-  handleKeyDown(e) {
-    if (this.state.isFlipped && e.keyCode === 27) {
-      this.showFront();
-    }
-  }
+  // const handleKeyDown = (e) => {
+  //   if (this.state.isFlipped && e.keyCode === 27) {
+  //     this.showFront();
+  //   }
+  // };
 
-  componentDidMount() {
-    Tabletop.init({
-      // key: "1FuVIG3TqJK7jfQs853T-clF_QsQpi5t4_iIuIRoyxJI",
-      // key: "1y60qXJduhtREnn98UgHQprO13I5mRzG-XO7wdI8uh-k", // 2019-2020
-      key: "1Wa4MF0b-60QC1rmuP6A2jJmMIJL62NlvlG-NhhaCnR0", // 2020-2021
-      callback: (googleData) => {
-        this.setState({
-          membersData: googleData,
+  useEffect(() => {
+    fetch("http://localhost:5000/sheets/members", {
+      method: "GET",
+      mode: "cors",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result);
+        setData({
+          ...data,
+          membersData: result.data,
         });
-      },
-      simpleSheet: true,
-    });
-    Tabletop.init({
-      key: "1bOLQA-3072h9-_BmdceXsM4QT3aREskoQSeOQ42kg5k",
-      callback: (googleData) => {
-        this.setState({
-          teamsData: googleData,
+      });
+
+    fetch("http://localhost:5000/sheets/team", {
+      method: "GET",
+      mode: "cors",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result);
+        setData({
+          ...data,
+          teamsData: result.data,
         });
-      },
-      simpleSheet: true,
-    });
-  }
+      });
+  });
 
-  render() {
-    const { membersData, teamsData } = this.state;
-    return (
-      <div>
-        <constants.Desktop>
-          <Container>
-            <TopBar history={this.props.history} />
-            <Heading>
-              <h1
-                style={{
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                <a
-                  href="https://ucla.zoom.us/j/91281986263"
-                  style={{ color: "white" }}
-                >
-                  Meeting Link
-                </a>
-              </h1>
-              {/* <MeetingInfo>Where: Boelter SCC Space</MeetingInfo> */}
-              <h1
-                style={{
-                  color: "white",
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                The Rest of the Team
-              </h1>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+  useEffect(() => {
+    if (!prevData) return;
+    if (prevData.teamName === data.teamName)
+      setData({
+        ...data,
+        teamsData: data.teamsData.filter((x) => x["Name"] === data.teamName),
+      });
+  }, [data, prevData]);
+
+  return (
+    <Container>
+      <constants.Desktop>
+        <Heading>
+          <MiniHeader>
+            <a
+              href="https://ucla.zoom.us/j/91281986263"
+              style={{ color: "white" }}
+            >
+              Meeting Link
+            </a>
+          </MiniHeader>
+          {/* <MeetingInfo>Where: Boelter SCC Space</MeetingInfo> */}
+          <MiniHeader>The Rest of the Team</MiniHeader>
+          <div className="grid-container">
+            <StyledButton
+              onClick={() => setData({ ...data, teamName: "officers" })}
+            >
+              Officers
+            </StyledButton>
+            {data.teamsData.map((obj) => {
+              return (
                 <StyledButton
-                  onClick={() =>
-                    this.props.history.push({ pathname: "/team/officers" })
-                  }
+                  onClick={() => setData({ ...data, teamName: obj.Name })}
                 >
-                  Officers
+                  {obj.Name}
                 </StyledButton>
-                {teamsData.map((obj) => {
-                  let pathStr = "/team/" + obj.Name;
-                  return (
-                    <StyledButton
-                      onClick={() =>
-                        this.props.history.push({ pathname: pathStr })
-                      }
-                    >
-                      {obj.Name}
-                    </StyledButton>
-                  );
-                })}
-              </div>
-              <h1
-                style={{
-                  color: "white",
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                Officers:{" "}
-              </h1>
-            </Heading>
-            <div className="grid-container">
-              <TransitionGroup component={null}>
-                {membersData
-                  .filter((obj) => obj["IsLead"] === "TRUE")
-                  .map((obj) => {
-                    return (
-                      <CSSTransition classNames="cardboi" timeout={300}>
-                        <FlipCard>
-                          {/* FRONT */}
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              flexDirection: "column",
-                            }}
-                          >
-                            <ImageThing image={obj.Image} />
-                            <TextPart>
-                              <div>{obj.Name}</div>
-                              <div>{obj.Position}</div>
-                            </TextPart>
-                          </div>
+              );
+            })}
+          </div>
+          {data.teamName === "officers" ? (
+            <MiniHeader>Officers: </MiniHeader>
+          ) : (
+            data.teamsData
+              .filter((obj) => obj["Name"] === data.teamName)
+              .map((obj) => <TeamDescrip>{obj.Descrip}</TeamDescrip>)
+          )}
+        </Heading>
+        <div className="grid-container">
+          <TransitionGroup component={null}>
+            {data.membersData
+              .filter((obj) => {
+                if (data.teamName === "officers")
+                  return obj["IsLead"] === "TRUE";
+                else return obj["Team"] === data.teamName;
+              })
+              .map((obj) => {
+                return (
+                  <CSSTransition classNames="cardboi" timeout={300}>
+                    <FlipCard>
+                      {/* FRONT */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <ImageThing
+                          style={{ backgroundImage: `url(${obj.Image})` }}
+                        />
+                        <TextPart>
+                          <div>{obj.Name}</div>
+                          <div>{obj.Position}</div>
+                        </TextPart>
+                      </div>
 
-                          {/* BACK */}
-                          <Back>
-                            <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
-                            <div style={{}}>{obj.Email}</div>
-                          </Back>
-                        </FlipCard>
-                      </CSSTransition>
-                    );
-                  })}
-              </TransitionGroup>
-            </div>
-          </Container>
-        </constants.Desktop>
-        <constants.Default>
-          <Container>
-            <TopBar history={this.props.history} />
-            <Heading>
-              <h1
-                style={{
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                <a
-                  href="https://ucla.zoom.us/j/91281986263"
-                  style={{ color: "white" }}
-                >
-                  Meeting Link
-                </a>
-              </h1>
-
-              <h1
-                style={{
-                  color: "white",
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                The Rest of the Team
-              </h1>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                      {/* BACK */}
+                      <Back>
+                        <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
+                        <div>{obj.Email}</div>
+                      </Back>
+                    </FlipCard>
+                  </CSSTransition>
+                );
+              })}
+          </TransitionGroup>
+        </div>
+      </constants.Desktop>
+      <constants.Default>
+        <Heading>
+          <MiniHeader>
+            <a
+              href="https://ucla.zoom.us/j/91281986263"
+              style={{ color: "white" }}
+            >
+              Meeting Link
+            </a>
+          </MiniHeader>
+          <MiniHeader>The Rest of the Team</MiniHeader>
+          <div className="grid-container">
+            <StyledButton
+              onClick={() => setData({ ...data, teamName: "officers" })}
+            >
+              Officers
+            </StyledButton>
+            {data.teamsData.map((obj) => {
+              return (
                 <StyledButton
-                  onClick={() =>
-                    this.props.history.push({ pathname: "/team/officers" })
-                  }
+                  onClick={() => setData({ ...data, teamName: obj.Name })}
                 >
-                  Officers
+                  {obj.Name}
                 </StyledButton>
-                {teamsData.map((obj) => {
-                  let pathStr = "/team/" + obj.Name;
-                  return (
-                    <StyledButton
-                      onClick={() =>
-                        this.props.history.push({ pathname: pathStr })
-                      }
-                    >
-                      {obj.Name}
-                    </StyledButton>
-                  );
-                })}
-              </div>
-              <h1
-                style={{
-                  color: "white",
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                Officers:{" "}
-              </h1>
-            </Heading>
-            <div className="grid-container">
-              <TransitionGroup component={null}>
-                {membersData
-                  .filter((obj) => obj["IsLead"] === "TRUE")
-                  .map((obj) => {
-                    return (
-                      <CSSTransition classNames="cardboi" timeout={300}>
-                        <FlipCard>
-                          {/* FRONT */}
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              flexDirection: "column",
-                            }}
-                          >
-                            <ImageThing image={obj.Image} />
-                            <TextPart>
-                              <div>{obj.Name}</div>
-                              <div>{obj.Position}</div>
-                            </TextPart>
-                          </div>
+              );
+            })}
+          </div>
+          {data.teamName === "officers" ? (
+            <MiniHeader>Officers: </MiniHeader>
+          ) : (
+            data.teamsData
+              .filter((obj) => {
+                if (data.teamName === "officers")
+                  return obj["IsLead"] === "TRUE";
+                else return obj["Name"] === data.teamName;
+              })
+              .map((obj) => <TeamDescrip>{obj.Descrip}</TeamDescrip>)
+          )}
+        </Heading>
+        <div className="grid-container">
+          <TransitionGroup component={null}>
+            {data.membersData
+              .filter((obj) => {
+                if (data.teamName === "officers")
+                  return obj["IsLead"] === "TRUE";
+                else return obj["Team"] === data.teamName;
+              })
+              .map((obj) => {
+                return (
+                  <CSSTransition classNames="cardboi" timeout={300}>
+                    <FlipCard>
+                      {/* FRONT */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <ImageThing
+                          style={{ backgroundImage: `url(${obj.Image})` }}
+                        />
+                        <TextPart>
+                          <div>{obj.Name}</div>
+                          <div>{obj.Position}</div>
+                        </TextPart>
+                      </div>
 
-                          {/* BACK */}
-                          <Back>
-                            <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
-                            <div style={{}}>{obj.Email}</div>
-                          </Back>
-                        </FlipCard>
-                      </CSSTransition>
-                    );
-                  })}
-              </TransitionGroup>
-            </div>
-          </Container>
-        </constants.Default>
-        <constants.Mobile>
-          <Container>
-            <TopBar history={this.props.history} />
-            <Heading>
-              <h2
-                style={{
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                <a
-                  href="https://ucla.zoom.us/j/91281986263"
-                  style={{ color: "white" }}
-                >
-                  Meeting Link
-                </a>
-              </h2>
-              <h2
-                style={{
-                  color: "white",
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                The Rest of the Team
-              </h2>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  // justifyContent: "center",
-                  // alignItems: "center",
-                }}
-              >
+                      {/* BACK */}
+                      <Back>
+                        <div style={{ flexGrow: 1 }}>{obj.Bio}</div>
+                        <div>{obj.Email}</div>
+                      </Back>
+                    </FlipCard>
+                  </CSSTransition>
+                );
+              })}
+          </TransitionGroup>
+        </div>
+      </constants.Default>
+      <constants.Mobile>
+        <Heading>
+          <h2
+            style={{
+              paddingTop: "5%",
+              fontFamily: "Futura",
+              margin: "0 0 5px 0",
+            }}
+          >
+            <a
+              href="https://ucla.zoom.us/j/91281986263"
+              style={{ color: "white" }}
+            >
+              Meeting Link
+            </a>
+          </h2>
+          <h2
+            style={{
+              color: "white",
+              paddingTop: "5%",
+              fontFamily: "Futura",
+              margin: "0 0 5px 0",
+            }}
+          >
+            The Rest of the Team
+          </h2>
+          <div className="grid-container">
+            <StyledButton
+              onClick={() => setData({ ...data, teamName: "officers" })}
+            >
+              Officers
+            </StyledButton>
+            {data.teamsData.map((obj) => {
+              return (
                 <StyledButton
-                  onClick={() =>
-                    this.props.history.push({ pathname: "/team/officers" })
-                  }
+                  onClick={() => setData({ ...data, teamName: obj.Name })}
                 >
-                  Officers
+                  {obj.Name}
                 </StyledButton>
-                {teamsData.map((obj) => {
-                  let pathStr = "/team/" + obj.Name;
-                  return (
-                    <StyledButton
-                      onClick={() =>
-                        this.props.history.push({ pathname: pathStr })
-                      }
-                    >
-                      {obj.Name}
-                    </StyledButton>
-                  );
-                })}
-              </div>
+              );
+            })}
+          </div>
+          {data.teamName === "officers" ? (
+            <MiniHeader>Officers: </MiniHeader>
+          ) : (
+            data.teamsData
+              .filter((obj) => obj["Name"] === data.teamName)
+              .map((obj) => <TeamDescrip>{obj.Descrip}</TeamDescrip>)
+          )}
+        </Heading>
+        <div className="grid-container">
+          <TransitionGroup component={null}>
+            {data.membersData
+              .filter((obj) => {
+                if (data.teamName === "officers")
+                  return obj["IsLead"] === "TRUE";
+                else return obj["Team"] === data.teamName;
+              })
+              .map((obj) => {
+                return (
+                  <CSSTransition classNames="cardboi" timeout={300}>
+                    <FlipCard>
+                      {/* FRONT */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <ImageThing
+                          style={{ backgroundImage: `url(${obj.Image})` }}
+                        />
+                        <TextPart>
+                          <div>{obj.Name}</div>
+                          <div>{obj.Position}</div>
+                        </TextPart>
+                      </div>
 
-              <h2
-                style={{
-                  color: "white",
-                  paddingTop: "5%",
-                  fontFamily: "Futura",
-                  margin: "0 0 5px 0",
-                }}
-              >
-                Officers:{" "}
-              </h2>
-            </Heading>
-            <div className="grid-container">
-              <TransitionGroup component={null}>
-                {membersData
-                  .filter((obj) => obj["IsLead"] === "TRUE")
-                  .map((obj) => {
-                    return (
-                      <CSSTransition classNames="cardboi" timeout={300}>
-                        <FlipCard>
-                          {/* FRONT */}
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              flexDirection: "column",
-                            }}
-                          >
-                            <ImageThing image={obj.Image} />
-                            <TextPart>
-                              <div>{obj.Name}</div>
-                              <div>{obj.Position}</div>
-                            </TextPart>
-                          </div>
+                      {/* BACK */}
+                      <Back>
+                        <div style={{ flexGrow: 1 }}>
+                          {obj.Bio.substr(0, 350)}
+                          {obj.Bio.length > 350 && "..."}
+                        </div>
+                        <div>{obj.Email}</div>
+                      </Back>
+                    </FlipCard>
+                  </CSSTransition>
+                );
+              })}
+          </TransitionGroup>
+        </div>
+      </constants.Mobile>
+    </Container>
+  );
+};
+const MiniHeader = styled("h1")({
+  color: "white",
+  paddingTop: "5%",
+  fontFamily: "Futura",
+  margin: "0 0 5px 0",
+});
 
-                          {/* BACK */}
-                          <Back>
-                            <div style={{ flexGrow: 1 }}>
-                              {obj.Bio.substr(0, 350)}
-                              {obj.Bio.length > 350 && "..."}
-                            </div>
-                            <div style={{}}>{obj.Email}</div>
-                          </Back>
-                        </FlipCard>
-                      </CSSTransition>
-                    );
-                  })}
-              </TransitionGroup>
-            </div>
-          </Container>
-        </constants.Mobile>
-      </div>
-    );
-  }
-}
+const TeamDescrip = styled("h3")({
+  color: constants.HOME_PAGE_LIGHT_COLOR,
+  fontFamily: "Futura",
+  textAlign: "center",
+  padding: "1.5rem",
+  margin: 0,
+});
+
+const Heading = styled("div")({
+  padding: "30px 0px 30px 0px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+});
 
 const Back = styled("div")({
   fontFamily: "Futura",
@@ -405,15 +375,14 @@ const Back = styled("div")({
   color: constants.HOME_PAGE_DARK_TEXT_COLOR,
 });
 
-const ImageThing = bruh.div`
-    background-image: url(${(props) => props.image});
-    height: 70%;
-    background-size: contain; 
-    background-repeat: no-repeat;
-    background-position: center;
-    flex-grow: 1;
-    margin-bottom: 1rem;
-`;
+const ImageThing = styled("div")({
+  height: "70%",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  flexGrow: 1,
+  marginBottom: "1rem",
+});
 
 const TextPart = styled("div")({
   display: "flex",

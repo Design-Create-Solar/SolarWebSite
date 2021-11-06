@@ -28,29 +28,41 @@ router.post("/register", async (req, res) => {
 
 //login
 router.post("/login", async (req, res) => {
-  console.log("received request!");
-  console.log(req.body);
   //check if user in db
   const user = await User.findOne({ name: req.body.name });
   if (!user) {
     return res.status(400).send("Name not found.");
   }
 
-  //password is correct
-  await bcrypt
-    .compare(req.body.password, user.password)
-    .then((result) => {
-      if (!result) {
-        return res.status(400).send("Password incorrect");
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const result = await bcrypt.compare(req.body.password, user.password);
+  if (!result) res.status(401).send("Wrong password");
+  else { // if it's the right userename and password, sign cookie
+    let token = jwt.sign(
+      { 'exp': Math.floor(new Date().getTime() / 1000) + 7200, _id: user._id  },
+      process.env.TOKEN_SECRET,
+      { 'header': { 'alg': 'HS256', 'typ': 'JWT' } }
+    );
 
-  // //create and assign token
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.send({ user: user._id, token: token });
+    res.cookie('jwt', token, { httpOnly: false }).send("Authentication successful");
+  }
 });
+
+// verify session
+router.get("/verify", (req, res) => {
+  if (!req.cookies.jwt) res.status(400).send("No jwt cookie");
+  else
+    jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET, function (err, decoded) {
+      if (err) res.status(400).send(err);
+      else res.status(200).send("Good session");
+    })
+});
+
+// logout
+router.post("/logout", async (req, res) => {
+  res.clearCookie('jwt');
+  if (req.body.page === "/blocks" || req.body.page === "/editmembers" ) {
+    res.status(301).send("Goodbye");
+  } else res.status(200).send("Goodbye");
+})
 
 module.exports = router;

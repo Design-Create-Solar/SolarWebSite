@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import { styled } from "@material-ui/styles";
 import Button from "../MultiplePages/Button"
 
@@ -13,7 +12,6 @@ class SponsorsPage extends Component {
   render() {
     return (
       <Container>
-        <TopBar history={this.props.history} />
         <div style={{ height: "100px" }} />
         <h1
           style={{
@@ -25,12 +23,14 @@ class SponsorsPage extends Component {
             alignItems: "center",
             justifyContent: "center",
             display: "flex",
+            textAlign: "center",
           }}
         >
           Sponsorship Packet:{" "}
         </h1>
         <div style={{ display: "flex", justifyContent: "center", height: 700 }}>
           <iframe
+            title="sponsorspacket"
             src="https://drive.google.com/file/d/1miL-m87M9KGKtba5hjTUZX6xXt_gnszT/preview"
             width="853.33333333333"
             height="640"

@@ -1,11 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-final-form";
-import axios from "axios";
 
-import { UserContext } from "../../../context/UserContext";
 import * as constants from "../MultiplePages/constants";
-import TopBar from "../MultiplePages/TopBar";
 import GFXField from "./GFXField";
 import GFXButton from "./GFXButton";
 
@@ -13,47 +10,52 @@ import { showErrorOnBlur } from "mui-rff";
 
 import { styled } from "@material-ui/styles";
 import { Paper, Grid } from "@material-ui/core";
-
-const jwt = require("jsonwebtoken");
-// const { TOKEN_SECRET } = process.env;
-const TOKEN_SECRET = "thisisarbitrary";
+import { UserContext } from "./UserContext";
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 
 const Login = (props) => {
-  const { userData, setUserData } = useContext(UserContext);
-  const [isLogin, setLogin] = useState(false);
   const history = useHistory();
+  const { setLoggedIn } = useContext(UserContext);
 
-  // Async response to Local Storage & Backend
-  const onSubmit = async (values) => {
-    await axios
-      .post("http://localhost:5000/auth/login", {
+  useEffect(() => {
+    fetch(`${BACK_BASE_URL}/auth/verify`, {
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) history.push("/blocks");
+      })
+      .catch((err) => console.log(err));
+  });
+
+  const onSubmit = (values) => {
+    console.log(`req sent to ${BACK_BASE_URL}/auth/login`);
+    fetch(`${BACK_BASE_URL}/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         name: values.username,
         password: values.password,
-      })
+      }),
+    })
       .then((res) => {
-        // generate access token via JWT (+ process.env.ACCESS_KEY_ID)
-        const accessToken = jwt.sign(
-          { name: values.username, password: values.password },
-          TOKEN_SECRET
-        );
-
-        // sending data to Backend + LS
-        console.log("userData" + userData);
-        setUserData({
-          token: accessToken,
-          user: res.data.user,
-        });
-
-        localStorage.setItem("auth-token", accessToken);
-        history.push("/auth-success"); // send user to random page
-
-        // change login state
-        setLogin(true); // no purpose as of now
-        console.log(res);
-        alert("Successful login!");
+        if (res.status === 200) {
+          setLoggedIn(true);
+          // history.push("/auth-success"); // send user to random page
+          history.push("/blocks");
+        } else alert("Wrong username or password");
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         alert("Failed to login.");
       });
   };
@@ -98,7 +100,6 @@ const Login = (props) => {
 
   return (
     <Container>
-      <TopBar history={props.history} />
       <div style={{ height: "100px" }} />
       <h1
         style={{

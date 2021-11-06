@@ -2,14 +2,14 @@ import React from "react";
 import { render } from "react-dom";
 import Styles from "../Styles";
 import { Form, Field } from "react-final-form";
-
+import { BACK_BASE_URL } from "../MultiplePages/constants";
 import axios from "axios";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const onSubmit = async (values) => {
   await axios
-    .post("http://localhost:5000/auth/register", {
+    .post(`${BACK_BASE_URL}/auth/register`, {
       name: values.name,
       password: values.password,
     })

@@ -1,140 +1,159 @@
-const router = require('express').Router();
-const client = require('../config/influx.js');
-const socketIO = require('socket.io');
+const { InfluxDB, Point } = require("@influxdata/influxdb-client");
+const router = require("express").Router();
 
-// const io = require("../server");
-const sockettest = async (data) => {
-	try {
-		const io = require('../server.js');
-		// console.log(io)
-		io.emit('FromAPI', data);
-	} catch (error) {
-		console.log('came in here');
-		console.error(`Error ${error.code}`);
-		console.log(io);
-	}
-};
+// You can generate a Token from the "Tokens Tab" in the UI
+const org = process.env.INFLUX_ORG;
+const bucket = process.env.INFLUX_BUCKET;
 
-router.post('/add', (req, res) => {
-	let sID = req.body.sID;
-	let tempValue = req.body.tempValue;
-	let deviceString = req.body.device;
+const client = new InfluxDB({
+  url: process.env.INFLUX_URL,
+  token: process.env.INFLUX_TOKEN,
+});
 
-	client
-		.write('temperatureSensor')
-		.tag({
-			sensorID: sID,
-		})
-		.field({
-			temperature: tempValue,
-			measureDevice: deviceString,
-		})
+router.post("/addTemp", (req, res) => {
+  // initialize API & sensor
+  const writeApi = client.getWriteApi(org, bucket);
+  const { SID, temp } = req.body;
 
-  client
-    .write("temperatureSensor")
-    .tag({
-      sensorID: sID,
-    })
-    .field({
-      temperature: tempValue,
-      measureDevice: deviceString,
-    })
-    .then((data) => {
-      sockettest(JSON.stringify(data));
-      console.info("write point success");
-    })
-    .catch(console.error);
+  const point = new Point("temperatureSensor")
+    .tag("sensorID", SID)
+    .floatField("temperature", temp)
+    .timestamp(new Date());
 
-  res.json({
-    test: "arbitrary response",
-  });
+  writeApi.writePoint(point);
+  writeApi
+    .close()
+    .then(() => console.log("Successfully wrote temperature point"))
+    .catch((e) => {
+      console.error(e);
+      console.log("\\Temperature point write ERROR");
+    });
+  res.json(point);
 });
 
 router.post("/addBMS", (req, res) => {
-  let sID = req.body.sID;
-  let tempValue = req.body.tempValue;
-  let voltage = req.body.voltage;
-  client
-    .write("BMS")
-    .tag({
-      sensorID: sID,
-    })
-    .field({
-      temperature: tempValue,
-      voltage: voltage,
-    })
-    .then(() => console.info("write BMS point success"))
-    .catch(console.error);
+  const writeApi = client.getWriteApi(org, bucket);
+  const { SID, temp, volt } = req.body;
+  const point = new Point("BMS")
 
-  res.json({
-    test: "arbitrary response",
-  });
+    .tag("sensorID", SID)
+    .floatField("temperature", temp)
+    .floatField("voltage", volt)
+    .timestamp(new Date());
+
+  writeApi.writePoint(point);
+  writeApi
+    .close()
+    .then(() => console.log("Successfully wrote BMS point"))
+    .catch((e) => {
+      console.error(e);
+      console.log("\\BMS point write ERROR");
+    });
+  res.json(point);
 });
 
 router.post("/addAcc", (req, res) => {
-  let sID = req.body.sID;
-  let Zenith = req.body.Zenith;
-  let Azimuth = req.body.Azimuth;
-  client
-    .write("accelerometer")
-    .tag({
-      sensorID: sID,
-    })
-    .field({
-      Zenith: Zenith,
-      Azimuth: Azimuth,
-    })
-    .then(() => console.info("write point success"))
-    .catch(console.error);
+  const writeApi = client.getWriteApi(org, bucket);
+  const { SID, zenith, azimuth } = req.body;
 
-  res.json({
-    test: "arbitrary response",
+  const point = new Point("accelerometer")
+    .tag("sensorID", SID)
+    .floatField("zenith", zenith)
+    .floatField("azimuth", azimuth)
+    .timestamp(new Date());
+  writeApi.writePoint(point);
+
+  writeApi
+    .close()
+    .then(() => console.log("Successfully wrote accelerometer point"))
+    .catch((e) => {
+      console.error(e);
+      console.log("\\accelerometer point write ERROR");
+    });
+  res.json(point);
+});
+
+// e.g. localhost:5000/data/query/last24hr?type=BMS
+router.get("/query/last24hr", (req, res) => {
+  const queryApi = client.getQueryApi(org);
+  const fluxQuery = `from(bucket: "${process.env.INFLUX_BUCKET}")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r["_measurement"] == "${req.query.type}")`;
+
+  // for dummy data segment:
+  //   |> range(start: 2021-06-17T04:00:00.505Z, stop: 2021-06-17T07:00:00.505Z)
+  // note: UTC time I think...
+
+  // Execute query and receive table metadata and rows.
+  // https://v2.docs.influxdata.com/v2.0/reference/syntax/annotated-csv/
+
+  let results = [];
+  queryApi.queryRows(fluxQuery, {
+    next(row, tableMeta) {
+      const o = tableMeta.toObject(row);
+      // console.log(JSON.stringify(o, null, 2))
+      // console.log(
+      //   `${o._time} ${o._measurement}: ${o._field}=${o._value}, sensorID=${o.sensorID}`
+      // )
+      let entry = {
+        time: o._time,
+        collection: o._measurement,
+        sensorID: o.sensorID,
+      };
+      entry[o._field] = o._value;
+      results.push(entry);
+    },
+    error(error) {
+      console.error(error);
+      console.log(`\ERROR: 24 Hr ${req.query.type} Query`);
+    },
+    complete() {
+      console.log(`\nSUCCESS: 24 Hr ${req.query.type} Query`);
+      res.json(results);
+    },
   });
 });
 
-router.get("/query/:type/all", (req, res) => {
-  let type = req.params.type;
-  let reader = client.query(type);
-  reader
-    .then((data) => {
-      res.send(JSON.stringify(data));
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-});
+// e.g. localhost:5000/data/query?type=temperatureSensor&start=2021-06-17T04:00:00.505Z&end=2021-06-17T07:00:00.505Z
+router.get("/query", (req, res) => {
+  const queryApi = client.getQueryApi(org);
+  const fluxQuery = `from(bucket: "${process.env.INFLUX_BUCKET}")
+  |> range(start: ${new Date(req.query.start).toISOString()}, stop: ${new Date(
+    req.query.end
+  ).toISOString()})
+  |> filter(fn: (r) => r["_measurement"] == "${req.query.type}")`;
 
-router.get("/query/:type/:number", (req, res) => {
-  let type = req.params.type;
-  let number = req.params.number;
-  let reader = client.query(type);
-  reader.limit = number;
-  reader
-    .then((data) => {
-      res.send(JSON.stringify(data));
-      console.log("GET success!");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-});
+  // for dummy data segment:
+  //   |> range(start: 2021-06-17T04:00:00.505Z, stop: 2021-06-17T07:00:00.505Z)
+  // note: UTC time I think...
 
-router.get("/query/:type/start/:stime/end/:etime", (req, res) => {
-  let type = req.params.type;
-  let reader = client.query(type);
-  let stime = req.params.stime;
-  let etime = req.params.etime;
-  reader.end = "-" + etime + "h";
-  reader.start = "-" + stime + "h";
-  reader
-    .then((data) => {
-      res.send(JSON.stringify(data));
-      sockettest(JSON.stringify(data));
-      console.log("router.get /query/type/time success!");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  // Execute query and receive table metadata and rows.
+  // https://v2.docs.influxdata.com/v2.0/reference/syntax/annotated-csv/
+
+  let results = [];
+  queryApi.queryRows(fluxQuery, {
+    next(row, tableMeta) {
+      const o = tableMeta.toObject(row);
+      // console.log(
+      //   `${o._time} ${o._measurement}: ${o._field}=${o._value}, sensorID=${o.sensorID}`
+      // )
+      let entry = {
+        time: o._time,
+        collection: o._measurement,
+        sensorID: o.sensorID,
+      };
+      entry[o._field] = o._value;
+      results.push(entry);
+    },
+    error(error) {
+      console.error(error);
+      console.log(`\ERROR: Custom Time Range ${req.query.type} Query`);
+    },
+    complete() {
+      console.log(`\nSUCCESS: Custom Time Range ${req.query.type} Query`);
+      res.json(results);
+    },
+  });
 });
 
 module.exports = router;

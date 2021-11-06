@@ -11,45 +11,52 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BottomBanner from "./js/components/MultiplePages/BottomBanner";
 import ScrollToTop from "./js/components/MultiplePages/ScrollToTop";
 import SponsorsPage from "./js/components/SponsorsPage/SponsorsPage";
-import SubsystemPage from "./js/components/MembersPage/SubsystemPage";
 import RecruitmentPage from "./js/components/RecruitmentPage/RecruitmentPage";
+import BlocksPage from "./js/components/BlocksPage/BlocksPage";
+// import EditMembersPage from "./js/components/EditMembersPage/EditMembersPage";
+
+import SideMenu from "./js/components/MultiplePages/SideMenu";
+
 import "./futura/futur.ttf";
-import test from "./js/components/sockettest.jsx";
+// import test from "./js/components/sockettest.jsx";
 
 import "./assets/base.css";
-import configureStore from "./config/configureStore";
-import { Provider } from "react-redux";
 
-import { UserProvider } from "./context/UserContext";
-
-const store = configureStore();
+import { UserProvider } from "./js/components/Login/UserContext";
+import { BlocksProvider } from "./js/components/BlocksPage/BlocksContext";
+import LoginWrapper from "./js/components/Login/LoginWrapper";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <div>
-        <ScrollToTop>
-          <Switch>
+  <Router>
+    <UserProvider>
+      <SideMenu />
+      <ScrollToTop>
+        <Switch>
+          <BlocksProvider>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/home" component={LandingPage} />
             <Route path="/programs" component={ProjectPage} />
-            <Route exact path="/team/officers" component={MembersPage} />
             <Route path="/sponsors" component={SponsorsPage} />
-            <Route path="/test" component={test} />
-            <Route path="/team" component={SubsystemPage} />
+            <Route path="/test" component={SideMenu} />
+            <Route path="/team" component={MembersPage} />
             <Route path="/join" component={RecruitmentPage} />
-            <Route path="/login">
-              <UserProvider>
-                <Login />
-              </UserProvider>
+            <Route path="/login" component={Login} />
+            <Route path="/blocks">
+              <LoginWrapper>
+                <BlocksPage />
+              </LoginWrapper>
             </Route>
-          </Switch>
-        </ScrollToTop>
-        <BottomBanner />
-      </div>
-    </Router>
-  </Provider>,
-
+            {/* <Route path="/editmembers">
+              <LoginWrapper>
+                <EditMembersPage />
+              </LoginWrapper>
+            </Route> */}
+          </BlocksProvider>
+        </Switch>
+      </ScrollToTop>
+      <BottomBanner />
+    </UserProvider>
+  </Router>,
   document.getElementById("root")
 );
 

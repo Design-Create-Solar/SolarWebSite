@@ -4,8 +4,8 @@ import * as constants from "../MultiplePages/constants";
 import Typing from "react-typing-animation";
 import Box from "@material-ui/core/Box";
 import { Default, Mobile, Desktop } from "../MultiplePages/constants";
+import Logo from './logo2.png';
 
-const Logo = require("../../../images/logo2.png");
 const texts = ["DESIGNERS", "CREATORS", "SOLAR"];
 
 const base = "WE ARE  ";
@@ -14,29 +14,25 @@ const LogoHolder = () => {
   return (
     <Container>
       <Default>
-        <img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+        <img alt="logo" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
       </Default>
       <Desktop>
-        <img src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
+        <img alt="logo" src={Logo} style={{ height: "35em", paddingBottom: "2em" }} />
       </Desktop>
       <Mobile>
-        <img src={Logo} style={{ width: "100%", paddingBottom: "2em" }} />
+        <img alt="logo" src={Logo} style={{ width: "60%", paddingBottom: "2em" }} />
       </Mobile>
-      <Box
-        style={{
-          minHeight: "4em",
-        }}
-      >
+      <Box style={{ minHeight: "5rem", textAlign: "center" }}>
         <Typing loop={true} hideCursor={true}>
           <Text>{base}</Text>
           <SpecialText>{texts[0]}</SpecialText>
-          <Typing.Backspace count={texts[0].length + 1} delay={900} />
+          <Typing.Backspace count={texts[0].length + 1} delay={1500} />
           <SpecialText>{texts[1]}</SpecialText>
-          <Typing.Backspace count={texts[1].length + 1} delay={900} />
+          <Typing.Backspace count={texts[1].length + 1} delay={1500} />
           <SpecialText>{texts[2]}</SpecialText>
           <Typing.Backspace
             count={texts[2].length + base.length + 3}
-            delay={500}
+            delay={1000}
           />
         </Typing>
       </Box>
@@ -56,19 +52,18 @@ const Container = styled("div")({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  boxShadow: "10px 10px 5px gray",
 });
 
 const Text = styled("span")({
   fontFamily: "Futura",
-  fontSize: "2.5em",
-  fontWeight: "bold",
+  fontSize: "2.9rem",
+  fontWeight: "550",
   color: constants.HOME_PAGE_LIGHT_TEXT_COLOR,
 });
 
 const SpecialText = styled("span")({
   fontFamily: "Futura",
-  fontSize: "2.5em",
+  fontSize: "2.9rem",
   fontWeight: "400",
-  color: constants.HOME_PAGE_TYPING_TEXT_COLOR,
+  color: constants.HOME_PAGE_YELLOW,
 });
